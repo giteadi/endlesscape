@@ -21,7 +21,7 @@ interface AdminPanelProps {
   onRefreshPublicData: () => void;
 }
 
-const API_BASE = 'http://localhost:5001/api';
+import { API_BASE } from '../config/api';
 
 export const AdminPanel = ({ onBackToSite, onRefreshPublicData }: AdminPanelProps) => {
   const [activeTab, setActiveTab] = useState<'enquiries' | 'itineraries' | 'analytics'>('enquiries');

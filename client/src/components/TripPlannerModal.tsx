@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { X, Sparkles, Check, ChevronRight } from 'lucide-react';
 import { DESTINATION_REGIONS } from '../data/travelData';
+import { API_BASE } from '../config/api';
 
 interface TripPlannerModalProps {
   isOpen: boolean;
@@ -34,7 +35,7 @@ export const TripPlannerModal = ({
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      await fetch('http://localhost:5001/api/enquiries', {
+      await fetch(`${API_BASE}/enquiries`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

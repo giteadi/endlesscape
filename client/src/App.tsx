@@ -14,6 +14,7 @@ import { AdminPanel } from './components/AdminPanel';
 import { ItineraryDetailPage } from './components/ItineraryDetailPage';
 import { ExperienceCategoryPage } from './components/ExperienceCategoryPage';
 import { ITINERARIES } from './data/travelData';
+import { API_BASE } from './config/api';
 import type { Itinerary, TravelStyle } from './types/travel';
 import './App.css';
 
@@ -45,7 +46,7 @@ export function App() {
   // Fetch live itineraries from backend
   const fetchLiveItineraries = useCallback(async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/itineraries');
+      const res = await fetch(`${API_BASE}/itineraries`);
       if (res.ok) {
         const data = await res.json();
         if (Array.isArray(data) && data.length > 0) {
