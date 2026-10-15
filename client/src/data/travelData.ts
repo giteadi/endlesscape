@@ -1,0 +1,624 @@
+import type { Itinerary, TravelStyle, Testimonial, PressAward } from '../types/travel';
+
+export const TRAVEL_STYLES: TravelStyle[] = [
+  {
+    id: 'family',
+    title: 'FAMILY',
+    subtitle: 'Wonders Crafted for All Generations',
+    focus: 'Private villas, expert naturalists, unhurried pacing & engaging wilderness masterclasses.',
+    image: 'https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=1200&q=85',
+    destinations: ['Costa Rica Rainforest', 'Kenya Masai Mara', 'Galápagos Islands']
+  },
+  {
+    id: 'couples',
+    title: 'COUPLES',
+    subtitle: 'Intimate Horizons & Secluded Luxury',
+    focus: 'Clifftop infinity pools, candlelit ruins, secret Tuscan vineyards and starlit desert camps.',
+    image: 'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=85',
+    destinations: ['Santorini Cliffside', 'Bora Bora Overwater', 'Swiss Alpine Chalets']
+  },
+  {
+    id: 'groups',
+    title: 'GROUPS',
+    subtitle: 'Milestone Expeditions & Private Estates',
+    focus: 'Whole-island buyouts, chartered classic schooners, private castles and bespoke chef celebrations.',
+    image: 'https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&w=1200&q=85',
+    destinations: ['Scottish Highlands Lodge', 'Balearic Private Catamaran', 'Napa Valley Estate']
+  },
+  {
+    id: 'honeymoon',
+    title: 'HONEYMOON',
+    subtitle: 'Once-in-a-Lifetime Romance',
+    focus: 'Barefoot luxury, private coral reef sandbanks, glacier helicopter flights & seamless pampering.',
+    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85',
+    destinations: ['Maldives Atolls', 'Amalfi Coast Villa', 'Kyoto Zen Sanctuary']
+  },
+  {
+    id: 'solo',
+    title: 'SOLO',
+    subtitle: 'Untamed Freedom & Deep Immersion',
+    focus: 'Transformative solo journeys, photography expeditions, wellness sanctuaries & safe, effortless ease.',
+    image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85',
+    destinations: ['Patagonia Wilderness', 'Iceland Ring Road', 'Bhutan Monasteries']
+  }
+];
+
+export interface MonthGuide {
+  id: string;
+  month: string;
+  destination: string;
+  region: string;
+  image: string;
+  description: string;
+}
+
+export const MONTH_CALENDAR_DATA: MonthGuide[] = [
+  {
+    id: 'january',
+    month: 'JANUARY',
+    destination: 'MALDIVES & SOUTHEAST ASIA',
+    region: 'asia',
+    image: 'https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=800&q=80',
+    description: 'Calm turquoise waters, dry sunny trade winds and private coral atolls.'
+  },
+  {
+    id: 'february',
+    month: 'FEBRUARY',
+    destination: 'MOROCCO & OMAN',
+    region: 'africa',
+    image: 'https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=800&q=80',
+    description: 'Warm winter sun in Marrakech riads, tranquil courtyards and desert starscapes.'
+  },
+  {
+    id: 'march',
+    month: 'MARCH',
+    destination: 'GREECE & CYCLADES',
+    region: 'mediterranean',
+    image: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=800&q=80',
+    description: 'Crisp spring sunshine before summer crowds, blooming wildflowers and Aegean calm.'
+  },
+  {
+    id: 'april',
+    month: 'APRIL',
+    destination: 'SOUTH AFRICA & GARDEN ROUTE',
+    region: 'africa',
+    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
+    description: 'Golden autumn light across Cape winelands, whale migrations and coastal serenity.'
+  },
+  {
+    id: 'may',
+    month: 'MAY',
+    destination: 'TUSCANY & LAKE COMO',
+    region: 'mediterranean',
+    image: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=800&q=80',
+    description: 'Cypress-lined lanes, flowering hillside terraces and alfresco Chianti dining.'
+  },
+  {
+    id: 'june',
+    month: 'JUNE',
+    destination: 'CAPE TOWN & SAFARI',
+    region: 'africa',
+    image: 'https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=800&q=80',
+    description: 'Dramatic Atlantic sunsets, private game reserves and peak predator sightings.'
+  },
+  {
+    id: 'july',
+    month: 'JULY',
+    destination: 'PORTUGAL & BALEARICS',
+    region: 'mediterranean',
+    image: 'https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=800&q=80',
+    description: 'Golden Atlantic cliff beaches, private yacht coves and sun-drenched vineyards.'
+  },
+  {
+    id: 'august',
+    month: 'AUGUST',
+    destination: 'CINQUE TERRE & AMALFI',
+    region: 'mediterranean',
+    image: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80',
+    description: 'Clifftop pastel villages, private speedboat dips and vibrant Mediterranean warmth.'
+  },
+  {
+    id: 'september',
+    month: 'SEPTEMBER',
+    destination: 'COSTA RICA & GALÁPAGOS',
+    region: 'latin',
+    image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80',
+    description: 'Lush biodiversity, sea turtle nesting, playful sea lions and uncrowded islands.'
+  },
+  {
+    id: 'october',
+    month: 'OCTOBER',
+    destination: 'FLORENCE & SIENA',
+    region: 'mediterranean',
+    image: 'https://images.unsplash.com/photo-1543429776-2782fc8e1acd?auto=format&fit=crop&w=800&q=80',
+    description: 'Truffle harvest season, medieval hilltown festivals and rich autumn foliage.'
+  },
+  {
+    id: 'november',
+    month: 'NOVEMBER',
+    destination: 'VENICE, SAHARA & BRAZIL',
+    region: 'africa',
+    image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=800&q=80',
+    description: 'Ideal Sahara desert warmth, misty romantic Venetian canals and tropical Rio breeze.'
+  },
+  {
+    id: 'december',
+    month: 'DECEMBER',
+    destination: 'ARCTIC LAPLAND & ICELAND',
+    region: 'polar',
+    image: 'https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=800&q=80',
+    description: 'Glowing glass domes under northern lights, crackling log fires and pure arctic magic.'
+  }
+];
+
+export const ITINERARIES: Itinerary[] = [
+  {
+    id: 'morocco-sahara-desert',
+    nights: 10,
+    country: 'MOROCCO',
+    region: 'africa',
+    title: 'MOROCCO: A LUXURY ADVENTURE IN THE SAHARA DESERT',
+    tagline: 'Marrakech riads, Atlas Mountain passes, palm-fringed oases, and starlit luxury desert camps.',
+    image: 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=85',
+    gallery: [
+      'https://images.unsplash.com/photo-1539020140153-e479b8c22e70?auto=format&fit=crop&w=1600&q=85',
+      'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1600&q=85',
+      'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1600&q=85',
+      'https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=1600&q=85'
+    ],
+    tag: 'SAHARA EXPEDITION',
+    startingPrice: '£8,538pp',
+    priceNote: 'excl. flights (based on 2 ppl sharing)',
+    bestSeason: 'March to June | Sept to Nov',
+    months: ['March', 'April', 'May', 'June', 'September', 'October', 'November'],
+    experienceTypes: ['honeymoon', 'couples', 'luxury-adventure'],
+    highlights: [
+      'Private sunset camel caravan into the untouched dunes of Erg Chigaga',
+      'Opulent stay at Villa des Orangers Marrakech and Dar Ahlam palm oasis',
+      'Private guide through the ancient Glaoui Kasbah and Ait Ben Haddou',
+      'Stargazing banquet with private chef in nomadic desert encampment'
+    ],
+    description: 'Versatile and full of intrigue, Morocco perfectly lends itself to all manner of luxury holidays. Extending from snow-capped mountain ranges to rocky hamada and the sweeping sand dunes of the Sahara Desert, there is a lot to explore here. The good news is that our travel experts have found the perfect way to do it. Get off the beaten track and discover a lesser-known side to Morocco as you venture out of Marrakech and into palm-fringed oases and sweeping deserts in this luxurious 10-night adventure.',
+    narrativeSections: [
+      {
+        title: '24 HOURS IN MARRAKECH',
+        content: 'Flying into Marrakech, you’ll spend your first night amid the opulent surrounds of Villa des Orangers, getting to grips with the city on an afternoon private tour of the winding souks and atmospheric Jemaa el Fna square. In the morning, you’ll leave all of this behind as you are met by your private driver-guide who will be at your side for the next eight days of this adventure. Leaving the medina behind, you’ll travel through the heart of the Atlas Mountains, stopping off at the ancient Glaoui kasbah in Telouet, on through the Ounila Valley to the hilltop fortress of Ait Ben Haddou and on through Ouarzazate to the palm-fringed deserts of Skoura.'
+      },
+      {
+        title: 'PALM-FRINGED OASES & DAR AHLAM',
+        content: 'Check in at the gorgeous Dar Ahlam before spending the afternoon relaxing by the pool, ahead of a day exploring the 17th-century kasbah of Amerhidil and wandering through the fragrant almond and olive groves. Your private host prepares candlelit culinary discoveries inside private ruined fortresses as lanterns flicker in the evening breeze.'
+      },
+      {
+        title: 'THE VAST SILENCE OF ERG CHIGAGA',
+        content: 'Venturing beyond Zagora, the paved world ceases. Cross dramatic moonscape rocky hamadas until reaching the majestic, rolling dunes of Erg Chigaga. Mounted on dromedaries, ascend the crest of the sands for an unforgettable golden hour sunset before entering your bespoke tented oasis with plush silk linens, hot showers, and private campfires under the cosmos.'
+      }
+    ],
+    itineraryOutline: [
+      { day: 'Day 1-2', title: 'Marrakech: Souks & Palace Sanctuary', detail: 'Stay at Villa des Orangers. Private curator tour of Jardin Majorelle and evening dining overlooking Jemaa el Fna.' },
+      { day: 'Day 3-4', title: 'High Atlas & Fortress of Ait Ben Haddou', detail: 'Tizi n’Tichka mountain pass, Telouet kasbah, and sunset over the clay towers of Ait Ben Haddou.' },
+      { day: 'Day 5-7', title: 'Skoura Oasis & Dar Ahlam', detail: 'Two nights of sublime luxury at Dar Ahlam. Private picnics in almond groves and kasbah exploration.' },
+      { day: 'Day 8-10', title: 'Dunes of Erg Chigaga & Sahara Stargazing', detail: 'Private 4x4 expedition to remote desert camp. Camel trekking, dune dinners, and stargazing.' }
+    ]
+  },
+  {
+    id: 'greece-luxury-island-hopping',
+    nights: 8,
+    country: 'GREECE',
+    region: 'mediterranean',
+    title: 'BEST OF GREECE: LUXURY ISLAND HOPPING IN GREECE',
+    tagline: 'Private catamarans, whitewashed caldera clifftops, and secluded Aegean bays.',
+    image: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1200&q=85',
+    gallery: [
+      'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?auto=format&fit=crop&w=1600&q=85',
+      'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1600&q=85',
+      'https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1600&q=85'
+    ],
+    tag: 'CYCLADIC ROMANCE',
+    startingPrice: '£7,950pp',
+    priceNote: 'excl. flights (based on 2 ppl sharing)',
+    bestSeason: 'May to October',
+    months: ['May', 'June', 'July', 'August', 'September', 'October'],
+    experienceTypes: ['honeymoon', 'couples'],
+    highlights: [
+      'Chartered 72ft Riva yacht through Delos and uninhabited Aegean coves',
+      'Private caldera infinity pool villa in Oia, Santorini',
+      'Sommelier-guided Assyrtiko wine tasting at dusk',
+      'Helicopter transfers avoiding public ferry schedules'
+    ],
+    description: 'The definitive romantic Greek odyssey. Island-hop across Santorini, Mykonos, and Paros in absolute seclusion aboard your chartered luxury vessel, savoring world-renowned Aegean cuisine and golden sunsets from private clifftop sanctuaries.',
+    narrativeSections: [
+      {
+        title: 'SANTORINI CALDERA SOLITUDE',
+        content: 'Perched high above the sapphire waters of the submerged caldera, your cliffside villa offers panoramic views of world-famous sunsets without the crowds. Enjoy private champagne tastings on your secluded terrace as yachts glide across the Aegean below.'
+      },
+      {
+        title: 'PRIVATE CHARTER ACROSS CYCLADIC WATERS',
+        content: 'Board your private Riva yacht for an unhurried exploration of secret sea caves, volcanic hot springs, and uninhabited islets with crystalline waters ideal for swimming and snorkeling.'
+      }
+    ],
+    itineraryOutline: [
+      { day: 'Day 1-3', title: 'Santorini Caldera & Wine Heritage', detail: 'Private cliffside cave suite. Private catamaran sunset cruise and sommelier cellar tour.' },
+      { day: 'Day 4-6', title: 'Mykonos & The Uninhabited Isle of Rhenia', detail: 'Private yacht charter for secluded bay swimming and beachside taverna dining.' },
+      { day: 'Day 7-8', title: 'Paros & Antiparos Sea Caves', detail: 'Boutique estate stay, fishing village strolls, and private chef dinners by the sea.' }
+    ]
+  },
+  {
+    id: 'italy-como-tuscany-amalfi',
+    nights: 12,
+    country: 'ITALY',
+    region: 'mediterranean',
+    title: 'COMO, TUSCANY & AMALFI: THE ULTIMATE ITALIAN HONEYMOON',
+    tagline: 'Riva speedboats on Lake Como, private Chianti estates, and clifftop Ravello palaces.',
+    image: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1200&q=85',
+    gallery: [
+      'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=1600&q=85',
+      'https://images.unsplash.com/photo-1533900298318-6b8da08a523e?auto=format&fit=crop&w=1600&q=85',
+      'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1600&q=85'
+    ],
+    tag: 'LA DOLCE VITA',
+    startingPrice: '£11,400pp',
+    priceNote: 'excl. flights (based on 2 ppl sharing)',
+    bestSeason: 'April to October',
+    months: ['April', 'May', 'June', 'July', 'August', 'September', 'October'],
+    experienceTypes: ['honeymoon', 'couples'],
+    highlights: [
+      'Private wooden Riva speedboat cruise to historic Lake Como villas',
+      'Exclusive buyout of a private wine cellar in Val d’Orcia',
+      'Helicopter transfer from Florence directly into Ravello clifftop gardens',
+      'Private sunset cruise past the Faraglioni rocks of Capri'
+    ],
+    description: 'Immerse yourselves in Italy’s most timeless and breathtaking landscapes. From the shimmering alpine tranquility of Lake Como to the golden cypress-lined hills of Tuscany and the dramatic sea cliffs of the Amalfi Coast.',
+    narrativeSections: [
+      {
+        title: 'LAKE COMO GLAMOUR',
+        content: 'Step aboard a varnished wooden Riva boat and glide across Lake Como past historic neoclassical villas and cascading wisteria. Disembark for an exclusive tour of Villa del Balbianello’s terraced gardens before an intimate dinner on Bellagio’s shores.'
+      },
+      {
+        title: 'TUSCAN HILLS & PRIVATE VINEYARDS',
+        content: 'Stay in a restored 12th-century castle among rolling vineyards. Discover the secrets of Brunello di Montalcino with the head winemaker and enjoy romantic truffle-hunting mornings in private oak forests.'
+      }
+    ],
+    itineraryOutline: [
+      { day: 'Day 1-4', title: 'Lake Como: Alpine Elegance & Speedboats', detail: 'Stay at Grand Hotel Tremezzo. Private Riva boat tour and lakeside terrace dinners.' },
+      { day: 'Day 5-8', title: 'Tuscany: Chianti Castles & Val d’Orcia', detail: 'Castello di Casole estate. Private sommelier wine blending and horseback ride through olive groves.' },
+      { day: 'Day 9-12', title: 'Amalfi Coast: Clifftop Ravello & Capri', detail: 'Belmond Hotel Caruso. Helicopter transfer and private gozzo boat cruise along Positano.' }
+    ]
+  },
+  {
+    id: 'indonesia-bali-boats-sumba',
+    nights: 15,
+    country: 'INDONESIA',
+    region: 'asia',
+    title: 'BALI, BOATS & SUMBA: A LUXURY HONEYMOON IN INDONESIA',
+    tagline: 'Private Komodo phinisi yacht charters, Nihi Sumba wilderness sanctuary, and spiritual Ubud.',
+    image: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=85',
+    gallery: [
+      'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1600&q=85',
+      'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?auto=format&fit=crop&w=1600&q=85',
+      'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1600&q=85'
+    ],
+    tag: 'ISLAND SANCTUARY',
+    startingPrice: '£13,800pp',
+    priceNote: 'excl. flights (based on 2 ppl sharing)',
+    bestSeason: 'April to November',
+    months: ['April', 'May', 'June', 'July', 'August', 'September', 'October', 'November'],
+    experienceTypes: ['honeymoon', 'couples'],
+    highlights: [
+      '4-day private charter on a hand-crafted luxury Indonesian phinisi yacht',
+      'Swimming alongside manta rays in Komodo National Park',
+      'Wild horseback riding on the pristine shores of Nihi Sumba',
+      'Private water blessings and bamboo pavilion dining in Ubud'
+    ],
+    description: 'An unforgettable Indonesian tapestry of spiritual rainforest retreats, private sailing through Jurassic island chains, and world-renowned barefoot luxury on the untamed shores of Sumba.',
+    narrativeSections: [
+      {
+        title: 'UBUD: RAINFOREST PEACE & ANCIENT BLESSINGS',
+        content: 'Wake to misty jungle canopies and cascading river ravines. Experience a private cleansing ceremony with a Balinese high priest before exploring ancient stone water temples and hidden artisan workshops.'
+      },
+      {
+        title: 'KOMODO BY PRIVATE PHINISI SCHOONER',
+        content: 'Set sail across azure seas between uninhabited volcanic islands. Anchor in secluded pink-sand coves, dive among vibrant coral reefs teeming with manta rays, and observe legendary Komodo dragons in their native habitat.'
+      }
+    ],
+    itineraryOutline: [
+      { day: 'Day 1-4', title: 'Ubud: Sacred Rainforest & Bamboo Sanctuaries', detail: 'Mandapa Ritz-Carlton Reserve. Private river rafting and temple blessings.' },
+      { day: 'Day 5-9', title: 'Komodo Islands: Luxury Phinisi Charter', detail: 'Private yacht cruise to Pink Beach, Padar Island viewpoint, and manta ray snorkeling.' },
+      { day: 'Day 10-15', title: 'Nihi Sumba: Untamed Barefoot Paradise', detail: 'Clifftop villa at Nihi Sumba. Spa safari, horseback swimming, and secluded waterfall hikes.' }
+    ]
+  },
+  {
+    id: 'fiji-new-zealand',
+    nights: 14,
+    country: 'FIJI & NEW ZEALAND',
+    region: 'asia',
+    title: 'SEE IT ALL IN NEW ZEALAND AND FIJI',
+    tagline: 'Heli-hiking over Franz Josef Glacier followed by secluded private island bliss in Fiji.',
+    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85',
+    gallery: [
+      'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=85',
+      'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1600&q=85'
+    ],
+    tag: 'PACIFIC CONTRASTS',
+    startingPrice: '£12,900pp',
+    priceNote: 'excl. flights (based on 2 ppl sharing)',
+    bestSeason: 'October to April',
+    months: ['October', 'November', 'December', 'January', 'February', 'March', 'April'],
+    experienceTypes: ['honeymoon', 'couples', 'family'],
+    highlights: [
+      'Glacier heli-flight and champagne landing in the Southern Alps',
+      'Private overwater bure at Kokomo Private Island Fiji',
+      'Super-jeep Lord of the Rings alpine exploration',
+      'Snorkeling with reef sharks on outer Fijian barrier reefs'
+    ],
+    description: 'The ultimate contrast of high-octane alpine drama and blissful South Pacific seclusion. Soar over New Zealand’s fjords and glacial peaks before unwinding in paradise on a private Fijian island.',
+    itineraryOutline: [
+      { day: 'Day 1-4', title: 'Queenstown & Milford Sound Fiords', detail: 'Blanket Bay luxury lodge. Helicopter fly-in to Milford Sound and private jet boat safari.' },
+      { day: 'Day 5-7', title: 'Hawke’s Bay Wine & Artisan Estates', detail: 'The Farm at Cape Kidnappers. Clifftop golf, private cellar door tastings, and gannet colony.' },
+      { day: 'Day 8-14', title: 'Fiji: Kokomo Private Island Paradise', detail: 'Overwater villa, private catamaran sandbank picnic, and traditional Fijian kava ceremonies.' }
+    ]
+  },
+  {
+    id: 'brazil-amazon-rio-bahia',
+    nights: 9,
+    country: 'BRAZIL',
+    region: 'latin',
+    title: 'ULTIMATE BRAZIL: AMAZON, RIO & BAHIA',
+    tagline: 'Rio luxury penthouses, private Amazon river expedition, and bohemian Trancoso beaches.',
+    image: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=85',
+    gallery: [
+      'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1600&q=85',
+      'https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&w=1600&q=85'
+    ],
+    tag: 'TROPICAL SPIRIT',
+    startingPrice: '£9,200pp',
+    priceNote: 'excl. flights (based on 2 ppl sharing)',
+    bestSeason: 'Year-Round (Best: May - Nov)',
+    months: ['May', 'June', 'July', 'August', 'September', 'October', 'November'],
+    experienceTypes: ['honeymoon', 'couples', 'solo'],
+    highlights: [
+      'Private sunrise opening of Christ the Redeemer before public entry',
+      'Luxury Amazon cruiser buyout along the Rio Negro',
+      'Pink river dolphin swimming with native conservationists',
+      'Barefoot beachfront luxury villa in colonial Trancoso'
+    ],
+    description: 'From the samba rhythms and dramatic mountain backdrop of Rio de Janeiro to the mysterious emerald waterways of the deep Amazon and the barefoot chic beaches of Bahia.',
+    itineraryOutline: [
+      { day: 'Day 1-3', title: 'Rio de Janeiro: Penthouse Samba & Sunrise Corcovado', detail: 'Copacabana Palace suite. Private helicopter over Sugarloaf and VIP samba club access.' },
+      { day: 'Day 4-6', title: 'Amazon: Private Expedition Cruising', detail: 'Chartered boutique river cruiser. Piranha fishing, night caiman spotting, and pink dolphin swimming.' },
+      { day: 'Day 7-9', title: 'Trancoso: Bohemian Beaches & Quadrado Charm', detail: 'UXUA Casa Hotel. Clifftop caipirinhas, capoeira sessions, and private Atlantic beaches.' }
+    ]
+  },
+  {
+    id: 'iceland-northern-lights',
+    nights: 5,
+    country: 'ICELAND',
+    region: 'polar',
+    title: 'ICELAND: A LUXURY TRIP CHASING THE NORTHERN LIGHTS',
+    tagline: 'Private geothermal glass domes, super-jeep glacier crossings and after-hours lagoons.',
+    image: 'https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=1200&q=85',
+    tag: 'AURORA & VOLCANOES',
+    startingPrice: '£8,450 per person',
+    bestSeason: 'October to March',
+    highlights: [
+      'Private aurora wake-up calls in luxury heated glass domes',
+      'Exclusive after-hours access to the Retreat at the Blue Lagoon',
+      'Private helicopter transit across active volcanic fissures',
+      'Snowmobile expedition over Langjökull ice cap'
+    ],
+    description: 'An ethereal arctic journey designed to immerse you in Iceland’s wild contrasts. Watch the aurora borealis dancing overhead from your private panoramic dome, descend into magma chambers, and dine on wild Nordic gastronomy prepared by your private chef.',
+    itineraryOutline: [
+      { day: 'Day 1', title: 'Arrival in Reykjavik & Private Retreat', detail: 'Helicopter transfer from Keflavik to the Retreat Hotel. Private soak in subterranean silica waters.' },
+      { day: 'Day 2', title: 'Super-Jeep Glacier Crossing & Ice Caves', detail: 'Venture into shimmering turquoise ice tunnels beneath Langjökull with a senior glaciologist.' },
+      { day: 'Day 3', title: 'The Golden Circle by Air & Secret Geothermal Dinner', detail: 'Private flight over Gullfoss waterfall followed by farm-to-table dining inside a heated glass greenhouse.' },
+      { day: 'Day 4-5', title: 'South Coast Black Sands & Starlit Domes', detail: 'Reynisfjara obsidian basalt columns and nocturnal Aurora hunting from custom wilderness pods.' }
+    ]
+  },
+  {
+    id: 'greece-athens-mykonos-crete',
+    nights: 9,
+    country: 'GREECE',
+    region: 'mediterranean',
+    title: 'ATHENS, MYKONOS AND CRETE: A LUXURY AEGEAN DISCOVERY',
+    tagline: 'Chartered private yachts, ancient ruins at sunrise, and clifftop Cycladic serenity.',
+    image: 'https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=1200&q=85',
+    tag: 'AEGEAN ODYSSEY',
+    startingPrice: '£9,800 per person',
+    bestSeason: 'May to October',
+    highlights: [
+      'Private dawn opening of the Acropolis before public entry',
+      '4-day charter aboard a private 72ft Riva yacht through Delos & Rhenia',
+      'Private villa stay in Crete with olive grove helicopter landing',
+      'Sommelier-led tasting of rare Assyrtiko grapes overlooking the caldera'
+    ],
+    description: 'Bask in timeless Mediterranean splendor. From archaeological treasures in Athens opened exclusively for you to sun-drenched private yacht cruises across secret turquoise coves, every detail is orchestrated with white-glove precision.',
+    itineraryOutline: [
+      { day: 'Day 1-2', title: 'Athens: Private Classical Antiquity', detail: 'Stay at Hotel Grande Bretagne with Parthenon views. Exclusive after-hours tour of the Acropolis Museum.' },
+      { day: 'Day 3-5', title: 'Mykonos & The Sacred Isle of Delos', detail: 'Board your private Riva yacht for secluded bay swimming and an archaeologist-led Delos exploration.' },
+      { day: 'Day 6-9', title: 'Crete: Chania Venetians & Minoan Gastronomy', detail: 'Private cliff villa in Elounda, private diving at sunken Olous, and slow-roasted mountain feasts.' }
+    ]
+  },
+  {
+    id: 'japan-tokyo-kyoto',
+    nights: 10,
+    country: 'JAPAN',
+    region: 'asia',
+    title: 'TOKYO & KYOTO: A SUBLIME JAPAN HERITAGE EXPEDITION',
+    tagline: 'Private machiya estates, master tea ceremonies, and Hakone onsen sanctuary.',
+    image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=1200&q=85',
+    tag: 'HERITAGE & CONTRASTS',
+    startingPrice: '£12,200 per person',
+    bestSeason: 'March to May & September to November',
+    highlights: [
+      'Private access to Gion teahouse with an authentic Geiko master',
+      'Stay at an exclusive Aman Kyoto forest pavilion & Hakone ryokan',
+      'Private sword-forging lesson with a licensed master swordsmith',
+      'Tsukiji outer market curated culinary walk with a 3-star Michelin chef'
+    ],
+    description: 'Experience Japan at its most rarefied. Seamlessly journey from the neon pulse and hyper-refined sushi counters of Tokyo to the moss gardens, mist-shrouded temples, and hot-spring mineral baths of historic Kyoto.',
+    itineraryOutline: [
+      { day: 'Day 1-3', title: 'Tokyo: Modernist Elegance & Gastronomy', detail: 'Aman Tokyo suite. Private gallery access in Roppongi and VIP Tsukiji tasting.' },
+      { day: 'Day 4-5', title: 'Hakone: Hot Springs & Mt. Fuji Solitude', detail: 'Private onsen ryokan, traditional Kaiseki multi-course dining, and cedar forest walks.' },
+      { day: 'Day 6-10', title: 'Kyoto: Ancient Temples & Gion Secrets', detail: 'Private dawn stroll through Fushimi Inari, Daitoku-ji Zen meditation with an abbot, and bamboo grove tea.' }
+    ]
+  },
+  {
+    id: 'ecuador-galapagos',
+    nights: 13,
+    country: 'ECUADOR & GALÁPAGOS',
+    region: 'latin',
+    title: 'ECUADOR & GALÁPAGOS: A VOYAGE INTO PURE NATURE',
+    tagline: 'Chartered expedition yachts, ancient giant tortoises, and misty cloud forests.',
+    image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85',
+    tag: 'WILD EXPEDITION',
+    startingPrice: '£14,500 per person',
+    bestSeason: 'Year-Round (Best wildlife: Dec - May)',
+    highlights: [
+      'Private cabin charter aboard luxury eco-catamaran Stella Maris',
+      'Snorkeling with playful sea lions, penguins, and marine iguanas',
+      'Stay at Mashpi Lodge in the heart of the Andean Cloud Forest',
+      'Colonial Quito private palace access and artisan chocolate atelier'
+    ],
+    description: 'Trace the path of Charles Darwin in unparalleled comfort. Stand meters away from fearless wildlife, kayak through volcanic lava tunnels, and retreat each night to a world-class luxury expedition vessel.',
+    itineraryOutline: [
+      { day: 'Day 1-3', title: 'Quito Colonial Splendor & Mashpi Cloud Forest', detail: 'Historic mansion stay in Quito followed by dragonfly gondola rides over the lush biodiverse canopy.' },
+      { day: 'Day 4-9', title: 'Central & Southern Galápagos Cruising', detail: 'Fernandina lava fields, Española waved albatross colonies, and deep-sea sea turtle snorkeling.' },
+      { day: 'Day 10-13', title: 'Santa Cruz Highlands & Giant Tortoise Safari', detail: 'Private tented camp in the mist-veiled highlands among roaming century-old tortoises.' }
+    ]
+  },
+  {
+    id: 'namibia-skeleton-coast',
+    nights: 8,
+    country: 'NAMIBIA',
+    region: 'africa',
+    title: 'NAMIBIA: SOSSUSVLEI DUNES & SKELETON COAST WILDERNESS',
+    tagline: 'Fly-in safaris, ochre sand dunes, desert-adapted lions, and celestial dark skies.',
+    image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=85',
+    tag: 'DESERT SERENITY',
+    startingPrice: '£11,600 per person',
+    bestSeason: 'May to October',
+    highlights: [
+      'Private Cessna scenic flights along the fog-veiled Skeleton Coast',
+      'Sunrise hot-air balloon ascent over the world’s tallest red dunes',
+      'Track black rhinos on foot with anti-poaching wildlife rangers',
+      'Night-sky stargazing from your open-air rooftop observatory suite'
+    ],
+    description: 'An otherworldly African landscape of sublime silence and dramatic solitude. From Sossusvlei’s colossal rust-red dunes to the shipwrecks and seal colonies of the Atlantic coast, experience Africa like few ever will.',
+    itineraryOutline: [
+      { day: 'Day 1-3', title: 'Sossusvlei & Deadvlei Clay Pan', detail: 'Stay at andBeyond Sossusvlei. Dawn hot air ballooning and climbing Big Daddy dune.' },
+      { day: 'Day 4-5', title: 'Damaraland Desert Elephants & Rock Art', detail: 'Tracking endangered desert elephants through dry riverbeds with private naturalist guides.' },
+      { day: 'Day 6-8', title: 'Skeleton Coast Fly-In & Shipwreck Wilderness', detail: 'Shipwreck fly-overs, Roaring Dunes exploration, and sunset champagne over the roaring Atlantic.' }
+    ]
+  },
+  {
+    id: 'patagonia-chile-argentina',
+    nights: 11,
+    country: 'PATAGONIA',
+    region: 'latin',
+    title: 'PATAGONIA: FJORDS, GLACIERS & TORRES DEL PAINE',
+    tagline: 'Private estancias, granite peaks, zodiac glacier navigation, and Andean condors.',
+    image: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=85',
+    tag: 'EDGE OF THE EARTH',
+    startingPrice: '£13,200 per person',
+    bestSeason: 'November to March',
+    highlights: [
+      'Lodge stay inside Torres del Paine National Park with panoramic massif views',
+      'Private zodiac boat navigation between sapphire icebergs of Grey Glacier',
+      'Authentic horseback trek across vast pampas with Patagonian Gauchos',
+      'Private wine pairing in Chile’s Casablanca Valley en route'
+    ],
+    description: 'Venture to the dramatic southern tip of the American continent. Marvel at turquoise glacial lakes, thundering waterfalls, and jagged granite towers rising from the windswept wilderness.',
+    itineraryOutline: [
+      { day: 'Day 1-2', title: 'Santiago & Casablanca Wine Estates', detail: 'Acclimatize in a boutique vineyard estate with private cellar tastings of biodynamic Carménère.' },
+      { day: 'Day 3-7', title: 'Torres del Paine: Untamed Wilderness', detail: 'Stay at Explora Patagonia. Guided treks to French Valley and horseback riding through golden steppes.' },
+      { day: 'Day 8-11', title: 'Los Glaciares & Perito Moreno', detail: 'Cross into Argentina to witness the thunderous ice-calving of Perito Moreno Glacier.' }
+    ]
+  }
+];
+
+export const TESTIMONIALS: Testimonial[] = [
+  {
+    id: '1',
+    quote: 'ENDLESSCAPE WILL CHANGE THE WAY YOU TRAVEL',
+    author: 'Micah',
+    destination: 'Egypt'
+  },
+  {
+    id: '2',
+    quote: 'GLAMPING, HIKING, ICEBERGS, GOURMET FOOD. NOT SURE HOW MY TRIP COULD HAVE BEEN ANY BETTER',
+    author: 'Jimmy',
+    destination: 'Greenland'
+  },
+  {
+    id: '3',
+    quote: 'A DREAM COME TRUE – FROM SMALL RIADS TO A MOUNTAIN FORTRESS AND A DESERT OASIS. ENDLESSCAPE DELIVERED',
+    author: 'Kim',
+    destination: 'Morocco'
+  },
+  {
+    id: '4',
+    quote: 'HIGHLY RECOMMEND ENDLESSCAPE’S HELP IN PLANNING AN ADVENTUROUS FAMILY-FRIENDLY HOLIDAY',
+    author: 'Susan',
+    destination: 'Sweden'
+  }
+];
+
+export const PRESS_AWARDS: PressAward[] = [
+  {
+    id: '1',
+    quote: '“Luxury bespoke travel company, Endlesscape specialises in the trip you didn’t even realize you had been dreaming of.”',
+    publication: 'Condé Nast Traveller'
+  },
+  {
+    id: '2',
+    quote: '“One of our travel experts voted as a Robb Report Travel Master for bespoke international expeditions.”',
+    publication: 'Robb Report'
+  },
+  {
+    id: '3',
+    quote: '“Voted among the World’s Most Influential Bespoke Travel Specialists of the Year.”',
+    publication: 'Travel + Leisure'
+  },
+  {
+    id: '4',
+    quote: '“Awarded Best Custom Luxury Holidays at the Global Luxury Travel Awards.”',
+    publication: 'Luxury Travel Awards'
+  }
+];
+
+export const DESTINATION_REGIONS = [
+  {
+    id: 'all',
+    name: 'All Destinations',
+    count: 36
+  },
+  {
+    id: 'polar',
+    name: 'Polar & Arctic',
+    count: 8,
+    highlight: 'Iceland, Norway, Greenland, Antarctica'
+  },
+  {
+    id: 'mediterranean',
+    name: 'Mediterranean & Europe',
+    count: 14,
+    highlight: 'Greece, Italy, Spain, France, Croatia'
+  },
+  {
+    id: 'asia',
+    name: 'Asia & Far East',
+    count: 9,
+    highlight: 'Japan, Bhutan, Indonesia, Vietnam, India'
+  },
+  {
+    id: 'latin',
+    name: 'Latin America',
+    count: 7,
+    highlight: 'Galápagos, Patagonia, Peru, Costa Rica'
+  },
+  {
+    id: 'africa',
+    name: 'Wild Africa & Arabia',
+    count: 8,
+    highlight: 'Namibia, Kenya, Botswana, Oman, Egypt'
+  }
+];

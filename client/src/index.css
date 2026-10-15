@@ -1,0 +1,299 @@
+/* Endlesscape Design System - Ultra-Luxury Bespoke Travel (Inspired by Black Tomato) */
+:root {
+  --color-black: #08090b;
+  --color-dark-bg: #0d0f12;
+  --color-card-dark: #15181e;
+  --color-surface-hover: #1e222a;
+  
+  --color-light-bg: #faf9f6;
+  --color-light-surface: #ffffff;
+  --color-light-border: #e8e6e1;
+  --color-light-text: #1d1e21;
+  --color-light-subtext: #595b63;
+
+  /* Black Tomato signature accents */
+  --color-pink-accent: #e61b65;
+  --color-pink-hover: #cc1256;
+  --color-teal-accent: #059669;
+  --color-gold-accent: #c9a35e;
+
+  /* Typography - Black Tomato High-End Luxury Editorial */
+  --font-heading: 'Outfit', 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-condensed: 'Outfit', 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  /* Transitions */
+  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: all 0.2s ease;
+
+  /* iOS Safe Area Insets for iPhone notch / Dynamic Island / home bar */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --header-height: 76px;
+  --header-height-mobile: 64px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+  background-color: var(--color-black);
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: var(--color-black);
+  color: #ffffff;
+  line-height: 1.6;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  position: relative;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-black);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+/* Utility Containers */
+.container {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding-left: clamp(1rem, 4vw, 2rem);
+  padding-right: clamp(1rem, 4vw, 2rem);
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Touch-optimized Buttons (Apple HIG compliant >= 44px touch targets) */
+.btn-primary-pink {
+  background-color: var(--color-pink-accent);
+  color: #ffffff;
+  min-height: 44px;
+  padding: 0.65rem 1.35rem;
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.btn-primary-pink:hover {
+  background-color: var(--color-pink-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(230, 27, 101, 0.35);
+}
+
+.btn-primary-pink:active {
+  transform: scale(0.98);
+}
+
+.btn-outline-white {
+  background: transparent;
+  color: #ffffff;
+  min-height: 44px;
+  padding: 0.75rem 1.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.btn-outline-white:hover {
+  background: #ffffff;
+  color: var(--color-black);
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.btn-outline-white:active {
+  transform: scale(0.98);
+}
+
+.btn-solid-dark {
+  background-color: #000000;
+  color: #ffffff;
+  min-height: 44px;
+  padding: 0.75rem 1.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.btn-solid-dark:hover {
+  background-color: #1a1a1a;
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-solid-dark:active {
+  transform: scale(0.98);
+}
+
+.btn-solid-black {
+  background-color: #0b0c0e;
+  color: #ffffff;
+  min-height: 44px;
+  padding: 0.85rem 2rem;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.btn-solid-black:hover {
+  background-color: #24252a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.btn-solid-black:active {
+  transform: scale(0.98);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDownFade {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUpModal {
+  from { opacity: 0; transform: translateY(24px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.8; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+@keyframes floatIndicator {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-float {
+  animation: floatIndicator 2s ease-in-out infinite;
+}
+
+/* Subtle Topographic Background Texture */
+.topo-pattern {
+  background-image: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* iOS Input Safeguard: Prevents auto-zoom in mobile Safari */
+@media screen and (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="url"],
+  input[type="search"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Touch scroll helper */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+

@@ -1,0 +1,751 @@
+import { useState, useEffect } from 'react';
+import { Search, Phone, User, X, Sparkles, ChevronRight, Compass, Heart } from 'lucide-react';
+
+interface NavbarProps {
+  onGoHome?: () => void;
+  onOpenEnquire: () => void;
+  onOpenSearch: () => void;
+  onOpenMenu?: () => void;
+  onSelectDestinations: () => void;
+  onSelectExperiences: () => void;
+  onOpenAdmin: () => void;
+}
+
+export const Navbar = ({
+  onGoHome,
+  onOpenEnquire,
+  onOpenSearch,
+  onSelectDestinations,
+  onSelectExperiences,
+  onOpenAdmin,
+}: NavbarProps) => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 30) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Prevent background scrolling when iOS full-screen mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+    };
+  }, [mobileMenuOpen]);
+
+  const closeMenuAnd = (callback: () => void) => {
+    setMobileMenuOpen(false);
+    callback();
+  };
+
+  return (
+    <>
+      <header
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          zIndex: 110,
+          transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
+          backgroundColor: isScrolled ? 'rgba(7, 8, 10, 0.92)' : 'rgba(7, 8, 10, 0.68)',
+          backdropFilter: 'blur(24px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(24px) saturate(180%)',
+          borderBottom: isScrolled ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid rgba(255, 255, 255, 0.05)',
+          paddingTop: 'max(0.25rem, var(--safe-top))',
+        }}
+      >
+        <div
+          className="container nav-main-container"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            transition: 'all 0.3s ease',
+          }}
+        >
+          {/* Left: Brand Identity */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                if (onGoHome) onGoHome();
+                else window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              style={{
+                textDecoration: 'none',
+                color: '#ffffff',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+              }}
+            >
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <span
+                  style={{
+                    fontFamily: 'var(--font-heading)',
+                    fontWeight: 700,
+                    fontSize: 'clamp(1.1rem, 4vw, 1.35rem)',
+                    letterSpacing: '0.14em',
+                    lineHeight: 1,
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  ENDLESSCAPE
+                  <span
+                    style={{
+                      display: 'inline-block',
+                      width: '6px',
+                      height: '6px',
+                      borderRadius: '50%',
+                      backgroundColor: 'var(--color-pink-accent)',
+                      marginLeft: '4px',
+                      boxShadow: '0 0 10px rgba(230, 27, 101, 0.9)',
+                    }}
+                  />
+                </span>
+                <span
+                  style={{
+                    fontSize: '0.52rem',
+                    letterSpacing: '0.3em',
+                    color: 'rgba(255, 255, 255, 0.65)',
+                    fontWeight: 600,
+                    marginTop: '3px',
+                  }}
+                >
+                  BESPOKE TRAVEL
+                </span>
+              </div>
+            </a>
+
+            {/* Desktop Navigation Links */}
+            <nav
+              style={{
+                display: 'none',
+                alignItems: 'center',
+                gap: '1.75rem',
+                marginLeft: '1.5rem',
+              }}
+              className="desktop-nav"
+            >
+              <button
+                onClick={onOpenSearch}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  color: 'rgba(255, 255, 255, 0.85)',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  padding: '6px',
+                  transition: 'var(--transition-fast)',
+                }}
+                aria-label="Search destinations"
+                title="Search destinations & experiences"
+              >
+                <Search size={18} strokeWidth={2.2} />
+              </button>
+
+              <button
+                onClick={onSelectDestinations}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  color: 'rgba(255, 255, 255, 0.9)',
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: '0.76rem',
+                  fontWeight: 600,
+                  letterSpacing: '0.14em',
+                  textTransform: 'uppercase',
+                  cursor: 'pointer',
+                  padding: '0.5rem 0',
+                  position: 'relative',
+                  transition: 'var(--transition-fast)',
+                }}
+                className="nav-link"
+              >
+                DESTINATIONS
+              </button>
+
+              <button
+                onClick={onSelectExperiences}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  color: 'rgba(255, 255, 255, 0.9)',
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: '0.76rem',
+                  fontWeight: 600,
+                  letterSpacing: '0.14em',
+                  textTransform: 'uppercase',
+                  cursor: 'pointer',
+                  padding: '0.5rem 0',
+                  transition: 'var(--transition-fast)',
+                }}
+                className="nav-link"
+              >
+                EXPERIENCES
+              </button>
+
+              <a
+                href="#philosophy"
+                style={{
+                  textDecoration: 'none',
+                  color: 'rgba(255, 255, 255, 0.9)',
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: '0.76rem',
+                  fontWeight: 600,
+                  letterSpacing: '0.14em',
+                  textTransform: 'uppercase',
+                  padding: '0.5rem 0',
+                  transition: 'var(--transition-fast)',
+                }}
+                className="nav-link"
+              >
+                OUR PHILOSOPHY
+              </a>
+
+              <a
+                href="#itineraries"
+                style={{
+                  textDecoration: 'none',
+                  color: 'rgba(255, 255, 255, 0.9)',
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: '0.76rem',
+                  fontWeight: 600,
+                  letterSpacing: '0.14em',
+                  textTransform: 'uppercase',
+                  padding: '0.5rem 0',
+                  transition: 'var(--transition-fast)',
+                }}
+                className="nav-link"
+              >
+                ITINERARIES
+              </a>
+            </nav>
+          </div>
+
+          {/* Right: Phone Concierge, Admin Switcher & "ENQUIRE" Button */}
+          <div className="nav-actions-cluster" style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexShrink: 0 }}>
+            {/* Desktop Phone */}
+            <a
+              href="tel:+442074269888"
+              style={{
+                textDecoration: 'none',
+                color: 'rgba(255, 255, 255, 0.9)',
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.78rem',
+                fontWeight: 600,
+                letterSpacing: '0.08em',
+                display: 'none',
+                alignItems: 'center',
+                gap: '0.45rem',
+                transition: 'var(--transition-fast)',
+                marginRight: '0.5rem',
+              }}
+              className="desktop-phone"
+            >
+              <Phone size={13} style={{ color: 'var(--color-pink-accent)' }} />
+              +44 207 426 9888
+            </a>
+
+            {/* Admin Concierge Portal Switcher (Desktop) */}
+            <button
+              onClick={onOpenAdmin}
+              style={{
+                background: 'rgba(255, 255, 255, 0.06)',
+                border: '1px solid rgba(255, 255, 255, 0.16)',
+                color: 'rgba(255, 255, 255, 0.9)',
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.72rem',
+                fontWeight: 600,
+                letterSpacing: '0.1em',
+                padding: '0.45rem 0.85rem',
+                borderRadius: '2px',
+                cursor: 'pointer',
+                display: 'none',
+                alignItems: 'center',
+                gap: '0.4rem',
+                transition: 'all 0.25s ease',
+              }}
+              className="desktop-admin-btn"
+              title="Open Concierge Admin Dashboard"
+            >
+              <User size={13} style={{ color: 'var(--color-pink-accent)' }} />
+              ADMIN PORTAL
+            </button>
+
+            {/* Mobile Quick Search Glass Button */}
+            <button
+              onClick={onOpenSearch}
+              className="mobile-search-btn"
+              aria-label="Search destinations"
+              title="Search destinations & experiences"
+            >
+              <Search size={16} strokeWidth={2.2} />
+            </button>
+
+            {/* Signature Luxury Hot Pink ENQUIRE Pill Button */}
+            <button
+              onClick={onOpenEnquire}
+              className="nav-enquire-btn"
+              aria-label="Enquire now"
+            >
+              <Sparkles size={12} className="enquire-sparkle" />
+              <span className="enquire-text-desktop">ENQUIRE NOW</span>
+              <span className="enquire-text-mobile">ENQUIRE</span>
+            </button>
+
+            {/* Bespoke Luxury 2-Line Editorial Hamburger Toggle */}
+            <button
+              onClick={() => setMobileMenuOpen(true)}
+              className="mobile-toggle-btn"
+              aria-label="Open mobile menu"
+              title="Menu"
+            >
+              <span className="menu-line menu-line-top" />
+              <span className="menu-line menu-line-bottom" />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* iOS Full-Screen Luxury Mobile Drawer Menu */}
+      {mobileMenuOpen && (
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100vw',
+            height: '100vh',
+            minHeight: '100dvh',
+            zIndex: 999,
+            backgroundColor: 'rgba(8, 9, 11, 0.97)',
+            backdropFilter: 'blur(30px)',
+            WebkitBackdropFilter: 'blur(30px)',
+            display: 'flex',
+            flexDirection: 'column',
+            overflowY: 'auto',
+            WebkitOverflowScrolling: 'touch',
+            paddingTop: 'max(1.2rem, var(--safe-top))',
+            paddingBottom: 'max(1.5rem, var(--safe-bottom))',
+            animation: 'fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
+          }}
+        >
+          {/* Top Bar inside Drawer: Brand + Close Button */}
+          <div
+            style={{
+              padding: '0 1.25rem 1.25rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+            }}
+          >
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <span
+                style={{
+                  fontFamily: 'var(--font-heading)',
+                  fontWeight: 700,
+                  fontSize: '1.25rem',
+                  letterSpacing: '0.14em',
+                  color: '#ffffff',
+                }}
+              >
+                ENDLESSCAPE
+                <span
+                  style={{
+                    display: 'inline-block',
+                    width: '6px',
+                    height: '6px',
+                    borderRadius: '50%',
+                    backgroundColor: 'var(--color-pink-accent)',
+                    marginLeft: '4px',
+                  }}
+                />
+              </span>
+              <span style={{ fontSize: '0.52rem', letterSpacing: '0.28em', color: 'rgba(255, 255, 255, 0.55)', fontWeight: 600 }}>
+                BESPOKE PRIVATE TRAVEL
+              </span>
+            </div>
+
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              style={{
+                width: '42px',
+                height: '42px',
+                borderRadius: '50%',
+                backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                color: '#ffffff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+              }}
+              aria-label="Close menu"
+            >
+              <X size={20} />
+            </button>
+          </div>
+
+          {/* Quick Search Bar inside Menu */}
+          <div style={{ padding: '1.25rem' }}>
+            <button
+              onClick={() => closeMenuAnd(onOpenSearch)}
+              style={{
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.75rem',
+                backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid rgba(255, 255, 255, 0.12)',
+                borderRadius: '6px',
+                padding: '0.9rem 1rem',
+                color: 'rgba(255, 255, 255, 0.7)',
+                fontSize: '0.86rem',
+                textAlign: 'left',
+                cursor: 'pointer',
+              }}
+            >
+              <Search size={18} style={{ color: 'var(--color-pink-accent)' }} />
+              <span>Search destinations, feelings, itineraries...</span>
+            </button>
+          </div>
+
+          {/* Editorial Navigation Links */}
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              padding: '0.5rem 1.25rem',
+              flex: 1,
+            }}
+          >
+            {[
+              {
+                title: 'DESTINATIONS',
+                subtitle: 'Explore 100+ worldwide expedition collection',
+                icon: Compass,
+                action: () => closeMenuAnd(onSelectDestinations),
+              },
+              {
+                title: 'EXPERIENCES & TRAVEL STYLES',
+                subtitle: 'Couples, multi-gen families, solo odysseys',
+                icon: Heart,
+                action: () => closeMenuAnd(onSelectExperiences),
+              },
+              {
+                title: 'CURATED ITINERARIES',
+                subtitle: 'Inspirational bespoke routes & private charters',
+                icon: Sparkles,
+                action: () => {
+                  closeMenuAnd(() => {
+                    const el = document.getElementById('itineraries');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  });
+                },
+              },
+              {
+                title: 'OUR PHILOSOPHY',
+                subtitle: 'Every journey starts with a feeling',
+                icon: Compass,
+                action: () => {
+                  closeMenuAnd(() => {
+                    const el = document.getElementById('philosophy');
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  });
+                },
+              },
+              {
+                title: 'CONCIERGE ADMIN PORTAL',
+                subtitle: 'Manage client enquiries & edit itineraries',
+                icon: User,
+                action: () => closeMenuAnd(onOpenAdmin),
+              },
+            ].map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <button
+                  key={idx}
+                  onClick={item.action}
+                  style={{
+                    background: 'transparent',
+                    border: 'none',
+                    borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
+                    padding: '1.1rem 0',
+                    textAlign: 'left',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+                    <div
+                      style={{
+                        width: '36px',
+                        height: '36px',
+                        borderRadius: '6px',
+                        backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: 'var(--color-pink-accent)',
+                      }}
+                    >
+                      <Icon size={16} />
+                    </div>
+                    <div>
+                      <div
+                        style={{
+                          fontFamily: 'var(--font-heading)',
+                          fontSize: '1.05rem',
+                          fontWeight: 700,
+                          letterSpacing: '0.08em',
+                          color: '#ffffff',
+                          textTransform: 'uppercase',
+                        }}
+                      >
+                        {item.title}
+                      </div>
+                      <div style={{ fontSize: '0.74rem', color: 'rgba(255, 255, 255, 0.55)', marginTop: '2px' }}>
+                        {item.subtitle}
+                      </div>
+                    </div>
+                  </div>
+                  <ChevronRight size={18} style={{ color: 'rgba(255, 255, 255, 0.35)' }} />
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Bottom Concierge Quick Access & Hot Pink CTA */}
+          <div
+            style={{
+              padding: '1.5rem 1.25rem 1rem',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0.85rem',
+              borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+            }}
+          >
+            <a
+              href="tel:+442074269888"
+              style={{
+                textDecoration: 'none',
+                color: '#ffffff',
+                backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                borderRadius: '4px',
+                padding: '0.8rem 1rem',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.6rem',
+                fontSize: '0.82rem',
+                fontWeight: 600,
+              }}
+            >
+              <Phone size={14} style={{ color: 'var(--color-pink-accent)' }} />
+              +44 207 426 9888 (24/7 Mayfair Concierge)
+            </a>
+
+            <button
+              onClick={() => closeMenuAnd(onOpenEnquire)}
+              className="btn-primary-pink"
+              style={{
+                width: '100%',
+                padding: '0.95rem 1.5rem',
+                fontSize: '0.82rem',
+                letterSpacing: '0.14em',
+                boxShadow: '0 8px 24px rgba(230, 27, 101, 0.4)',
+              }}
+            >
+              <Sparkles size={16} />
+              START YOUR BESPOKE JOURNEY
+            </button>
+          </div>
+        </div>
+      )}
+
+      <style>{`
+        .nav-main-container {
+          height: 60px;
+        }
+
+        .enquire-text-mobile { display: inline; }
+        .enquire-text-desktop { display: none; }
+
+        /* Mobile Search Glass Button */
+        .mobile-search-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.06);
+          border: 1px solid rgba(255, 255, 255, 0.14);
+          color: #ffffff;
+          cursor: pointer;
+          touch-action: manipulation;
+          transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+          flex-shrink: 0;
+        }
+        .mobile-search-btn:active {
+          transform: scale(0.92);
+          background: rgba(255, 255, 255, 0.16);
+        }
+
+        /* Luxury Hot Pink Enquire Pill Button */
+        .nav-enquire-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.35rem;
+          height: 36px;
+          padding: 0 0.95rem;
+          border-radius: 999px;
+          background: linear-gradient(135deg, #e61b65 0%, #ce1254 100%);
+          color: #ffffff;
+          border: none;
+          font-family: var(--font-sans);
+          font-size: 0.68rem;
+          font-weight: 700;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          cursor: pointer;
+          touch-action: manipulation;
+          box-shadow: 0 3px 14px rgba(230, 27, 101, 0.38);
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+          white-space: nowrap;
+          flex-shrink: 0;
+        }
+        .nav-enquire-btn:active {
+          transform: scale(0.94);
+          box-shadow: 0 1px 6px rgba(230, 27, 101, 0.4);
+        }
+        .nav-enquire-btn:hover {
+          background: linear-gradient(135deg, #ff2375 0%, #e61b65 100%);
+        }
+
+        /* Luxury 2-Line Editorial Hamburger */
+        .mobile-toggle-btn {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 5px;
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.06);
+          border: 1px solid rgba(255, 255, 255, 0.14);
+          cursor: pointer;
+          touch-action: manipulation;
+          padding: 0;
+          transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+          flex-shrink: 0;
+        }
+        .mobile-toggle-btn:active {
+          transform: scale(0.92);
+          background: rgba(255, 255, 255, 0.16);
+        }
+        .mobile-toggle-btn .menu-line {
+          display: block;
+          height: 1.5px;
+          border-radius: 1px;
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .mobile-toggle-btn .menu-line-top {
+          width: 17px;
+          background-color: #ffffff;
+        }
+        .mobile-toggle-btn .menu-line-bottom {
+          width: 11px;
+          background-color: var(--color-pink-accent);
+        }
+        .mobile-toggle-btn:hover .menu-line-bottom {
+          width: 17px;
+        }
+
+        @media (min-width: 640px) {
+          .nav-main-container {
+            height: 68px;
+          }
+          .enquire-text-mobile { display: none; }
+          .enquire-text-desktop { display: inline; }
+          .nav-enquire-btn {
+            height: 38px;
+            padding: 0 1.15rem;
+          }
+        }
+
+        @media (min-width: 960px) {
+          .nav-main-container {
+            height: 74px;
+          }
+          .desktop-nav { display: flex !important; }
+          .desktop-phone { display: flex !important; }
+          .desktop-admin-btn { display: inline-flex !important; }
+          .mobile-search-btn { display: none !important; }
+          .mobile-toggle-btn { display: none !important; }
+          .nav-enquire-btn {
+            height: 42px;
+            padding: 0 1.4rem;
+            font-size: 0.74rem;
+            border-radius: 3px;
+          }
+        }
+
+        .nav-link:hover {
+          color: #ffffff !important;
+        }
+        .nav-link::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0%;
+          height: 1px;
+          background-color: var(--color-pink-accent);
+          transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+          width: 100%;
+        }
+
+        @media (max-width: 380px) {
+          .enquire-sparkle {
+            display: none;
+          }
+          .nav-enquire-btn {
+            padding: 0 0.75rem;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+          }
+        }
+      `}</style>
+    </>
+  );
+};
