@@ -3,16 +3,56 @@ import cors from 'cors';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import multer from 'multer';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const DB_PATH = path.join(__dirname, 'data', 'database.json');
+const UPLOADS_DIR = path.join(__dirname, 'uploads');
+
+if (!fs.existsSync(UPLOADS_DIR)) {
+  fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+}
+
+// Multer storage configuration for clean, web-optimized image filenames
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, UPLOADS_DIR);
+  },
+  filename: (req, file, cb) => {
+    const ext = path.extname(file.originalname).toLowerCase() || '.webp';
+    const safeExt = ['.webp', '.jpg', '.jpeg', '.png', '.avif'].includes(ext) ? ext : '.webp';
+    const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e6)}`;
+    cb(null, `expedition-${uniqueSuffix}${safeExt}`);
+  }
+});
+
+const upload = multer({
+  storage,
+  limits: { fileSize: 25 * 1024 * 1024 }, // 25MB limit
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype.startsWith('image/')) {
+      cb(null, true);
+    } else {
+      cb(new Error('Only image files are permitted'));
+    }
+  }
+});
 
 const app = express();
 const PORT = process.env.PORT || 5001;
 
 app.use(cors());
 app.use(express.json());
+app.use('/api/uploads', express.static(UPLOADS_DIR));
+
+// Disable browser caching for all dynamic API endpoints
+app.use('/api', (req, res, next) => {
+  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Expires', '0');
+  next();
+});
 
 // Helper to read and write database
 function readDB() {
@@ -90,9 +130,28 @@ app.get('/api/itineraries/:id', (req, res) => {
   res.json(item);
 });
 
+// POST Upload multiple images (Admin)
+app.post('/api/upload', upload.array('images', 12), (req, res) => {
+  try {
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ error: 'No files were uploaded' });
+    }
+    const urls = req.files.map(file => `/api/uploads/${file.filename}`);
+    res.json({ success: true, urls });
+  } catch (err) {
+    console.error('File upload error:', err);
+    res.status(500).json({ error: 'File upload failed' });
+  }
+});
+
 // POST Create itinerary (Admin)
 app.post('/api/itineraries', (req, res) => {
   const db = readDB();
+  const heroImg = req.body.image || (Array.isArray(req.body.gallery) && req.body.gallery[0]) || 'https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=1200&q=85';
+  const galleryImgs = Array.isArray(req.body.gallery) && req.body.gallery.length > 0
+    ? req.body.gallery
+    : (heroImg ? [heroImg] : []);
+
   const newItem = {
     id: req.body.id || `trip-${Date.now()}`,
     nights: Number(req.body.nights) || 7,
@@ -100,7 +159,8 @@ app.post('/api/itineraries', (req, res) => {
     region: req.body.region || 'mediterranean',
     title: req.body.title?.toUpperCase() || 'UNTITLED EXPEDITION',
     tagline: req.body.tagline || 'Bespoke luxury journey tailored around feeling.',
-    image: req.body.image || 'https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=1200&q=85',
+    image: heroImg,
+    gallery: galleryImgs,
     tag: req.body.tag || 'EXCLUSIVE DEPARTURE',
     startingPrice: req.body.startingPrice || '£9,500 per person',
     bestSeason: req.body.bestSeason || 'Year-Round',

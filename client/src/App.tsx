@@ -43,13 +43,16 @@ export function App() {
   const [destinationsOpen, setDestinationsOpen] = useState(false);
   const [searchInitialQuery, setSearchInitialQuery] = useState('');
 
-  // Fetch live itineraries from backend
+  // Fetch live itineraries from backend with cache-busting
   const fetchLiveItineraries = useCallback(async () => {
     try {
-      const res = await fetch(`${API_BASE}/itineraries`);
+      const res = await fetch(`${API_BASE}/itineraries?_t=${Date.now()}`, {
+        cache: 'no-store',
+        headers: { 'Cache-Control': 'no-cache, no-store, must-revalidate', 'Pragma': 'no-cache' }
+      });
       if (res.ok) {
         const data = await res.json();
-        if (Array.isArray(data) && data.length > 0) {
+        if (Array.isArray(data)) {
           setItineraries(data);
         }
       }
@@ -58,15 +61,25 @@ export function App() {
     }
   }, []);
 
-  useEffect(() => {
+  // Instant public data update handler (receives immediate list from AdminPanel without delay)
+  const handleUpdatePublicData = useCallback((directList?: Itinerary[]) => {
+    if (directList && Array.isArray(directList)) {
+      setItineraries(directList);
+    }
     fetchLiveItineraries();
   }, [fetchLiveItineraries]);
 
+  // Sync data on pageState changes (e.g. returning to home/experience)
+  useEffect(() => {
+    fetchLiveItineraries();
+  }, [pageState, fetchLiveItineraries]);
+
   // Handlers memoized with useCallback
   const handleGoHome = useCallback(() => {
+    fetchLiveItineraries();
     setPageState('home');
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
+  }, [fetchLiveItineraries]);
 
   const handleOpenEnquire = useCallback((tripTitle?: string) => {
     setPlannerFeeling(tripTitle ? `Enquiring for: ${tripTitle}` : '');
@@ -138,7 +151,7 @@ export function App() {
     return (
       <AdminPanel
         onBackToSite={handleGoHome}
-        onRefreshPublicData={fetchLiveItineraries}
+        onRefreshPublicData={handleUpdatePublicData}
       />
     );
   }

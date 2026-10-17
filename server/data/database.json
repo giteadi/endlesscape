@@ -1,6 +1,38 @@
 {
   "itineraries": [
     {
+      "id": "trip-1792225706640",
+      "nights": 7,
+      "country": "INDIA",
+      "region": "asia",
+      "title": "INDIA: ROYAL RAJASTHAN, PALACES, TIGERS & DESERT CAMPS EXPEDITION",
+      "tagline": "Private palace stays, tiger safaris at dawn, and starlit dinners in the Thar Desert.",
+      "image": "https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=1200&q=85",
+      "gallery": [
+        "https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=1200&q=85",
+        "/api/uploads/expedition-1792225555277-737667.webp"
+      ],
+      "tag": "PRIVATE EXPEDITION",
+      "startingPrice": "£10,500 per person",
+      "bestSeason": "May to October",
+      "highlights": [
+        "Private palace suites in Udaipur & Jaipur",
+        "Dawn tiger safari at Ranthambore",
+        "Private chauffeur & expert guide",
+        "Luxury desert camp in Jaisalmer",
+        "Private lake dinner on a heritage boat",
+        "Helicopter transfer between cities"
+      ],
+      "description": "Seven nights across Rajasthan, designed for travellers who want India at its most regal and unhurried. Wake in lakeside palace suites in Udaipur, trace the pink-hued history of Jaipur with a private historian, and track tigers through Ranthambore's ancient ruins at first light. Evenings end beneath open desert skies, with candlelit dinners and folk musicians playing just for your group. Every detail, from private transfers to behind-the-scenes access, is arranged around the way you want to feel.",
+      "itineraryOutline": [
+        {
+          "day": "Day 1-2",
+          "title": "Private Arrival & VIP Lodge Check-in",
+          "detail": "Chauffeured luxury transit and evening welcome tasting."
+        }
+      ]
+    },
+    {
       "id": "morocco-sahara-desert",
       "nights": 10,
       "country": "MOROCCO",
@@ -18,8 +50,20 @@
       "startingPrice": "£8,538pp",
       "priceNote": "excl. flights (based on 2 ppl sharing)",
       "bestSeason": "March to June | Sept to Nov",
-      "months": ["March", "April", "May", "June", "September", "October", "November"],
-      "experienceTypes": ["honeymoon", "couples", "luxury-adventure"],
+      "months": [
+        "March",
+        "April",
+        "May",
+        "June",
+        "September",
+        "October",
+        "November"
+      ],
+      "experienceTypes": [
+        "honeymoon",
+        "couples",
+        "luxury-adventure"
+      ],
       "highlights": [
         "Private sunset camel caravan into the untouched dunes of Erg Chigaga",
         "Opulent stay at Villa des Orangers Marrakech and Dar Ahlam palm oasis",
@@ -42,10 +86,26 @@
         }
       ],
       "itineraryOutline": [
-        { "day": "Day 1-2", "title": "Marrakech: Souks & Palace Sanctuary", "detail": "Stay at Villa des Orangers. Private curator tour of Jardin Majorelle and evening dining overlooking Jemaa el Fna." },
-        { "day": "Day 3-4", "title": "High Atlas & Fortress of Ait Ben Haddou", "detail": "Tizi n’Tichka mountain pass, Telouet kasbah, and sunset over the clay towers of Ait Ben Haddou." },
-        { "day": "Day 5-7", "title": "Skoura Oasis & Dar Ahlam", "detail": "Two nights of sublime luxury at Dar Ahlam. Private picnics in almond groves and kasbah exploration." },
-        { "day": "Day 8-10", "title": "Dunes of Erg Chigaga & Sahara Stargazing", "detail": "Private 4x4 expedition to remote desert camp. Camel trekking, dune dinners, and stargazing." }
+        {
+          "day": "Day 1-2",
+          "title": "Marrakech: Souks & Palace Sanctuary",
+          "detail": "Stay at Villa des Orangers. Private curator tour of Jardin Majorelle and evening dining overlooking Jemaa el Fna."
+        },
+        {
+          "day": "Day 3-4",
+          "title": "High Atlas & Fortress of Ait Ben Haddou",
+          "detail": "Tizi n’Tichka mountain pass, Telouet kasbah, and sunset over the clay towers of Ait Ben Haddou."
+        },
+        {
+          "day": "Day 5-7",
+          "title": "Skoura Oasis & Dar Ahlam",
+          "detail": "Two nights of sublime luxury at Dar Ahlam. Private picnics in almond groves and kasbah exploration."
+        },
+        {
+          "day": "Day 8-10",
+          "title": "Dunes of Erg Chigaga & Sahara Stargazing",
+          "detail": "Private 4x4 expedition to remote desert camp. Camel trekking, dune dinners, and stargazing."
+        }
       ]
     },
     {
@@ -65,8 +125,18 @@
       "startingPrice": "£7,950pp",
       "priceNote": "excl. flights (based on 2 ppl sharing)",
       "bestSeason": "May to October",
-      "months": ["May", "June", "July", "August", "September", "October"],
-      "experienceTypes": ["honeymoon", "couples"],
+      "months": [
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October"
+      ],
+      "experienceTypes": [
+        "honeymoon",
+        "couples"
+      ],
       "highlights": [
         "Chartered 72ft Riva yacht through Delos and uninhabited Aegean coves",
         "Private caldera infinity pool villa in Oia, Santorini",
@@ -85,9 +155,21 @@
         }
       ],
       "itineraryOutline": [
-        { "day": "Day 1-3", "title": "Santorini Caldera & Wine Heritage", "detail": "Private cliffside cave suite. Private catamaran sunset cruise and sommelier cellar tour." },
-        { "day": "Day 4-6", "title": "Mykonos & The Uninhabited Isle of Rhenia", "detail": "Private yacht charter for secluded bay swimming and beachside taverna dining." },
-        { "day": "Day 7-8", "title": "Paros & Antiparos Sea Caves", "detail": "Boutique estate stay, fishing village strolls, and private chef dinners by the sea." }
+        {
+          "day": "Day 1-3",
+          "title": "Santorini Caldera & Wine Heritage",
+          "detail": "Private cliffside cave suite. Private catamaran sunset cruise and sommelier cellar tour."
+        },
+        {
+          "day": "Day 4-6",
+          "title": "Mykonos & The Uninhabited Isle of Rhenia",
+          "detail": "Private yacht charter for secluded bay swimming and beachside taverna dining."
+        },
+        {
+          "day": "Day 7-8",
+          "title": "Paros & Antiparos Sea Caves",
+          "detail": "Boutique estate stay, fishing village strolls, and private chef dinners by the sea."
+        }
       ]
     },
     {
@@ -107,8 +189,19 @@
       "startingPrice": "£11,400pp",
       "priceNote": "excl. flights (based on 2 ppl sharing)",
       "bestSeason": "April to October",
-      "months": ["April", "May", "June", "July", "August", "September", "October"],
-      "experienceTypes": ["honeymoon", "couples"],
+      "months": [
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October"
+      ],
+      "experienceTypes": [
+        "honeymoon",
+        "couples"
+      ],
       "highlights": [
         "Private wooden Riva speedboat cruise to historic Lake Como villas",
         "Exclusive buyout of a private wine cellar in Val d’Orcia",
@@ -127,9 +220,21 @@
         }
       ],
       "itineraryOutline": [
-        { "day": "Day 1-4", "title": "Lake Como: Alpine Elegance & Speedboats", "detail": "Stay at Grand Hotel Tremezzo. Private Riva boat tour and lakeside terrace dinners." },
-        { "day": "Day 5-8", "title": "Tuscany: Chianti Castles & Val d’Orcia", "detail": "Castello di Casole estate. Private sommelier wine blending and horseback ride through olive groves." },
-        { "day": "Day 9-12", "title": "Amalfi Coast: Clifftop Ravello & Capri", "detail": "Belmond Hotel Caruso. Helicopter transfer and private gozzo boat cruise along Positano." }
+        {
+          "day": "Day 1-4",
+          "title": "Lake Como: Alpine Elegance & Speedboats",
+          "detail": "Stay at Grand Hotel Tremezzo. Private Riva boat tour and lakeside terrace dinners."
+        },
+        {
+          "day": "Day 5-8",
+          "title": "Tuscany: Chianti Castles & Val d’Orcia",
+          "detail": "Castello di Casole estate. Private sommelier wine blending and horseback ride through olive groves."
+        },
+        {
+          "day": "Day 9-12",
+          "title": "Amalfi Coast: Clifftop Ravello & Capri",
+          "detail": "Belmond Hotel Caruso. Helicopter transfer and private gozzo boat cruise along Positano."
+        }
       ]
     },
     {
@@ -149,8 +254,20 @@
       "startingPrice": "£13,800pp",
       "priceNote": "excl. flights (based on 2 ppl sharing)",
       "bestSeason": "April to November",
-      "months": ["April", "May", "June", "July", "August", "September", "October", "November"],
-      "experienceTypes": ["honeymoon", "couples"],
+      "months": [
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November"
+      ],
+      "experienceTypes": [
+        "honeymoon",
+        "couples"
+      ],
       "highlights": [
         "4-day private charter on a hand-crafted luxury Indonesian phinisi yacht",
         "Swimming alongside manta rays in Komodo National Park",
@@ -169,9 +286,21 @@
         }
       ],
       "itineraryOutline": [
-        { "day": "Day 1-4", "title": "Ubud: Sacred Rainforest & Bamboo Sanctuaries", "detail": "Mandapa Ritz-Carlton Reserve. Private river rafting and temple blessings." },
-        { "day": "Day 5-9", "title": "Komodo Islands: Luxury Phinisi Charter", "detail": "Private yacht cruise to Pink Beach, Padar Island viewpoint, and manta ray snorkeling." },
-        { "day": "Day 10-15", "title": "Nihi Sumba: Untamed Barefoot Paradise", "detail": "Clifftop villa at Nihi Sumba. Spa safari, horseback swimming, and secluded waterfall hikes." }
+        {
+          "day": "Day 1-4",
+          "title": "Ubud: Sacred Rainforest & Bamboo Sanctuaries",
+          "detail": "Mandapa Ritz-Carlton Reserve. Private river rafting and temple blessings."
+        },
+        {
+          "day": "Day 5-9",
+          "title": "Komodo Islands: Luxury Phinisi Charter",
+          "detail": "Private yacht cruise to Pink Beach, Padar Island viewpoint, and manta ray snorkeling."
+        },
+        {
+          "day": "Day 10-15",
+          "title": "Nihi Sumba: Untamed Barefoot Paradise",
+          "detail": "Clifftop villa at Nihi Sumba. Spa safari, horseback swimming, and secluded waterfall hikes."
+        }
       ]
     },
     {
@@ -190,8 +319,20 @@
       "startingPrice": "£12,900pp",
       "priceNote": "excl. flights (based on 2 ppl sharing)",
       "bestSeason": "October to April",
-      "months": ["October", "November", "December", "January", "February", "March", "April"],
-      "experienceTypes": ["honeymoon", "couples", "family"],
+      "months": [
+        "October",
+        "November",
+        "December",
+        "January",
+        "February",
+        "March",
+        "April"
+      ],
+      "experienceTypes": [
+        "honeymoon",
+        "couples",
+        "family"
+      ],
       "highlights": [
         "Glacier heli-flight and champagne landing in the Southern Alps",
         "Private overwater bure at Kokomo Private Island Fiji",
@@ -200,9 +341,21 @@
       ],
       "description": "The ultimate contrast of high-octane alpine drama and blissful South Pacific seclusion. Soar over New Zealand’s fjords and glacial peaks before unwinding in paradise on a private Fijian island.",
       "itineraryOutline": [
-        { "day": "Day 1-4", "title": "Queenstown & Milford Sound Fiords", "detail": "Blanket Bay luxury lodge. Helicopter fly-in to Milford Sound and private jet boat safari." },
-        { "day": "Day 5-7", "title": "Hawke’s Bay Wine & Artisan Estates", "detail": "The Farm at Cape Kidnappers. Clifftop golf, private cellar door tastings, and gannet colony." },
-        { "day": "Day 8-14", "title": "Fiji: Kokomo Private Island Paradise", "detail": "Overwater villa, private catamaran sandbank picnic, and traditional Fijian kava ceremonies." }
+        {
+          "day": "Day 1-4",
+          "title": "Queenstown & Milford Sound Fiords",
+          "detail": "Blanket Bay luxury lodge. Helicopter fly-in to Milford Sound and private jet boat safari."
+        },
+        {
+          "day": "Day 5-7",
+          "title": "Hawke’s Bay Wine & Artisan Estates",
+          "detail": "The Farm at Cape Kidnappers. Clifftop golf, private cellar door tastings, and gannet colony."
+        },
+        {
+          "day": "Day 8-14",
+          "title": "Fiji: Kokomo Private Island Paradise",
+          "detail": "Overwater villa, private catamaran sandbank picnic, and traditional Fijian kava ceremonies."
+        }
       ]
     },
     {
@@ -221,8 +374,20 @@
       "startingPrice": "£9,200pp",
       "priceNote": "excl. flights (based on 2 ppl sharing)",
       "bestSeason": "Year-Round (Best: May - Nov)",
-      "months": ["May", "June", "July", "August", "September", "October", "November"],
-      "experienceTypes": ["honeymoon", "couples", "solo"],
+      "months": [
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November"
+      ],
+      "experienceTypes": [
+        "honeymoon",
+        "couples",
+        "solo"
+      ],
       "highlights": [
         "Private sunrise opening of Christ the Redeemer before public entry",
         "Luxury Amazon cruiser buyout along the Rio Negro",
@@ -231,9 +396,21 @@
       ],
       "description": "From the samba rhythms and dramatic mountain backdrop of Rio de Janeiro to the mysterious emerald waterways of the deep Amazon and the barefoot chic beaches of Bahia.",
       "itineraryOutline": [
-        { "day": "Day 1-3", "title": "Rio de Janeiro: Penthouse Samba & Sunrise Corcovado", "detail": "Copacabana Palace suite. Private helicopter over Sugarloaf and VIP samba club access." },
-        { "day": "Day 4-6", "title": "Amazon: Private Expedition Cruising", "detail": "Chartered boutique river cruiser. Piranha fishing, night caiman spotting, and pink dolphin swimming." },
-        { "day": "Day 7-9", "title": "Trancoso: Bohemian Beaches & Quadrado Charm", "detail": "UXUA Casa Hotel. Clifftop caipirinhas, capoeira sessions, and private Atlantic beaches." }
+        {
+          "day": "Day 1-3",
+          "title": "Rio de Janeiro: Penthouse Samba & Sunrise Corcovado",
+          "detail": "Copacabana Palace suite. Private helicopter over Sugarloaf and VIP samba club access."
+        },
+        {
+          "day": "Day 4-6",
+          "title": "Amazon: Private Expedition Cruising",
+          "detail": "Chartered boutique river cruiser. Piranha fishing, night caiman spotting, and pink dolphin swimming."
+        },
+        {
+          "day": "Day 7-9",
+          "title": "Trancoso: Bohemian Beaches & Quadrado Charm",
+          "detail": "UXUA Casa Hotel. Clifftop caipirinhas, capoeira sessions, and private Atlantic beaches."
+        }
       ]
     },
     {
@@ -255,10 +432,26 @@
       ],
       "description": "An ethereal arctic journey designed to immerse you in Iceland’s wild contrasts. Watch the aurora borealis dancing overhead from your private panoramic dome, descend into magma chambers, and dine on wild Nordic gastronomy prepared by your private chef.",
       "itineraryOutline": [
-        { "day": "Day 1", "title": "Arrival in Reykjavik & Private Retreat", "detail": "Helicopter transfer from Keflavik to the Retreat Hotel. Private soak in subterranean silica waters." },
-        { "day": "Day 2", "title": "Super-Jeep Glacier Crossing & Ice Caves", "detail": "Venture into shimmering turquoise ice tunnels beneath Langjökull with a senior glaciologist." },
-        { "day": "Day 3", "title": "The Golden Circle by Air & Secret Geothermal Dinner", "detail": "Private flight over Gullfoss waterfall followed by farm-to-table dining inside a heated glass greenhouse." },
-        { "day": "Day 4-5", "title": "South Coast Black Sands & Starlit Domes", "detail": "Reynisfjara obsidian basalt columns and nocturnal Aurora hunting from custom wilderness pods." }
+        {
+          "day": "Day 1",
+          "title": "Arrival in Reykjavik & Private Retreat",
+          "detail": "Helicopter transfer from Keflavik to the Retreat Hotel. Private soak in subterranean silica waters."
+        },
+        {
+          "day": "Day 2",
+          "title": "Super-Jeep Glacier Crossing & Ice Caves",
+          "detail": "Venture into shimmering turquoise ice tunnels beneath Langjökull with a senior glaciologist."
+        },
+        {
+          "day": "Day 3",
+          "title": "The Golden Circle by Air & Secret Geothermal Dinner",
+          "detail": "Private flight over Gullfoss waterfall followed by farm-to-table dining inside a heated glass greenhouse."
+        },
+        {
+          "day": "Day 4-5",
+          "title": "South Coast Black Sands & Starlit Domes",
+          "detail": "Reynisfjara obsidian basalt columns and nocturnal Aurora hunting from custom wilderness pods."
+        }
       ]
     },
     {
@@ -280,9 +473,21 @@
       ],
       "description": "Bask in timeless Mediterranean splendor. From archaeological treasures in Athens opened exclusively for you to sun-drenched private yacht cruises across secret turquoise coves, every detail is orchestrated with white-glove precision.",
       "itineraryOutline": [
-        { "day": "Day 1-2", "title": "Athens: Private Classical Antiquity", "detail": "Stay at Hotel Grande Bretagne with Parthenon views. Exclusive after-hours tour of the Acropolis Museum." },
-        { "day": "Day 3-5", "title": "Mykonos & The Sacred Isle of Delos", "detail": "Board your private Riva yacht for secluded bay swimming and an archaeologist-led Delos exploration." },
-        { "day": "Day 6-9", "title": "Crete: Chania Venetians & Minoan Gastronomy", "detail": "Private cliff villa in Elounda, private diving at sunken Olous, and slow-roasted mountain feasts." }
+        {
+          "day": "Day 1-2",
+          "title": "Athens: Private Classical Antiquity",
+          "detail": "Stay at Hotel Grande Bretagne with Parthenon views. Exclusive after-hours tour of the Acropolis Museum."
+        },
+        {
+          "day": "Day 3-5",
+          "title": "Mykonos & The Sacred Isle of Delos",
+          "detail": "Board your private Riva yacht for secluded bay swimming and an archaeologist-led Delos exploration."
+        },
+        {
+          "day": "Day 6-9",
+          "title": "Crete: Chania Venetians & Minoan Gastronomy",
+          "detail": "Private cliff villa in Elounda, private diving at sunken Olous, and slow-roasted mountain feasts."
+        }
       ]
     },
     {
@@ -304,9 +509,21 @@
       ],
       "description": "Experience Japan at its most rarefied. Seamlessly journey from the neon pulse and hyper-refined sushi counters of Tokyo to the moss gardens, mist-shrouded temples, and hot-spring mineral baths of historic Kyoto.",
       "itineraryOutline": [
-        { "day": "Day 1-3", "title": "Tokyo: Modernist Elegance & Gastronomy", "detail": "Aman Tokyo suite. Private gallery access in Roppongi and VIP Tsukiji tasting." },
-        { "day": "Day 4-5", "title": "Hakone: Hot Springs & Mt. Fuji Solitude", "detail": "Private onsen ryokan, traditional Kaiseki multi-course dining, and cedar forest walks." },
-        { "day": "Day 6-10", "title": "Kyoto: Ancient Temples & Gion Secrets", "detail": "Private dawn stroll through Fushimi Inari, Daitoku-ji Zen meditation with an abbot, and bamboo grove tea." }
+        {
+          "day": "Day 1-3",
+          "title": "Tokyo: Modernist Elegance & Gastronomy",
+          "detail": "Aman Tokyo suite. Private gallery access in Roppongi and VIP Tsukiji tasting."
+        },
+        {
+          "day": "Day 4-5",
+          "title": "Hakone: Hot Springs & Mt. Fuji Solitude",
+          "detail": "Private onsen ryokan, traditional Kaiseki multi-course dining, and cedar forest walks."
+        },
+        {
+          "day": "Day 6-10",
+          "title": "Kyoto: Ancient Temples & Gion Secrets",
+          "detail": "Private dawn stroll through Fushimi Inari, Daitoku-ji Zen meditation with an abbot, and bamboo grove tea."
+        }
       ]
     },
     {
@@ -328,9 +545,21 @@
       ],
       "description": "Trace the path of Charles Darwin in unparalleled comfort. Stand meters away from fearless wildlife, kayak through volcanic lava tunnels, and retreat each night to a world-class luxury expedition vessel.",
       "itineraryOutline": [
-        { "day": "Day 1-3", "title": "Quito Colonial Splendor & Mashpi Cloud Forest", "detail": "Historic mansion stay in Quito followed by dragonfly gondola rides over the lush biodiverse canopy." },
-        { "day": "Day 4-9", "title": "Central & Southern Galápagos Cruising", "detail": "Fernandina lava fields, Española waved albatross colonies, and deep-sea sea turtle snorkeling." },
-        { "day": "Day 10-13", "title": "Santa Cruz Highlands & Giant Tortoise Safari", "detail": "Private tented camp in the mist-veiled highlands among roaming century-old tortoises." }
+        {
+          "day": "Day 1-3",
+          "title": "Quito Colonial Splendor & Mashpi Cloud Forest",
+          "detail": "Historic mansion stay in Quito followed by dragonfly gondola rides over the lush biodiverse canopy."
+        },
+        {
+          "day": "Day 4-9",
+          "title": "Central & Southern Galápagos Cruising",
+          "detail": "Fernandina lava fields, Española waved albatross colonies, and deep-sea sea turtle snorkeling."
+        },
+        {
+          "day": "Day 10-13",
+          "title": "Santa Cruz Highlands & Giant Tortoise Safari",
+          "detail": "Private tented camp in the mist-veiled highlands among roaming century-old tortoises."
+        }
       ]
     },
     {
@@ -352,9 +581,21 @@
       ],
       "description": "An otherworldly African landscape of sublime silence and dramatic solitude. From Sossusvlei’s colossal rust-red dunes to the shipwrecks and seal colonies of the Atlantic coast, experience Africa like few ever will.",
       "itineraryOutline": [
-        { "day": "Day 1-3", "title": "Sossusvlei & Deadvlei Clay Pan", "detail": "Stay at andBeyond Sossusvlei. Dawn hot air ballooning and climbing Big Daddy dune." },
-        { "day": "Day 4-5", "title": "Damaraland Desert Elephants & Rock Art", "detail": "Tracking endangered desert elephants through dry riverbeds with private naturalist guides." },
-        { "day": "Day 6-8", "title": "Skeleton Coast Fly-In & Shipwreck Wilderness", "detail": "Shipwreck fly-overs, Roaring Dunes exploration, and sunset champagne over the roaring Atlantic." }
+        {
+          "day": "Day 1-3",
+          "title": "Sossusvlei & Deadvlei Clay Pan",
+          "detail": "Stay at andBeyond Sossusvlei. Dawn hot air ballooning and climbing Big Daddy dune."
+        },
+        {
+          "day": "Day 4-5",
+          "title": "Damaraland Desert Elephants & Rock Art",
+          "detail": "Tracking endangered desert elephants through dry riverbeds with private naturalist guides."
+        },
+        {
+          "day": "Day 6-8",
+          "title": "Skeleton Coast Fly-In & Shipwreck Wilderness",
+          "detail": "Shipwreck fly-overs, Roaring Dunes exploration, and sunset champagne over the roaring Atlantic."
+        }
       ]
     },
     {
@@ -376,9 +617,21 @@
       ],
       "description": "Venture to the dramatic southern tip of the American continent. Marvel at turquoise glacial lakes, thundering waterfalls, and jagged granite towers rising from the windswept wilderness.",
       "itineraryOutline": [
-        { "day": "Day 1-2", "title": "Santiago & Casablanca Wine Estates", "detail": "Acclimatize in a boutique vineyard estate with private cellar tastings of biodynamic Carménère." },
-        { "day": "Day 3-7", "title": "Torres del Paine: Untamed Wilderness", "detail": "Stay at Explora Patagonia. Guided treks to French Valley and horseback riding through golden steppes." },
-        { "day": "Day 8-11", "title": "Los Glaciares & Perito Moreno", "detail": "Cross into Argentina to witness the thunderous ice-calving of Perito Moreno Glacier." }
+        {
+          "day": "Day 1-2",
+          "title": "Santiago & Casablanca Wine Estates",
+          "detail": "Acclimatize in a boutique vineyard estate with private cellar tastings of biodynamic Carménère."
+        },
+        {
+          "day": "Day 3-7",
+          "title": "Torres del Paine: Untamed Wilderness",
+          "detail": "Stay at Explora Patagonia. Guided treks to French Valley and horseback riding through golden steppes."
+        },
+        {
+          "day": "Day 8-11",
+          "title": "Los Glaciares & Perito Moreno",
+          "detail": "Cross into Argentina to witness the thunderous ice-calving of Perito Moreno Glacier."
+        }
       ]
     }
   ],

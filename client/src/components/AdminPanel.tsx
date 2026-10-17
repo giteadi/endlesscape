@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Plus, Trash2, Edit3, ArrowLeft, RefreshCw, X } from 'lucide-react';
+import { Plus, Trash2, Edit3, ArrowLeft, RefreshCw, X, UploadCloud, Image as ImageIcon, AlertCircle, Loader2, Check } from 'lucide-react';
 import type { Itinerary } from '../types/travel';
+import { uploadMultipleImages } from '../utils/imageOptimizer';
 
 interface Enquiry {
   id: string;
@@ -18,7 +19,7 @@ interface Enquiry {
 
 interface AdminPanelProps {
   onBackToSite: () => void;
-  onRefreshPublicData: () => void;
+  onRefreshPublicData: (updatedList?: Itinerary[]) => void;
 }
 
 import { API_BASE } from '../config/api';
@@ -27,6 +28,7 @@ export const AdminPanel = ({ onBackToSite, onRefreshPublicData }: AdminPanelProp
   const [activeTab, setActiveTab] = useState<'enquiries' | 'itineraries' | 'analytics'>('enquiries');
   const [enquiries, setEnquiries] = useState<Enquiry[]>([]);
   const [itineraries, setItineraries] = useState<Itinerary[]>([]);
+  const [successToast, setSuccessToast] = useState<string | null>(null);
   const [stats, setStats] = useState({
     totalEnquiries: 0,
     newEnquiries: 0,
@@ -49,23 +51,50 @@ export const AdminPanel = ({ onBackToSite, onRefreshPublicData }: AdminPanelProp
     startingPrice: '£10,500 per person',
     bestSeason: 'May to October',
     image: '',
+    gallery: [] as string[],
     highlights: 'Private helicopter transfer, 5-star Relais & Châteaux villa, Michelin dining',
     description: 'An extraordinary tailor-made journey crafted around feeling.',
   });
 
+  const [isUploadingImages, setIsUploadingImages] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
+  const [isUrlInputVisible, setIsUrlInputVisible] = useState(false);
+  const [customUrlInput, setCustomUrlInput] = useState('');
+
+  const [isApiConnected, setIsApiConnected] = useState<boolean>(true);
+
+  const refreshStats = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/stats?_t=${Date.now()}`, { cache: 'no-store' });
+      if (res.ok) {
+        const data = await res.json();
+        setStats(data);
+      }
+    } catch {
+      // Ignore background refresh errors
+    }
+  };
+
   const fetchData = async () => {
     try {
+      const cacheBust = `_t=${Date.now()}`;
       const [statsRes, enqRes, itinRes] = await Promise.all([
-        fetch(`${API_BASE}/stats`).then(r => r.json()).catch(() => null),
-        fetch(`${API_BASE}/enquiries`).then(r => r.json()).catch(() => []),
-        fetch(`${API_BASE}/itineraries`).then(r => r.json()).catch(() => []),
+        fetch(`${API_BASE}/stats?${cacheBust}`, { cache: 'no-store' }).then(r => (r.ok ? r.json() : null)).catch(() => null),
+        fetch(`${API_BASE}/enquiries?${cacheBust}`, { cache: 'no-store' }).then(r => (r.ok ? r.json() : null)).catch(() => null),
+        fetch(`${API_BASE}/itineraries?${cacheBust}`, { cache: 'no-store' }).then(r => (r.ok ? r.json() : null)).catch(() => null),
       ]);
 
-      if (statsRes) setStats(statsRes);
-      if (enqRes) setEnquiries(enqRes);
-      if (itinRes) setItineraries(itinRes);
+      if (statsRes && enqRes && itinRes) {
+        setIsApiConnected(true);
+        setStats(statsRes);
+        setEnquiries(enqRes);
+        setItineraries(itinRes);
+      } else {
+        setIsApiConnected(false);
+      }
     } catch (err) {
       console.error('Error fetching admin data:', err);
+      setIsApiConnected(false);
     }
   };
 
@@ -82,6 +111,7 @@ export const AdminPanel = ({ onBackToSite, onRefreshPublicData }: AdminPanelProp
       });
       if (res.ok) {
         setEnquiries(prev => prev.map(e => e.id === enquiryId ? { ...e, status: newStatus } : e));
+        refreshStats();
       }
     } catch (err) {
       console.error('Error updating enquiry status:', err);
@@ -93,6 +123,7 @@ export const AdminPanel = ({ onBackToSite, onRefreshPublicData }: AdminPanelProp
     try {
       await fetch(`${API_BASE}/enquiries/${enquiryId}`, { method: 'DELETE' });
       setEnquiries(prev => prev.filter(e => e.id !== enquiryId));
+      refreshStats();
     } catch (err) {
       console.error('Error deleting enquiry:', err);
     }
@@ -100,6 +131,9 @@ export const AdminPanel = ({ onBackToSite, onRefreshPublicData }: AdminPanelProp
 
   const handleOpenCreateModal = () => {
     setEditingItem(null);
+    setUploadError(null);
+    setIsUrlInputVisible(false);
+    setCustomUrlInput('');
     setFormData({
       title: '',
       country: '',
@@ -110,6 +144,9 @@ export const AdminPanel = ({ onBackToSite, onRefreshPublicData }: AdminPanelProp
       startingPrice: '£10,500 per person',
       bestSeason: 'May to October',
       image: 'https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=1200&q=85',
+      gallery: [
+        'https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=1200&q=85',
+      ],
       highlights: 'Private helicopter transfer, Relais & Châteaux villa, Michelin dining',
       description: 'An extraordinary tailor-made journey crafted around feeling.',
     });
@@ -118,6 +155,13 @@ export const AdminPanel = ({ onBackToSite, onRefreshPublicData }: AdminPanelProp
 
   const handleOpenEditModal = (item: Itinerary) => {
     setEditingItem(item);
+    setUploadError(null);
+    setIsUrlInputVisible(false);
+    setCustomUrlInput('');
+    const existingGallery = (item.gallery && item.gallery.length > 0)
+      ? item.gallery
+      : (item.image ? [item.image] : []);
+
     setFormData({
       title: item.title,
       country: item.country,
@@ -127,22 +171,90 @@ export const AdminPanel = ({ onBackToSite, onRefreshPublicData }: AdminPanelProp
       tag: item.tag,
       startingPrice: item.startingPrice,
       bestSeason: item.bestSeason,
-      image: item.image,
+      image: item.image || existingGallery[0] || '',
+      gallery: existingGallery,
       highlights: item.highlights.join(', '),
       description: item.description,
     });
     setIsModalOpen(true);
   };
 
+  const handleFilesSelected = async (files: FileList | null) => {
+    if (!files || files.length === 0) return;
+    setIsUploadingImages(true);
+    setUploadError(null);
+    try {
+      const fileArray = Array.from(files);
+      const uploadedUrls = await uploadMultipleImages(fileArray);
+
+      setFormData(prev => {
+        const updatedGallery = [...prev.gallery, ...uploadedUrls];
+        return {
+          ...prev,
+          image: prev.image || updatedGallery[0] || '',
+          gallery: updatedGallery,
+        };
+      });
+    } catch (err: any) {
+      console.error('Image upload failed:', err);
+      setUploadError(err.message || 'Image upload failed. Please try again.');
+    } finally {
+      setIsUploadingImages(false);
+    }
+  };
+
+  const handleSetHeroImage = (selectedImgUrl: string) => {
+    setFormData(prev => {
+      const filtered = prev.gallery.filter(u => u !== selectedImgUrl);
+      return {
+        ...prev,
+        image: selectedImgUrl,
+        gallery: [selectedImgUrl, ...filtered],
+      };
+    });
+  };
+
+  const handleRemoveImage = (imgUrlToRemove: string) => {
+    setFormData(prev => {
+      const updatedGallery = prev.gallery.filter(u => u !== imgUrlToRemove);
+      const newHero = prev.image === imgUrlToRemove ? (updatedGallery[0] || '') : prev.image;
+      return {
+        ...prev,
+        image: newHero,
+        gallery: updatedGallery,
+      };
+    });
+  };
+
+  const handleAddImageUrl = () => {
+    const trimmed = customUrlInput.trim();
+    if (!trimmed) return;
+    setFormData(prev => {
+      const updatedGallery = [...prev.gallery, trimmed];
+      return {
+        ...prev,
+        image: prev.image || trimmed,
+        gallery: updatedGallery,
+      };
+    });
+    setCustomUrlInput('');
+  };
+
   const handleSaveItinerary = async (e: React.FormEvent) => {
     e.preventDefault();
+    const heroImg = formData.image || formData.gallery[0] || 'https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=1200&q=85';
+    const finalGallery = formData.gallery.length > 0 ? formData.gallery : [heroImg];
+
     const payload = {
       ...formData,
+      image: heroImg,
+      gallery: finalGallery,
       nights: Number(formData.nights),
       highlights: formData.highlights.split(',').map(s => s.trim()).filter(Boolean),
     };
 
     try {
+      let updatedList = itineraries;
       if (editingItem) {
         // Update
         const res = await fetch(`${API_BASE}/itineraries/${editingItem.id}`, {
@@ -152,7 +264,9 @@ export const AdminPanel = ({ onBackToSite, onRefreshPublicData }: AdminPanelProp
         });
         if (res.ok) {
           const updated = await res.json();
-          setItineraries(prev => prev.map(it => it.id === updated.id ? updated : it));
+          updatedList = itineraries.map(it => it.id === updated.id ? updated : it);
+          setItineraries(updatedList);
+          setSuccessToast(`✓ Updated "${payload.title}" successfully!`);
         }
       } else {
         // Create
@@ -163,11 +277,16 @@ export const AdminPanel = ({ onBackToSite, onRefreshPublicData }: AdminPanelProp
         });
         if (res.ok) {
           const created = await res.json();
-          setItineraries(prev => [created, ...prev]);
+          updatedList = [created, ...itineraries];
+          setItineraries(updatedList);
+          setSuccessToast(`✓ Published "${payload.title}" live to website!`);
         }
       }
       setIsModalOpen(false);
-      onRefreshPublicData();
+      setActiveTab('itineraries');
+      onRefreshPublicData(updatedList);
+      refreshStats();
+      setTimeout(() => setSuccessToast(null), 5000);
     } catch (err) {
       console.error('Error saving itinerary:', err);
     }
@@ -177,8 +296,12 @@ export const AdminPanel = ({ onBackToSite, onRefreshPublicData }: AdminPanelProp
     if (!confirm('Are you sure you want to permanently delete this luxury itinerary from the website?')) return;
     try {
       await fetch(`${API_BASE}/itineraries/${id}`, { method: 'DELETE' });
-      setItineraries(prev => prev.filter(it => it.id !== id));
-      onRefreshPublicData();
+      const filtered = itineraries.filter(it => it.id !== id);
+      setItineraries(filtered);
+      onRefreshPublicData(filtered);
+      refreshStats();
+      setSuccessToast('✓ Itinerary removed from website portfolio.');
+      setTimeout(() => setSuccessToast(null), 4000);
     } catch (err) {
       console.error('Error deleting itinerary:', err);
     }
@@ -240,9 +363,9 @@ export const AdminPanel = ({ onBackToSite, onRefreshPublicData }: AdminPanelProp
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', color: '#10b981' }}>
-              <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#10b981', display: 'inline-block' }} />
-              API Connected (Port 5001)
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', color: isApiConnected ? '#10b981' : '#ef4444' }}>
+              <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: isApiConnected ? '#10b981' : '#ef4444', display: 'inline-block' }} />
+              {isApiConnected ? 'Database Connected (Port 5001)' : 'Database Disconnected'}
             </div>
 
             <button
@@ -269,6 +392,38 @@ export const AdminPanel = ({ onBackToSite, onRefreshPublicData }: AdminPanelProp
 
       {/* Main Container */}
       <div style={{ maxWidth: '1440px', margin: '1.5rem auto', padding: '0 clamp(1rem, 3vw, 2rem)' }}>
+        {/* Instant Success Toast Notification */}
+        {successToast && (
+          <div
+            style={{
+              backgroundColor: 'rgba(16, 185, 129, 0.15)',
+              border: '1px solid #10b981',
+              color: '#10b981',
+              padding: '0.75rem 1.25rem',
+              borderRadius: '3px',
+              fontSize: '0.82rem',
+              fontWeight: 600,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: '1.5rem',
+              animation: 'slideUpModal 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.55rem' }}>
+              <Check size={16} />
+              <span>{successToast}</span>
+            </div>
+            <button
+              onClick={() => setSuccessToast(null)}
+              style={{ background: 'transparent', border: 'none', color: '#10b981', cursor: 'pointer', padding: '2px' }}
+              title="Close notification"
+            >
+              <X size={14} />
+            </button>
+          </div>
+        )}
+
         {/* KPI Summary Cards */}
         <div
           style={{
@@ -774,18 +929,278 @@ export const AdminPanel = ({ onBackToSite, onRefreshPublicData }: AdminPanelProp
                 </div>
               </div>
 
-              <div>
-                <label style={{ display: 'block', fontSize: '0.74rem', textTransform: 'uppercase', color: 'rgba(255, 255, 255, 0.6)', marginBottom: '0.35rem' }}>
-                  High-Res Hero Image URL *
+              {/* Luxury Multi-Image Expedition Gallery & Cover Hub */}
+              <div
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.02)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  borderRadius: '3px',
+                  padding: '1.25rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.85rem',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
+                  <div>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.74rem', textTransform: 'uppercase', color: '#ffffff', fontWeight: 700, letterSpacing: '0.08em' }}>
+                      <ImageIcon size={14} style={{ color: 'var(--color-pink-accent)' }} />
+                      Expedition Photography & Gallery (Multi-Select)
+                    </label>
+                    <span style={{ fontSize: '0.7rem', color: 'rgba(255, 255, 255, 0.45)' }}>
+                      Select photos from your device. Auto-converted to high-res WebP. First photo serves as Hero Cover.
+                    </span>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setIsUrlInputVisible(prev => !prev)}
+                    style={{
+                      background: 'transparent',
+                      border: '1px solid rgba(255, 255, 255, 0.15)',
+                      color: 'rgba(255, 255, 255, 0.7)',
+                      fontSize: '0.68rem',
+                      padding: '0.25rem 0.6rem',
+                      borderRadius: '2px',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    {isUrlInputVisible ? '✕ Hide URL Input' : '+ Add via Image URL'}
+                  </button>
+                </div>
+
+                {/* Drag & Drop Local Device Upload Zone */}
+                <label
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.6rem',
+                    padding: '1.5rem 1rem',
+                    backgroundColor: isUploadingImages ? 'rgba(255, 0, 127, 0.05)' : '#161922',
+                    border: '1px dashed rgba(255, 255, 255, 0.25)',
+                    borderRadius: '3px',
+                    cursor: isUploadingImages ? 'not-allowed' : 'pointer',
+                    transition: 'all 0.2s ease',
+                    textAlign: 'center',
+                  }}
+                  onDragOver={(e) => {
+                    e.preventDefault();
+                    e.currentTarget.style.borderColor = 'var(--color-pink-accent)';
+                    e.currentTarget.style.backgroundColor = 'rgba(255, 0, 127, 0.08)';
+                  }}
+                  onDragLeave={(e) => {
+                    e.preventDefault();
+                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.25)';
+                    e.currentTarget.style.backgroundColor = '#161922';
+                  }}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.25)';
+                    e.currentTarget.style.backgroundColor = '#161922';
+                    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                      handleFilesSelected(e.dataTransfer.files);
+                    }
+                  }}
+                >
+                  <input
+                    type="file"
+                    multiple
+                    accept="image/*"
+                    disabled={isUploadingImages}
+                    style={{ display: 'none' }}
+                    onChange={(e) => handleFilesSelected(e.target.files)}
+                  />
+
+                  {isUploadingImages ? (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', color: 'var(--color-pink-accent)', fontSize: '0.82rem' }}>
+                      <Loader2 size={20} className="animate-spin" />
+                      <span>Optimizing & Uploading to Server (/api/uploads)...</span>
+                    </div>
+                  ) : (
+                    <>
+                      <div
+                        style={{
+                          width: '42px',
+                          height: '42px',
+                          borderRadius: '50%',
+                          backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          color: 'var(--color-pink-accent)',
+                        }}
+                      >
+                        <UploadCloud size={22} />
+                      </div>
+                      <div>
+                        <div style={{ fontSize: '0.82rem', fontWeight: 600, color: '#ffffff', letterSpacing: '0.02em' }}>
+                          Click to select multiple local images or drag & drop here
+                        </div>
+                        <div style={{ fontSize: '0.7rem', color: 'rgba(255, 255, 255, 0.45)', marginTop: '0.15rem' }}>
+                          JPG, PNG, WEBP, HEIC • Auto-compressed for 60fps web performance
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </label>
-                <input
-                  required
-                  type="url"
-                  value={formData.image}
-                  placeholder="https://images.unsplash.com/..."
-                  onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                  style={{ width: '100%', padding: '0.65rem', backgroundColor: '#1a1d24', border: '1px solid rgba(255, 255, 255, 0.15)', color: '#fff', borderRadius: '2px' }}
-                />
+
+                {uploadError && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#ef4444', fontSize: '0.75rem', backgroundColor: 'rgba(239, 68, 68, 0.1)', padding: '0.5rem 0.75rem', borderRadius: '2px' }}>
+                    <AlertCircle size={14} />
+                    <span>{uploadError}</span>
+                  </div>
+                )}
+
+                {/* Optional URL Input if toggled */}
+                {isUrlInputVisible && (
+                  <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', marginTop: '0.25rem' }}>
+                    <input
+                      type="url"
+                      value={customUrlInput}
+                      placeholder="https://images.unsplash.com/photo-..."
+                      onChange={(e) => setCustomUrlInput(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          e.preventDefault();
+                          handleAddImageUrl();
+                        }
+                      }}
+                      style={{ flex: 1, padding: '0.55rem', backgroundColor: '#1a1d24', border: '1px solid rgba(255, 255, 255, 0.15)', color: '#fff', borderRadius: '2px', fontSize: '0.78rem' }}
+                    />
+                    <button
+                      type="button"
+                      onClick={handleAddImageUrl}
+                      style={{
+                        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                        border: '1px solid rgba(255, 255, 255, 0.2)',
+                        color: '#fff',
+                        padding: '0.55rem 0.95rem',
+                        borderRadius: '2px',
+                        fontSize: '0.75rem',
+                        cursor: 'pointer',
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      + Add URL
+                    </button>
+                  </div>
+                )}
+
+                {/* Gallery Thumbnails List */}
+                {formData.gallery.length > 0 && (
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                      <span style={{ fontSize: '0.7rem', color: 'rgba(255, 255, 255, 0.6)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+                        Selected Gallery ({formData.gallery.length} Images)
+                      </span>
+                      <span style={{ fontSize: '0.68rem', color: 'var(--color-pink-accent)' }}>
+                        ★ Click 'Set Hero' on any photo to make it the primary cover
+                      </span>
+                    </div>
+
+                    <div
+                      style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))',
+                        gap: '0.75rem',
+                        maxHeight: '260px',
+                        overflowY: 'auto',
+                        padding: '0.35rem',
+                        backgroundColor: '#0c0d12',
+                        borderRadius: '3px',
+                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                      }}
+                      className="no-scrollbar"
+                    >
+                      {formData.gallery.map((imgUrl, index) => {
+                        const isHero = formData.image === imgUrl || (index === 0 && !formData.image);
+                        return (
+                          <div
+                            key={`${imgUrl}-${index}`}
+                            style={{
+                              position: 'relative',
+                              height: '96px',
+                              borderRadius: '2px',
+                              overflow: 'hidden',
+                              border: isHero ? '2px solid var(--color-pink-accent)' : '1px solid rgba(255, 255, 255, 0.12)',
+                              backgroundImage: `url(${imgUrl})`,
+                              backgroundSize: 'cover',
+                              backgroundPosition: 'center',
+                            }}
+                          >
+                            {/* Hero Cover Badge */}
+                            {isHero ? (
+                              <span
+                                style={{
+                                  position: 'absolute',
+                                  top: '4px',
+                                  left: '4px',
+                                  backgroundColor: 'var(--color-pink-accent)',
+                                  color: '#fff',
+                                  fontSize: '0.58rem',
+                                  fontWeight: 800,
+                                  padding: '0.15rem 0.4rem',
+                                  borderRadius: '2px',
+                                  letterSpacing: '0.08em',
+                                  boxShadow: '0 2px 8px rgba(0,0,0,0.6)',
+                                }}
+                              >
+                                ★ HERO COVER
+                              </span>
+                            ) : (
+                              <button
+                                type="button"
+                                onClick={() => handleSetHeroImage(imgUrl)}
+                                style={{
+                                  position: 'absolute',
+                                  top: '4px',
+                                  left: '4px',
+                                  backgroundColor: 'rgba(0, 0, 0, 0.75)',
+                                  color: 'rgba(255, 255, 255, 0.85)',
+                                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                                  fontSize: '0.58rem',
+                                  fontWeight: 600,
+                                  padding: '0.15rem 0.35rem',
+                                  borderRadius: '2px',
+                                  cursor: 'pointer',
+                                }}
+                                title="Set as primary hero cover"
+                              >
+                                Set Hero
+                              </button>
+                            )}
+
+                            {/* Remove Image Button */}
+                            <button
+                              type="button"
+                              onClick={() => handleRemoveImage(imgUrl)}
+                              style={{
+                                position: 'absolute',
+                                top: '4px',
+                                right: '4px',
+                                backgroundColor: 'rgba(0, 0, 0, 0.75)',
+                                border: 'none',
+                                color: '#ef4444',
+                                width: '22px',
+                                height: '22px',
+                                borderRadius: '50%',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                cursor: 'pointer',
+                              }}
+                              title="Remove image from gallery"
+                            >
+                              <X size={12} />
+                            </button>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div>
