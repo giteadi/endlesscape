@@ -141,6 +141,8 @@ server {
    ```bash
    ssh -i ~/.ssh/id_ed25519 aditya@195.35.45.17
    ```
+   - User `aditya` sudo password: `RuhiRiya@12345`
+   - Database credentials: `Tiger@123`
 2. **Fail2ban (`f2b-sshd`) is active**:
    - Multiple failed SSH attempts will trigger an automatic IP ban.
    - To check ban status or unban an IP from VPS terminal:
