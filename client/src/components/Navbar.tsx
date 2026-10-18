@@ -82,6 +82,7 @@ export const Navbar = ({
         >
           {/* Left: Brand Identity */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+            {/* Logo / Brand */}
             <a
               href="#"
               onClick={(e) => {
@@ -89,51 +90,29 @@ export const Navbar = ({
                 if (onGoHome) onGoHome();
                 else window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
+              aria-label="Endlesscape Home"
               style={{
                 textDecoration: 'none',
                 color: '#ffffff',
-                display: 'flex',
+                display: 'inline-flex',
                 alignItems: 'center',
                 gap: '0.4rem',
               }}
             >
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <span
+              <picture>
+                <source srcSet="/assets/images/logo-nav.webp" type="image/webp" />
+                <img
+                  src="/assets/images/logo-nav.png"
+                  alt="Endlesscape"
                   style={{
-                    fontFamily: 'var(--font-heading)',
-                    fontWeight: 700,
-                    fontSize: 'clamp(1.1rem, 4vw, 1.35rem)',
-                    letterSpacing: '0.14em',
-                    lineHeight: 1,
-                    display: 'flex',
-                    alignItems: 'center',
+                    height: 'clamp(30px, 3.8vw, 38px)',
+                    width: 'auto',
+                    maxWidth: '220px',
+                    objectFit: 'contain',
+                    display: 'block',
                   }}
-                >
-                  ENDLESSCAPE
-                  <span
-                    style={{
-                      display: 'inline-block',
-                      width: '6px',
-                      height: '6px',
-                      borderRadius: '50%',
-                      backgroundColor: 'var(--color-pink-accent)',
-                      marginLeft: '4px',
-                      boxShadow: '0 0 10px rgba(230, 27, 101, 0.9)',
-                    }}
-                  />
-                </span>
-                <span
-                  style={{
-                    fontSize: '0.52rem',
-                    letterSpacing: '0.3em',
-                    color: 'rgba(255, 255, 255, 0.65)',
-                    fontWeight: 600,
-                    marginTop: '3px',
-                  }}
-                >
-                  BESPOKE TRAVEL
-                </span>
-              </div>
+                />
+              </picture>
             </a>
 
             {/* Desktop Navigation Links */}
@@ -361,32 +340,32 @@ export const Navbar = ({
               borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
             }}
           >
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <span
-                style={{
-                  fontFamily: 'var(--font-heading)',
-                  fontWeight: 700,
-                  fontSize: '1.25rem',
-                  letterSpacing: '0.14em',
-                  color: '#ffffff',
-                }}
-              >
-                ENDLESSCAPE
-                <span
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                setMobileMenuOpen(false);
+                if (onGoHome) onGoHome();
+                else window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }}
+              aria-label="Endlesscape Home"
+            >
+              <picture>
+                <source srcSet="/assets/images/logo-nav.webp" type="image/webp" />
+                <img
+                  src="/assets/images/logo-nav.png"
+                  alt="Endlesscape"
                   style={{
-                    display: 'inline-block',
-                    width: '6px',
-                    height: '6px',
-                    borderRadius: '50%',
-                    backgroundColor: 'var(--color-pink-accent)',
-                    marginLeft: '4px',
+                    height: '32px',
+                    width: 'auto',
+                    maxWidth: '190px',
+                    objectFit: 'contain',
+                    display: 'block',
                   }}
                 />
-              </span>
-              <span style={{ fontSize: '0.52rem', letterSpacing: '0.28em', color: 'rgba(255, 255, 255, 0.55)', fontWeight: 600 }}>
-                BESPOKE PRIVATE TRAVEL
-              </span>
-            </div>
+              </picture>
+            </a>
 
             <button
               onClick={() => setMobileMenuOpen(false)}

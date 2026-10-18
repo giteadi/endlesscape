@@ -348,7 +348,12 @@ export const AdminPanel = ({ onBackToSite, onRefreshPublicData }: AdminPanelProp
             </button>
 
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flexWrap: 'wrap' }}>
+                <img
+                  src="/assets/images/logo-symbol.webp"
+                  alt="Endlesscape"
+                  style={{ width: '22px', height: '22px', objectFit: 'contain' }}
+                />
                 <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.15rem', letterSpacing: '0.12em' }}>
                   ENDLESSCAPE
                 </span>

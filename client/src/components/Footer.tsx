@@ -144,30 +144,34 @@ export const Footer = () => {
         >
           {/* Brand Info & Concierge */}
           <div style={{ maxWidth: '320px' }}>
-            <span
-              style={{
-                fontFamily: 'var(--font-heading)',
-                fontWeight: 700,
-                fontSize: '1.25rem',
-                letterSpacing: '0.14em',
-                lineHeight: 1,
-                display: 'inline-flex',
-                alignItems: 'center',
-                marginBottom: '1rem',
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToTop();
               }}
+              style={{
+                display: 'inline-block',
+                marginBottom: '1.25rem',
+                textDecoration: 'none',
+              }}
+              aria-label="Endlesscape Home"
             >
-              ENDLESSCAPE
-              <span
-                style={{
-                  display: 'inline-block',
-                  width: '6px',
-                  height: '6px',
-                  borderRadius: '50%',
-                  backgroundColor: 'var(--color-pink-accent)',
-                  marginLeft: '4px',
-                }}
-              />
-            </span>
+              <picture>
+                <source srcSet="/assets/images/logo-nav.webp" type="image/webp" />
+                <img
+                  src="/assets/images/logo-nav.png"
+                  alt="Endlesscape"
+                  style={{
+                    height: '38px',
+                    width: 'auto',
+                    maxWidth: '220px',
+                    objectFit: 'contain',
+                    display: 'block',
+                  }}
+                />
+              </picture>
+            </a>
             <p
               style={{
                 fontSize: '0.82rem',
