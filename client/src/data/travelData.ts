@@ -6,7 +6,7 @@ export const TRAVEL_STYLES: TravelStyle[] = [
     title: 'FAMILY',
     subtitle: 'Wonders Crafted for All Generations',
     focus: 'Private villas, expert naturalists, unhurried pacing & engaging wilderness masterclasses.',
-    image: 'https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=1200&q=85',
+    image: '/assets/images/style-safari.jpg',
     destinations: ['Costa Rica Rainforest', 'Kenya Masai Mara', 'Galápagos Islands']
   },
   {
@@ -14,7 +14,7 @@ export const TRAVEL_STYLES: TravelStyle[] = [
     title: 'COUPLES',
     subtitle: 'Intimate Horizons & Secluded Luxury',
     focus: 'Clifftop infinity pools, candlelit ruins, secret Tuscan vineyards and starlit desert camps.',
-    image: 'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1200&q=85',
+    image: '/assets/images/hero-poster.jpg',
     destinations: ['Santorini Cliffside', 'Bora Bora Overwater', 'Swiss Alpine Chalets']
   },
   {
@@ -22,7 +22,7 @@ export const TRAVEL_STYLES: TravelStyle[] = [
     title: 'GROUPS',
     subtitle: 'Milestone Expeditions & Private Estates',
     focus: 'Whole-island buyouts, chartered classic schooners, private castles and bespoke chef celebrations.',
-    image: 'https://images.unsplash.com/photo-1539635278303-d4002c07eae3?auto=format&fit=crop&w=1200&q=85',
+    image: '/assets/images/style-yacht.jpg',
     destinations: ['Scottish Highlands Lodge', 'Balearic Private Catamaran', 'Napa Valley Estate']
   },
   {
@@ -30,7 +30,7 @@ export const TRAVEL_STYLES: TravelStyle[] = [
     title: 'HONEYMOON',
     subtitle: 'Once-in-a-Lifetime Romance',
     focus: 'Barefoot luxury, private coral reef sandbanks, glacier helicopter flights & seamless pampering.',
-    image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=85',
+    image: '/assets/images/style-honeymoon.jpg',
     destinations: ['Maldives Atolls', 'Amalfi Coast Villa', 'Kyoto Zen Sanctuary']
   },
   {
@@ -38,7 +38,7 @@ export const TRAVEL_STYLES: TravelStyle[] = [
     title: 'SOLO',
     subtitle: 'Untamed Freedom & Deep Immersion',
     focus: 'Transformative solo journeys, photography expeditions, wellness sanctuaries & safe, effortless ease.',
-    image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=1200&q=85',
+    image: '/assets/images/style-kyoto.jpg',
     destinations: ['Patagonia Wilderness', 'Iceland Ring Road', 'Bhutan Monasteries']
   }
 ];

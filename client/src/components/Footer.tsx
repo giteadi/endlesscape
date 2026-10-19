@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { Phone, Mail, Sparkles, Shield, ArrowUp } from 'lucide-react';
+import { useAppDispatch } from '../store/store';
+import { openLoginModal } from '../store/slices/authSlice';
+
 
 export const Footer = () => {
+  const dispatch = useAppDispatch();
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
@@ -409,10 +413,29 @@ export const Footer = () => {
           }}
         >
           <span>© 2026 Endlesscape Luxury Travel Ltd. All Rights Reserved.</span>
-          <div style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap', alignItems: 'center' }}>
             <a href="#" style={{ color: 'rgba(255, 255, 255, 0.45)', textDecoration: 'none' }}>Privacy Policy</a>
             <a href="#" style={{ color: 'rgba(255, 255, 255, 0.45)', textDecoration: 'none' }}>Terms & Booking Conditions</a>
             <a href="#" style={{ color: 'rgba(255, 255, 255, 0.45)', textDecoration: 'none' }}>Cookie Preferences</a>
+            <button
+              onClick={() => dispatch(openLoginModal())}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                color: 'rgba(255, 255, 255, 0.4)',
+                textDecoration: 'none',
+                fontSize: '0.72rem',
+                cursor: 'pointer',
+                padding: 0,
+                fontFamily: 'inherit',
+                transition: 'color 0.2s ease',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255, 255, 255, 0.4)')}
+              title="Concierge Portal Authentication"
+            >
+              Staff Access
+            </button>
           </div>
         </div>
       </div>

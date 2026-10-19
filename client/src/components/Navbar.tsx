@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Search, Phone, User, X, Sparkles, ChevronRight, Compass, Heart } from 'lucide-react';
+import { Search, Phone, User, X, Sparkles, ChevronRight, Compass, Heart, LogOut, Lock } from 'lucide-react';
+import { useAppSelector, useAppDispatch } from '../store/store';
+import { logout, openLoginModal } from '../store/slices/authSlice';
 
 interface NavbarProps {
   onGoHome?: () => void;
@@ -19,8 +21,11 @@ export const Navbar = ({
   onSelectExperiences,
   onOpenAdmin,
 }: NavbarProps) => {
+  const dispatch = useAppDispatch();
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -246,31 +251,64 @@ export const Navbar = ({
               +44 207 426 9888
             </a>
 
-            {/* Admin Concierge Portal Switcher (Desktop) */}
-            <button
-              onClick={onOpenAdmin}
-              style={{
-                background: 'rgba(255, 255, 255, 0.06)',
-                border: '1px solid rgba(255, 255, 255, 0.16)',
-                color: 'rgba(255, 255, 255, 0.9)',
-                fontFamily: 'var(--font-sans)',
-                fontSize: '0.72rem',
-                fontWeight: 600,
-                letterSpacing: '0.1em',
-                padding: '0.45rem 0.85rem',
-                borderRadius: '2px',
-                cursor: 'pointer',
-                display: 'none',
-                alignItems: 'center',
-                gap: '0.4rem',
-                transition: 'all 0.25s ease',
-              }}
-              className="desktop-admin-btn"
-              title="Open Concierge Admin Dashboard"
-            >
-              <User size={13} style={{ color: 'var(--color-pink-accent)' }} />
-              ADMIN PORTAL
-            </button>
+            {/* Admin Concierge Portal Switcher (Desktop - Only visible when logged in as admin) */}
+            {isAuthenticated && (
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.45rem' }}>
+                <button
+                  onClick={onOpenAdmin}
+                  style={{
+                    background: 'rgba(255, 0, 127, 0.12)',
+                    border: '1px solid rgba(255, 0, 127, 0.35)',
+                    color: '#ffffff',
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: '0.72rem',
+                    fontWeight: 600,
+                    letterSpacing: '0.1em',
+                    padding: '0.45rem 0.85rem',
+                    borderRadius: '2px',
+                    cursor: 'pointer',
+                    display: 'none',
+                    alignItems: 'center',
+                    gap: '0.4rem',
+                    transition: 'all 0.25s ease',
+                  }}
+                  className="desktop-admin-btn"
+                  title="Open Concierge Admin Dashboard"
+                >
+                  <span
+                    style={{
+                      width: '6px',
+                      height: '6px',
+                      borderRadius: '50%',
+                      backgroundColor: 'var(--color-pink-accent)',
+                      display: 'inline-block',
+                    }}
+                  />
+                  ADMIN SUITE
+                </button>
+                <button
+                  onClick={() => dispatch(logout())}
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.06)',
+                    border: '1px solid rgba(255, 255, 255, 0.15)',
+                    color: 'rgba(255, 255, 255, 0.7)',
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: '0.7rem',
+                    padding: '0.45rem 0.65rem',
+                    borderRadius: '2px',
+                    cursor: 'pointer',
+                    display: 'none',
+                    alignItems: 'center',
+                    gap: '0.3rem',
+                    transition: 'all 0.25s ease',
+                  }}
+                  className="desktop-admin-btn"
+                  title="Logout from Concierge Suite"
+                >
+                  <LogOut size={12} />
+                </button>
+              </div>
+            )}
 
             {/* Mobile Quick Search Glass Button */}
             <button
@@ -455,12 +493,29 @@ export const Navbar = ({
                   });
                 },
               },
-              {
-                title: 'CONCIERGE ADMIN PORTAL',
-                subtitle: 'Manage client enquiries & edit itineraries',
-                icon: User,
-                action: () => closeMenuAnd(onOpenAdmin),
-              },
+              ...(isAuthenticated
+                ? [
+                    {
+                      title: 'CONCIERGE ADMIN PORTAL',
+                      subtitle: 'Manage client enquiries & edit itineraries',
+                      icon: User,
+                      action: () => closeMenuAnd(onOpenAdmin),
+                    },
+                    {
+                      title: 'LOGOUT CONCIERGE',
+                      subtitle: 'End secure administrative session',
+                      icon: LogOut,
+                      action: () => closeMenuAnd(() => dispatch(logout())),
+                    },
+                  ]
+                : [
+                    {
+                      title: 'STAFF ACCESS',
+                      subtitle: 'Concierge administrative authentication',
+                      icon: Lock,
+                      action: () => closeMenuAnd(() => dispatch(openLoginModal())),
+                    },
+                  ]),
             ].map((item, idx) => {
               const Icon = item.icon;
               return (

@@ -88,7 +88,15 @@ Base URL (Production): `https://getashokaazzwels.shop/api`
 - **`GET /api/stats`**
   - Response: `{ "totalEnquiries": 4, "newEnquiries": 2, "proposalsSent": 1, "totalItineraries": 12, "estimatedPipeline": "£50,000" }`
 
-### 2. Itineraries
+### 2. Admin Authentication
+- **`POST /api/admin/login`**
+  - Body: `{ "username": "admin", "password": "..." }`
+  - Response: `{ "success": true, "token": "...", "user": { "username": "admin", "role": "admin", "name": "Chief Concierge" } }`
+- **`GET /api/admin/verify`**
+  - Response: `{ "success": true, "status": "authenticated" }`
+
+
+### 3. Itineraries
 - **`GET /api/itineraries`**
   - Query Params (optional): `?region=Europe`, `?search=safari`
   - Response: Array of `Itinerary` objects.
@@ -98,7 +106,8 @@ Base URL (Production): `https://getashokaazzwels.shop/api`
   - Body: Complete `Itinerary` JSON payload.
   - Response: `{ "success": true, "itinerary": { ... } }`
 
-### 3. Enquiries (CRM)
+### 4. Enquiries (CRM)
+
 - **`GET /api/enquiries`**
   - Response: Array of all `Enquiry` objects (newest first).
 - **`POST /api/enquiries`**
@@ -108,3 +117,32 @@ Base URL (Production): `https://getashokaazzwels.shop/api`
 - **`PATCH /api/enquiries/:id/status`**
   - Body: `{ "status": "Proposal Sent" }`
   - Response: `{ "success": true, "enquiry": { ... } }`
+
+### 5. AI Concierge RAG Chatbot (LangChain & Google Gemini 2.5 Flash)
+
+- **`POST /api/chat`**
+  - Body: `{ "message": "What is the best package for Italy?", "history": [{ "role": "user", "content": "..." }] }`
+  - Pipeline: Retrieval-Augmented Generation (RAG) querying `database.json`, `TRAVEL_STYLES_KNOWLEDGE`, and `SEASONAL_CALENDAR_KNOWLEDGE` combined with LangChain `ChatGoogleGenerativeAI` (`gemini-2.5-flash`).
+  - Response:
+    ```json
+    {
+      "success": true,
+      "reply": "Bespoke narrative editorial text answering queries in English or Hindi/Hinglish...",
+      "relevantPackages": [
+        {
+          "id": "italy-como-tuscany-amalfi",
+          "title": "COMO, TUSCANY & AMALFI: THE ULTIMATE ITALIAN HONEYMOON",
+          "country": "ITALY",
+          "startingPrice": "£11,400pp",
+          "nights": 12,
+          "image": "...",
+          "bestSeason": "April to October"
+        }
+      ],
+      "suggestedQuestions": [
+        "What are the key highlights of ITALY?",
+        "Can we customize the 12-night ITALY itinerary?",
+        "How does the private concierge booking process work?"
+      ]
+    }
+    ```

@@ -69,21 +69,23 @@ export const VideoModal = ({ isOpen, onClose, onEnquire }: VideoModalProps) => {
 
         {/* Cinematic Video Player Container */}
         <div style={{ position: 'relative', paddingTop: '56.25%', backgroundColor: '#000000' }}>
-          <iframe
+          <video
             style={{
               position: 'absolute',
               top: 0,
               left: 0,
               width: '100%',
               height: '100%',
-              border: 'none',
+              objectFit: 'cover',
             }}
-            src="https://www.youtube-nocookie.com/embed/ScMzIvxBSi4?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1"
-            title="Endlesscape: Crafting Extraordinary Bespoke Journeys"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
+            src="/assets/videos/hero-desktop.mp4"
+            poster="/assets/images/hero-poster.jpg"
+            controls
+            autoPlay
+            playsInline
           />
         </div>
+
 
         {/* Video Footer Caption */}
         <div

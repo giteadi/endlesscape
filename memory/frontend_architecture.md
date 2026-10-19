@@ -7,6 +7,11 @@ This document details the frontend architecture, component hierarchy, state mach
 ## ✦ Core Technologies
 
 - **Library**: React 19 + TypeScript (Strict Type Safety)
+- **State Management**: Redux Toolkit (`@reduxjs/toolkit` & `react-redux`) with typed hooks (`useAppDispatch`, `useAppSelector`) and slices:
+  - `authSlice`: Admin session persistence (`localStorage`), secure login, logout, and modal state.
+  - `uiSlice`: Page routing state machine (`home`, `itinerary`, `experience`, `admin`) and modal visibility.
+  - `itinerariesSlice`: Dynamic journeys cache and asynchronous API synchronization thunks.
+  - `chatSlice`: AI Travel Concierge (Aura) state machine, message history, suggested prompt chips, and RAG asynchronous thunk.
 - **Bundler**: Vite 8.3 with React Compiler & Babel Preset
 - **Styling**: Modern Vanilla CSS + Design Tokens (Custom CSS variables)
 - **Icons**: Lucide React
@@ -16,11 +21,12 @@ This document details the frontend architecture, component hierarchy, state mach
 
 ## ✦ Component Architecture & Page Routing State Machine
 
-Rather than heavy third-party routers, Endlesscape uses a high-performance, single-state router state machine in `client/src/App.tsx`:
+Endlesscape uses Redux Toolkit for unified reactive state management combined with a high-performance single-state router state machine in `client/src/App.tsx`:
 
 ```typescript
 type PageState = 'home' | 'itinerary' | 'experience' | 'admin';
 ```
+
 
 ```
 [ App.tsx ]
@@ -59,11 +65,24 @@ type PageState = 'home' | 'itinerary' | 'experience' | 'admin';
    ├── <Footer /> (Worldwide concierge details, global offices, newsletters)
    │
    └── Global Modals:
+         ├── <AdminLoginModal /> (Concierge administrative authentication dialog)
          ├── <DestinationsMenuModal /> (Live autocomplete search suggestions)
          ├── <TripPlannerModal /> (Step-by-step bespoke enquiry questionnaire)
          ├── <ItineraryModal /> (Quick preview modal)
          └── <VideoModal /> (Fullscreen cinema player)
 ```
+
+---
+
+## ✦ AI Concierge Chatbot (Aura) & RAG Integration
+
+Implemented in `client/src/components/AiConciergeChat.tsx`:
+- State managed through Redux slice `client/src/store/slices/chatSlice.ts`.
+- Floating trigger button at bottom-right with pulse glow and unread indicator dot.
+- Slide-up obsidian glassmorphism drawer (`#08090b` obsidian theme, Cormorant Garamond / Outfit typography).
+- Interactive matched package cards inside chat with thumbnail, price, duration, and direct actions ("View Details" and "Enquire").
+- Follow-up suggestion chips generated contextually by the RAG backend.
+- Full multi-language support (English, Hindi, Hinglish) grounded in live `database.json` expeditions.
 
 ---
 

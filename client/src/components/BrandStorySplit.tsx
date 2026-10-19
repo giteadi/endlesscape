@@ -136,7 +136,7 @@ export const BrandStorySplit = ({
           style={{
             position: 'relative',
             height: '100%',
-            backgroundImage: `url(https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1600&q=85)`,
+            backgroundImage: `url(/assets/images/brand-studio.jpg)`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             cursor: 'pointer',
@@ -219,7 +219,7 @@ export const BrandStorySplit = ({
           style={{
             position: 'relative',
             height: '100%',
-            backgroundImage: `url(https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&q=85)`,
+            backgroundImage: `url(/assets/images/brand-feeling.jpg)`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}

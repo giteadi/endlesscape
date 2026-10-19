@@ -4,6 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import multer from 'multer';
+import { askTravelAssistant } from './services/ragService.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -79,6 +80,41 @@ function writeDB(data) {
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', service: 'Endlesscape Bespoke Travel Engine', timestamp: new Date().toISOString() });
 });
+
+// Admin Authentication Login
+app.post('/api/admin/login', (req, res) => {
+  const { username, password } = req.body || {};
+  const cleanUsername = (username || '').trim().toLowerCase();
+  const cleanPassword = (password || '').trim();
+
+  // Valid credentials for endlesscape concierge admin
+  if (
+    (cleanUsername === 'admin' || cleanUsername === 'concierge') &&
+    (cleanPassword === 'endlesscape2026' || cleanPassword === 'admin123' || cleanPassword === 'admin')
+  ) {
+    const token = `auth-token-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+    return res.json({
+      success: true,
+      token,
+      user: {
+        username: 'admin',
+        role: 'admin',
+        name: 'Chief Concierge',
+      },
+    });
+  }
+
+  return res.status(401).json({
+    success: false,
+    error: 'Invalid administrator credentials. Please check your username and access key.',
+  });
+});
+
+// Admin Token Verify
+app.get('/api/admin/verify', (req, res) => {
+  res.json({ success: true, status: 'authenticated' });
+});
+
 
 // Admin Stats
 app.get('/api/stats', (req, res) => {
@@ -257,6 +293,30 @@ app.delete('/api/enquiries/:id', (req, res) => {
   db.enquiries = db.enquiries.filter(e => e.id !== req.params.id);
   writeDB(db);
   res.json({ message: 'Enquiry archived/deleted' });
+});
+
+// AI Concierge Chat RAG Endpoint
+app.post('/api/chat', async (req, res) => {
+  try {
+    const { message, history } = req.body || {};
+    if (!message || typeof message !== 'string') {
+      return res.status(400).json({ error: 'A query message is required.' });
+    }
+
+    const result = await askTravelAssistant({ message, history });
+    return res.json({
+      success: true,
+      reply: result.reply,
+      relevantPackages: result.relevantPackages || [],
+      suggestedQuestions: result.suggestedQuestions || [],
+    });
+  } catch (error) {
+    console.error('Chat endpoint error:', error);
+    return res.status(500).json({
+      success: false,
+      error: 'An unexpected error occurred while consulting the travel concierge.',
+    });
+  }
 });
 
 app.listen(PORT, () => {

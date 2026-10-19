@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { Sparkles, Volume2, VolumeX, Play, Pause } from 'lucide-react';
+import { Volume2, VolumeX, Play, Pause } from 'lucide-react';
+
 
 interface HeroProps {
   onExploreTrips: () => void;
@@ -26,9 +27,7 @@ export const Hero = ({ onExploreTrips, onPlanTrip }: HeroProps) => {
   }, []);
 
   const videoSrc = isMobileScreen ? '/assets/videos/hero-mobile.mp4' : '/assets/videos/hero-desktop.mp4';
-  const cdnFallbackSrc = isMobileScreen
-    ? 'https://media.blacktomato.com/2025/02/black-tomato-mob-home.mp4'
-    : 'https://media.blacktomato.com/2025%2F02%2Fblack-tomato-homepage.mp4';
+
 
   // Autoplay handler on mount or source change
   useEffect(() => {
@@ -85,7 +84,7 @@ export const Hero = ({ onExploreTrips, onPlanTrip }: HeroProps) => {
         muted={isMuted}
         playsInline
         preload="auto"
-        poster="https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?auto=format&fit=crop&w=2000&q=85"
+        poster="/assets/images/hero-poster.jpg"
         style={{
           position: 'absolute',
           top: 0,
@@ -99,7 +98,6 @@ export const Hero = ({ onExploreTrips, onPlanTrip }: HeroProps) => {
         }}
       >
         <source src={videoSrc} type="video/mp4" />
-        <source src={cdnFallbackSrc} type="video/mp4" />
       </video>
 
       {/* 2. Atmospheric Vignette & Contrast Overlay */}
@@ -131,29 +129,6 @@ export const Hero = ({ onExploreTrips, onPlanTrip }: HeroProps) => {
           width: '100%',
         }}
       >
-        {/* Subtle Luxury Badge */}
-        <div
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.45rem',
-            padding: '0.35rem 0.95rem',
-            borderRadius: '999px',
-            backgroundColor: 'rgba(255, 255, 255, 0.08)',
-            border: '1px solid rgba(255, 255, 255, 0.18)',
-            backdropFilter: 'blur(14px)',
-            WebkitBackdropFilter: 'blur(14px)',
-            marginBottom: '1.25rem',
-            fontSize: 'clamp(0.62rem, 1.8vw, 0.72rem)',
-            letterSpacing: '0.18em',
-            textTransform: 'uppercase',
-            color: 'rgba(255, 255, 255, 0.95)',
-          }}
-        >
-          <Sparkles size={12} style={{ color: 'var(--color-pink-accent)' }} />
-          Bespoke Journeys Designed Around Feeling
-        </div>
-
         {/* Main Headline */}
         <h1
           style={{
@@ -213,9 +188,9 @@ export const Hero = ({ onExploreTrips, onPlanTrip }: HeroProps) => {
           style={{
             display: 'inline-flex',
             alignItems: 'center',
-            gap: '0.75rem',
+            gap: '0.65rem',
             marginTop: '2.5rem',
-            padding: '0.35rem 0.9rem',
+            padding: '0.35rem 0.85rem',
             borderRadius: '999px',
             background: 'rgba(0, 0, 0, 0.55)',
             backdropFilter: 'blur(12px)',
@@ -223,32 +198,6 @@ export const Hero = ({ onExploreTrips, onPlanTrip }: HeroProps) => {
             border: '1px solid rgba(255, 255, 255, 0.14)',
           }}
         >
-          <span
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.4rem',
-              fontSize: '0.68rem',
-              letterSpacing: '0.14em',
-              textTransform: 'uppercase',
-              color: 'rgba(255, 255, 255, 0.85)',
-              fontWeight: 600,
-            }}
-          >
-            <span
-              style={{
-                width: '6px',
-                height: '6px',
-                borderRadius: '50%',
-                backgroundColor: 'var(--color-pink-accent)',
-                animation: 'pulse 1.8s infinite',
-              }}
-            />
-            CINEMATIC EXPEDITIONS
-          </span>
-
-          <span style={{ width: '1px', height: '12px', backgroundColor: 'rgba(255, 255, 255, 0.2)' }} />
-
           {/* Audio toggle button */}
           <button
             onClick={toggleSound}
@@ -259,19 +208,16 @@ export const Hero = ({ onExploreTrips, onPlanTrip }: HeroProps) => {
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              gap: '0.3rem',
-              fontSize: '0.65rem',
-              fontWeight: 600,
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              padding: '2px 4px',
+              padding: '3px 4px',
               touchAction: 'manipulation',
             }}
             title={isMuted ? 'Turn on sound' : 'Mute sound'}
+            aria-label={isMuted ? 'Turn on sound' : 'Mute sound'}
           >
-            {isMuted ? <VolumeX size={14} /> : <Volume2 size={14} color="var(--color-pink-accent)" />}
-            <span>{isMuted ? 'SOUND' : 'AUDIO ON'}</span>
+            {isMuted ? <VolumeX size={15} /> : <Volume2 size={15} color="var(--color-pink-accent)" />}
           </button>
+
+          <span style={{ width: '1px', height: '12px', backgroundColor: 'rgba(255, 255, 255, 0.2)' }} />
 
           {/* Play/Pause toggle */}
           <button
@@ -279,16 +225,17 @@ export const Hero = ({ onExploreTrips, onPlanTrip }: HeroProps) => {
             style={{
               background: 'transparent',
               border: 'none',
-              color: 'rgba(255, 255, 255, 0.7)',
+              color: 'rgba(255, 255, 255, 0.85)',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              padding: '2px',
+              padding: '3px 4px',
               touchAction: 'manipulation',
             }}
             title={isPlaying ? 'Pause film' : 'Play film'}
+            aria-label={isPlaying ? 'Pause film' : 'Play film'}
           >
-            {isPlaying ? <Pause size={12} /> : <Play size={12} />}
+            {isPlaying ? <Pause size={13} /> : <Play size={13} />}
           </button>
         </div>
       </div>

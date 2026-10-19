@@ -62,8 +62,9 @@ The project relies on three Google Fonts defined in `client/index.html` and `cli
   - Container must use `height: 100svh; min-height: 100vh;` with `object-fit: cover` and `object-position: center center`.
   - **NEVER** set fixed heights like `400px` that crop the cinematic framing.
 - **Ambient Controls**:
-  - The live floating glass pill (`● CINEMATIC EXPEDITIONS | 🔊 SOUND | ⏸`) must always remain accessible.
+  - The live floating glass pill (`🔊 MUTE/UNMUTE | ⏸ PLAY/PAUSE`) must always remain accessible.
   - Video must autoplay with `muted` and `playsInline` to comply with mobile browsers.
+
 
 ---
 

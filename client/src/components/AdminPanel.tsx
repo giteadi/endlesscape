@@ -1,7 +1,10 @@
-import { useState, useEffect } from 'react';
-import { Plus, Trash2, Edit3, ArrowLeft, RefreshCw, X, UploadCloud, Image as ImageIcon, AlertCircle, Loader2, Check } from 'lucide-react';
+import { useState, useEffect, useCallback } from 'react';
+
+import { Plus, Trash2, Edit3, ArrowLeft, RefreshCw, X, UploadCloud, Image as ImageIcon, AlertCircle, Loader2, Check, LogOut } from 'lucide-react';
 import type { Itinerary } from '../types/travel';
 import { uploadMultipleImages } from '../utils/imageOptimizer';
+import { useAppDispatch } from '../store/store';
+import { logout } from '../store/slices/authSlice';
 
 interface Enquiry {
   id: string;
@@ -25,6 +28,7 @@ interface AdminPanelProps {
 import { API_BASE } from '../config/api';
 
 export const AdminPanel = ({ onBackToSite, onRefreshPublicData }: AdminPanelProps) => {
+  const dispatch = useAppDispatch();
   const [activeTab, setActiveTab] = useState<'enquiries' | 'itineraries' | 'analytics'>('enquiries');
   const [enquiries, setEnquiries] = useState<Enquiry[]>([]);
   const [itineraries, setItineraries] = useState<Itinerary[]>([]);
@@ -63,7 +67,7 @@ export const AdminPanel = ({ onBackToSite, onRefreshPublicData }: AdminPanelProp
 
   const [isApiConnected, setIsApiConnected] = useState<boolean>(true);
 
-  const refreshStats = async () => {
+  const refreshStats = useCallback(async () => {
     try {
       const res = await fetch(`${API_BASE}/stats?_t=${Date.now()}`, { cache: 'no-store' });
       if (res.ok) {
@@ -73,9 +77,9 @@ export const AdminPanel = ({ onBackToSite, onRefreshPublicData }: AdminPanelProp
     } catch {
       // Ignore background refresh errors
     }
-  };
+  }, []);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const cacheBust = `_t=${Date.now()}`;
       const [statsRes, enqRes, itinRes] = await Promise.all([
@@ -96,11 +100,11 @@ export const AdminPanel = ({ onBackToSite, onRefreshPublicData }: AdminPanelProp
       console.error('Error fetching admin data:', err);
       setIsApiConnected(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const handleStatusChange = async (enquiryId: string, newStatus: Enquiry['status']) => {
     try {
@@ -390,6 +394,31 @@ export const AdminPanel = ({ onBackToSite, onRefreshPublicData }: AdminPanelProp
               }}
             >
               <RefreshCw size={12} /> Sync
+            </button>
+
+            <button
+              onClick={() => {
+                dispatch(logout());
+                onBackToSite();
+              }}
+              style={{
+                background: 'rgba(239, 68, 68, 0.12)',
+                border: '1px solid rgba(239, 68, 68, 0.3)',
+                color: '#fca5a5',
+                padding: '0.5rem 0.85rem',
+                borderRadius: '3px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.4rem',
+                fontSize: '0.75rem',
+                fontWeight: 600,
+                touchAction: 'manipulation',
+                transition: 'all 0.2s ease',
+              }}
+              title="Logout from Admin Concierge Suite"
+            >
+              <LogOut size={13} /> Logout
             </button>
           </div>
         </div>

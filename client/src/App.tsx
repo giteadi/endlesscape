@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { Philosophy } from './components/Philosophy';
@@ -11,89 +11,97 @@ import { ItineraryModal } from './components/ItineraryModal';
 import { VideoModal } from './components/VideoModal';
 import { DestinationsMenuModal } from './components/DestinationsMenuModal';
 import { AdminPanel } from './components/AdminPanel';
+import { AdminLoginModal } from './components/AdminLoginModal';
 import { ItineraryDetailPage } from './components/ItineraryDetailPage';
 import { ExperienceCategoryPage } from './components/ExperienceCategoryPage';
-import { ITINERARIES } from './data/travelData';
-import { API_BASE } from './config/api';
+import { AiConciergeChat } from './components/AiConciergeChat';
+import { useAppDispatch, useAppSelector } from './store/store';
+import { openLoginModal } from './store/slices/authSlice';
+import {
+  setPageState,
+  navigateHome,
+  openPlanner,
+  closePlanner,
+  openSearch,
+  closeSearch,
+  openVideoModal,
+  closeVideoModal,
+  closePreviewModal,
+  selectItineraryDetail,
+  selectExperienceStyle,
+  selectExperienceMonth,
+} from './store/slices/uiSlice';
+import { fetchItineraries, setItineraries } from './store/slices/itinerariesSlice';
 import type { Itinerary, TravelStyle } from './types/travel';
 import './App.css';
 
-type PageState = 'home' | 'itinerary' | 'experience' | 'admin';
-
 export function App() {
-  // Navigation State
-  const [pageState, setPageState] = useState<PageState>('home');
+  const dispatch = useAppDispatch();
 
-  // Dynamic live data from backend API
-  const [itineraries, setItineraries] = useState<Itinerary[]>(ITINERARIES);
+  // Redux global state selectors
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
+  const {
+    pageState,
+    selectedItinerary,
+    categoryTitle,
+    categorySubtitle,
+    selectedMonth,
+    plannerOpen,
+    plannerFeeling,
+    previewModalItinerary,
+    videoOpen,
+    destinationsOpen,
+    searchInitialQuery,
+  } = useAppSelector((state) => state.ui);
 
-  // Selected Detail States
-  const [selectedItinerary, setSelectedItinerary] = useState<Itinerary | null>(null);
-  const [categoryTitle, setCategoryTitle] = useState('LUXURY HONEYMOONS');
-  const [categorySubtitle, setCategorySubtitle] = useState(
-    'Your honeymoon should be as unique as you are. Use these suggested honeymoon itineraries as a prompt and get in touch to plan something that’s truly yours.'
-  );
-  const [selectedMonth, setSelectedMonth] = useState<string | undefined>(undefined);
+  const itineraries = useAppSelector((state) => state.itineraries.items);
 
-  // Modal states
-  const [plannerOpen, setPlannerOpen] = useState(false);
-  const [plannerFeeling, setPlannerFeeling] = useState('');
-  const [previewModalItinerary, setPreviewModalItinerary] = useState<Itinerary | null>(null);
-  const [videoOpen, setVideoOpen] = useState(false);
-  const [destinationsOpen, setDestinationsOpen] = useState(false);
-  const [searchInitialQuery, setSearchInitialQuery] = useState('');
+  // Initial fetch of live itineraries from backend
+  useEffect(() => {
+    dispatch(fetchItineraries());
+  }, [dispatch]);
 
-  // Fetch live itineraries from backend with cache-busting
-  const fetchLiveItineraries = useCallback(async () => {
-    try {
-      const res = await fetch(`${API_BASE}/itineraries?_t=${Date.now()}`, {
-        cache: 'no-store',
-        headers: { 'Cache-Control': 'no-cache, no-store, must-revalidate', 'Pragma': 'no-cache' }
-      });
-      if (res.ok) {
-        const data = await res.json();
-        if (Array.isArray(data)) {
-          setItineraries(data);
+  // Global keyboard shortcut (Ctrl/Cmd + Shift + A) to open admin login / panel
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.shiftKey && (e.key === 'a' || e.key === 'A')) {
+        e.preventDefault();
+        if (isAuthenticated) {
+          dispatch(setPageState('admin'));
+        } else {
+          dispatch(openLoginModal());
         }
       }
-    } catch (err) {
-      console.warn('Backend API offline or unreachable, using local curated itineraries', err);
-    }
-  }, []);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isAuthenticated, dispatch]);
 
-  // Instant public data update handler (receives immediate list from AdminPanel without delay)
+  // Update handler for admin changes
   const handleUpdatePublicData = useCallback((directList?: Itinerary[]) => {
     if (directList && Array.isArray(directList)) {
-      setItineraries(directList);
+      dispatch(setItineraries(directList));
     }
-    fetchLiveItineraries();
-  }, [fetchLiveItineraries]);
+    dispatch(fetchItineraries());
+  }, [dispatch]);
 
-  // Sync data on pageState changes (e.g. returning to home/experience)
-  useEffect(() => {
-    fetchLiveItineraries();
-  }, [pageState, fetchLiveItineraries]);
-
-  // Handlers memoized with useCallback
+  // Navigation handlers
   const handleGoHome = useCallback(() => {
-    fetchLiveItineraries();
-    setPageState('home');
+    dispatch(navigateHome());
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [fetchLiveItineraries]);
+  }, [dispatch]);
 
   const handleOpenEnquire = useCallback((tripTitle?: string) => {
-    setPlannerFeeling(tripTitle ? `Enquiring for: ${tripTitle}` : '');
-    setPlannerOpen(true);
-  }, []);
+    dispatch(openPlanner(tripTitle ? `Enquiring for: ${tripTitle}` : ''));
+  }, [dispatch]);
 
   const handleOpenSearch = useCallback(() => {
-    setSearchInitialQuery('');
-    setDestinationsOpen(true);
-  }, []);
+    dispatch(openSearch(''));
+  }, [dispatch]);
 
   const handleExploreTrips = useCallback(() => {
     if (pageState !== 'home') {
-      setPageState('home');
+      dispatch(setPageState('home'));
       setTimeout(() => {
         const el = document.getElementById('itineraries');
         if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -102,52 +110,57 @@ export function App() {
       const el = document.getElementById('itineraries');
       if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [pageState]);
+  }, [pageState, dispatch]);
 
-  // Navigate to full dedicated Itinerary Detail Page (Screenshots 4 & 5)
   const handleSelectItinerary = useCallback((itinerary: Itinerary) => {
-    setSelectedItinerary(itinerary);
-    setPageState('itinerary');
+    dispatch(selectItineraryDetail(itinerary));
     window.scrollTo({ top: 0, behavior: 'instant' });
-  }, []);
+  }, [dispatch]);
 
-  // Navigate to Experience Category Page (Screenshots 1, 2, 3)
+  const handleSelectItineraryById = useCallback((id: string) => {
+    const found = itineraries.find(it => it.id === id);
+    if (found) {
+      handleSelectItinerary(found);
+    }
+  }, [itineraries, handleSelectItinerary]);
+
   const handleSelectStyle = useCallback((style: TravelStyle) => {
-    setCategoryTitle(
-      style.id === 'honeymoon'
-        ? 'LUXURY HONEYMOONS'
-        : `LUXURY ${style.title} ADVENTURES`
-    );
-    setCategorySubtitle(
-      style.focus ||
-        `Each and every ${style.title} trip is tailored exactly to who you are and what you want to do.`
-    );
-    setSelectedMonth(undefined);
-    setPageState('experience');
+    dispatch(selectExperienceStyle(style));
     window.scrollTo({ top: 0, behavior: 'instant' });
-  }, []);
+  }, [dispatch]);
 
-  // Navigate to Month Filtered Experience Page (Screenshot 3)
   const handleSelectMonth = useCallback((monthName: string) => {
-    setCategoryTitle('LUXURY HONEYMOONS');
-    setSelectedMonth(monthName);
-    setPageState('experience');
+    dispatch(selectExperienceMonth(monthName));
     window.scrollTo({ top: 0, behavior: 'instant' });
-  }, []);
+  }, [dispatch]);
 
   const handleExploreFeeling = useCallback((feelingName: string) => {
-    setPlannerFeeling(feelingName);
-    setPlannerOpen(true);
-  }, []);
+    dispatch(openPlanner(feelingName));
+  }, [dispatch]);
 
   const handleCustomiseItinerary = useCallback((itinerary: Itinerary) => {
-    setPreviewModalItinerary(null);
-    setPlannerFeeling(`Customizing ${itinerary.title}`);
-    setPlannerOpen(true);
-  }, []);
+    dispatch(closePreviewModal());
+    dispatch(openPlanner(`Customizing ${itinerary.title}`));
+  }, [dispatch]);
 
-  // If in Admin Portal Mode
+  const handleOpenAdmin = useCallback(() => {
+    if (isAuthenticated) {
+      dispatch(setPageState('admin'));
+    } else {
+      dispatch(openLoginModal());
+    }
+  }, [isAuthenticated, dispatch]);
+
+  // Route Guard: Only authenticated administrators can access the Admin Panel
   if (pageState === 'admin') {
+    if (!isAuthenticated) {
+      // If an unauthenticated user somehow attempts to navigate to admin mode,
+      // revert to home and prompt with the AdminLoginModal
+      dispatch(navigateHome());
+      dispatch(openLoginModal());
+      return null;
+    }
+
     return (
       <AdminPanel
         onBackToSite={handleGoHome}
@@ -165,12 +178,10 @@ export function App() {
         onOpenSearch={handleOpenSearch}
         onSelectDestinations={handleOpenSearch}
         onSelectExperiences={() => {
-          setCategoryTitle('LUXURY HONEYMOONS');
-          setSelectedMonth(undefined);
-          setPageState('experience');
+          dispatch(selectExperienceMonth('November'));
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
-        onOpenAdmin={() => setPageState('admin')}
+        onOpenAdmin={handleOpenAdmin}
       />
 
       {/* 2. Main Page Content Routed by pageState */}
@@ -191,13 +202,12 @@ export function App() {
           <TravelStyles
             onSelectStyle={handleSelectStyle}
             onViewMore={() => {
-              setCategoryTitle('LUXURY HONEYMOONS');
-              setPageState('experience');
+              dispatch(selectExperienceMonth('November'));
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           />
 
-          {/* Curated Itineraries Carousel (Clicking opens Itinerary Detail Page) */}
+          {/* Curated Itineraries Carousel */}
           <CuratedItineraries
             itineraries={itineraries}
             onSelectItinerary={handleSelectItinerary}
@@ -206,13 +216,13 @@ export function App() {
 
           {/* Co-Founders Story & 'Pursuit of Feeling' */}
           <BrandStorySplit
-            onWatchFilm={() => setVideoOpen(true)}
+            onWatchFilm={() => dispatch(openVideoModal())}
             onExploreFeeling={handleExploreFeeling}
           />
         </>
       )}
 
-      {/* Dedicated Experience Category Page (Screenshots 1, 2, 3) */}
+      {/* Dedicated Experience Category Page */}
       {pageState === 'experience' && (
         <ExperienceCategoryPage
           categoryTitle={categoryTitle}
@@ -225,7 +235,7 @@ export function App() {
         />
       )}
 
-      {/* Dedicated Full Itinerary Detail Page (Screenshots 4 & 5) */}
+      {/* Dedicated Full Itinerary Detail Page */}
       {pageState === 'itinerary' && selectedItinerary && (
         <ItineraryDetailPage
           itinerary={selectedItinerary}
@@ -239,63 +249,24 @@ export function App() {
       {/* 3. Comprehensive Editorial Footer */}
       <Footer />
 
-      {/* Floating Discreet Concierge Admin Switcher */}
-      <div
-        style={{
-          position: 'fixed',
-          bottom: 'max(1.2rem, var(--safe-bottom))',
-          right: 'max(1.2rem, var(--safe-right))',
-          zIndex: 90,
-        }}
-      >
-        <button
-          onClick={() => setPageState('admin')}
-          style={{
-            backgroundColor: '#0f1116',
-            color: '#ffffff',
-            border: '1px solid rgba(255, 255, 255, 0.2)',
-            padding: '0.55rem 1rem',
-            borderRadius: '999px',
-            fontSize: '0.72rem',
-            fontWeight: 700,
-            letterSpacing: '0.1em',
-            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.6)',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.45rem',
-            transition: 'all 0.3s ease',
-          }}
-          title="Open Endlesscape Concierge Admin"
-        >
-          <span
-            style={{
-              width: '6px',
-              height: '6px',
-              borderRadius: '50%',
-              backgroundColor: 'var(--color-pink-accent)',
-            }}
-          />
-          ADMIN SUITE
-        </button>
-      </div>
+      {/* Interactive Global Modals */}
+      <AdminLoginModal />
 
-      {/* Interactive Modals */}
       <TripPlannerModal
         isOpen={plannerOpen}
-        onClose={() => setPlannerOpen(false)}
+        onClose={() => dispatch(closePlanner())}
         initialFeeling={plannerFeeling}
       />
 
       <ItineraryModal
         itinerary={previewModalItinerary}
-        onClose={() => setPreviewModalItinerary(null)}
+        onClose={() => dispatch(closePreviewModal())}
         onCustomiseTrip={handleCustomiseItinerary}
       />
 
       <VideoModal
         isOpen={videoOpen}
-        onClose={() => setVideoOpen(false)}
+        onClose={() => dispatch(closeVideoModal())}
         onEnquire={() => handleOpenEnquire()}
       />
 
@@ -303,11 +274,17 @@ export function App() {
         isOpen={destinationsOpen}
         initialQuery={searchInitialQuery}
         itineraries={itineraries}
-        onClose={() => setDestinationsOpen(false)}
+        onClose={() => dispatch(closeSearch())}
         onSelectItinerary={handleSelectItinerary}
         onSelectStyle={handleSelectStyle}
         onSelectMonth={handleSelectMonth}
         onEnquire={() => handleOpenEnquire()}
+      />
+
+      {/* 4. Luxury Floating AI Travel Concierge (Aura) */}
+      <AiConciergeChat
+        onSelectItineraryById={handleSelectItineraryById}
+        onEnquire={handleOpenEnquire}
       />
     </div>
   );
