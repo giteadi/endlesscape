@@ -12,6 +12,9 @@ This document details the live production deployment, hosting architecture, serv
 | **Secondary Domain** | `https://www.getashokaazzwels.shop` | 301 redirects to primary domain |
 | **Public IPv4** | `195.35.45.17` | Static VPS IP |
 | **Public IPv6** | `2a02:4780:12:1e1e::1` | Configured on Hostinger Cloud |
+| **Profile 1 (Standard User)** | User: `aditya` \| Login Password: `1234` | SSH Key: `~/.ssh/id_ed25519` |
+| **Profile 2 (Root / Admin)** | Switch: `sudo -i` \| Password: `RuhiRiya@12345` | System & domain services root |
+| **Security Service** | Fail2ban (`f2b-sshd`) Active | Ban on repeated failed login attempts |
 | **Hostinger VM ID** | `749165` | KVM 2 Plan (Data Center: 13) |
 | **Hardware Specs** | 2 vCPUs, 8 GB RAM, 100 GB NVMe Disk | High performance |
 | **Operating System** | Ubuntu 24.04 LTS (Noble Numbat) | 64-bit Linux |
@@ -135,21 +138,43 @@ server {
 
 ---
 
-## ✦ Security & Fail2ban Rules
+## ✦ Access Profiles, Security & Fail2ban Rules
 
-1. **Direct root login is disabled**: Always SSH as user `aditya`:
-   ```bash
-   ssh -i ~/.ssh/id_ed25519 aditya@195.35.45.17
-   ```
-   - User `aditya` sudo password: `RuhiRiya@12345`
-   - Database credentials: `Tiger@123`
-2. **Fail2ban (`f2b-sshd`) is active**:
-   - Multiple failed SSH attempts will trigger an automatic IP ban.
-   - To check ban status or unban an IP from VPS terminal:
-     ```bash
-     sudo fail2ban-client status sshd
-     sudo fail2ban-client unban <IP_ADDRESS>
-     ```
+### 1. Dual Access Profiles
+
+| Profile | Identifier | Password / Auth | Purpose & Permissions |
+| :--- | :--- | :--- | :--- |
+| **Profile 1 (Standard)** | `aditya` | Login Pass: `1234`<br>SSH Key: `~/.ssh/id_ed25519` | Application base: `/home/aditya/endlesscape`<br>Manages PM2 daemon (`endlesscape-api`), code syncing, and local builds. |
+| **Profile 2 (Root / System)** | `root` | Switch via: `sudo -i`<br>Root Pass: `RuhiRiya@12345` | Manages root-level services: Nginx (`/etc/nginx`), Let's Encrypt SSL, web root `/var/www/covershield`, domain configs for `getashokaazzwels.shop`, and system daemons. |
+
+### 2. Domain Management Under Root
+- Primary domain: **`https://getashokaazzwels.shop`** (referred to as `get ashoka`)
+- Nginx configuration: `/etc/nginx/sites-available/covershield`
+- Live production web root: `/var/www/covershield`
+- SSL certificates: `/etc/letsencrypt/live/getashokaazzwels.shop/`
+- Elevated switch command:
+  ```bash
+  # From user aditya:
+  sudo -i
+  # Enter password: RuhiRiya@12345
+  ```
+
+### 3. Fail2ban Active Defense (`f2b-sshd`)
+> [!CAUTION]
+> **FAIL2BAN IS ACTIVELY ENFORCING IP BANS ON THIS SERVER.**  
+> Multiple consecutive failed password or key authentication attempts will trigger an automatic, immediate IP ban from SSH. Always use the registered SSH key `~/.ssh/id_ed25519` or the exact credentials above. Never test speculative passwords.
+
+- **Check Fail2ban Status & Banned IPs**:
+  ```bash
+  sudo fail2ban-client status sshd
+  ```
+- **Unban an IP Address** (if accidentally triggered):
+  ```bash
+  sudo fail2ban-client set sshd unbanip <IP_ADDRESS>
+  # or
+  sudo fail2ban-client unban <IP_ADDRESS>
+  ```
+- **Internal Database Credentials**: `Tiger@123`
 
 ---
 
