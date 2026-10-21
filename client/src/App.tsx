@@ -77,6 +77,22 @@ export function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isAuthenticated, dispatch]);
 
+  // Support direct URL hash navigation (e.g. localhost:5173/#admin)
+  useEffect(() => {
+    const checkAdminHash = () => {
+      if (window.location.hash.toLowerCase() === '#admin') {
+        if (isAuthenticated) {
+          dispatch(setPageState('admin'));
+        } else {
+          dispatch(openLoginModal());
+        }
+      }
+    };
+    checkAdminHash();
+    window.addEventListener('hashchange', checkAdminHash);
+    return () => window.removeEventListener('hashchange', checkAdminHash);
+  }, [isAuthenticated, dispatch]);
+
   // Update handler for admin changes
   const handleUpdatePublicData = useCallback((directList?: Itinerary[]) => {
     if (directList && Array.isArray(directList)) {

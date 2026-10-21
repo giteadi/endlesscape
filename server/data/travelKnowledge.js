@@ -164,5 +164,18 @@ Key Luxury Highlights: ${highlightsText}
     keywords: ['booking', 'process', 'curator', 'service', 'bespoke', 'deposit', 'vip', 'customise', 'tailor']
   });
 
+  // 5. Official Contact Channels & Direct WhatsApp Inquiries
+  docs.push({
+    id: 'endlesscape-contact-channels',
+    type: 'contact_channels',
+    title: 'Endlesscape Direct Concierge Contact & WhatsApp Inquiries',
+    content: `OFFICIAL CONTACT DETAILS:
+Direct Phone & WhatsApp Inquiry: +91 8130216668
+Official Concierge Email: endlesscape949@gmail.com
+WhatsApp Direct Link: https://wa.me/918130216668
+Our private travel specialists are available 24/7 on WhatsApp (+91 8130216668) and email (endlesscape949@gmail.com) for prompt luxury itinerary design and questions.`,
+    keywords: ['contact', 'whatsapp', 'phone', 'call', 'email', 'mobile', 'reach', 'number', 'address', 'inquiry', 'enquiry']
+  });
+
   return docs;
 }

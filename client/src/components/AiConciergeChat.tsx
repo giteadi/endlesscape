@@ -8,6 +8,7 @@ import {
   sendChatMessage,
 } from '../store/slices/chatSlice';
 import type { ChatPackage } from '../types/chat';
+import { MessageCircle } from 'lucide-react';
 import './AiConciergeChat.css';
 
 interface AiConciergeChatProps {
@@ -136,8 +137,8 @@ export const AiConciergeChat: React.FC<AiConciergeChatProps> = ({
         <button
           className="aura-trigger-btn"
           onClick={() => dispatch(toggleChat())}
-          aria-label="Open AI Travel Concierge"
-          title="Consult Aura — AI Travel Concierge"
+          aria-label="Consult Aura — Private Travel Concierge"
+          title="Consult Aura — Private Travel Concierge"
         >
           <div className="aura-trigger-icon-wrap">
             <span className="aura-icon-pulse" />
@@ -158,7 +159,7 @@ export const AiConciergeChat: React.FC<AiConciergeChatProps> = ({
           </div>
           <div className="aura-trigger-content">
             <span className="aura-trigger-title">Ask Aura</span>
-            <span className="aura-trigger-subtitle">AI Travel Concierge</span>
+            <span className="aura-trigger-subtitle">Private Travel Concierge</span>
           </div>
         </button>
       )}
@@ -177,11 +178,24 @@ export const AiConciergeChat: React.FC<AiConciergeChatProps> = ({
                     <span className="aura-status-dot" /> Online
                   </span>
                 </div>
-                <span className="aura-header-sub">Bespoke Intelligence & RAG Curator</span>
+                <span className="aura-header-sub">Bespoke Travel Specialist</span>
               </div>
             </div>
 
             <div className="aura-header-actions">
+              {/* WhatsApp direct concierge link */}
+              <a
+                href="https://wa.me/918130216668?text=Hello%20Aura,%20I%20would%20like%20to%20consult%20with%20Endlesscape%20on%20WhatsApp."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="aura-header-btn"
+                title="Chat with Concierge on WhatsApp (+91 8130216668)"
+                aria-label="Chat on WhatsApp"
+                style={{ color: '#25D366', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              >
+                <MessageCircle size={14} />
+              </a>
+
               {/* Reset / Clear */}
               <button
                 className="aura-header-btn"
@@ -387,7 +401,7 @@ export const AiConciergeChat: React.FC<AiConciergeChatProps> = ({
                 </form>
 
                 <div className="aura-footer-tagline">
-                  Powered by Gemini 2.5 Flash & Endlesscape RAG Engine
+                  Endlesscape Tailor-Made Luxury Concierge
                 </div>
               </div>
             </>

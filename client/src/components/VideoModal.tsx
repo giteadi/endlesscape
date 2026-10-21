@@ -33,11 +33,11 @@ export const VideoModal = ({ isOpen, onClose, onEnquire }: VideoModalProps) => {
           position: 'relative',
           width: '100%',
           maxWidth: '920px',
-          backgroundColor: '#0a0b0e',
+          backgroundColor: '#ffffff',
           borderRadius: '4px',
           overflow: 'hidden',
-          boxShadow: '0 30px 90px rgba(0, 0, 0, 0.9)',
-          border: '1px solid rgba(255, 255, 255, 0.12)',
+          boxShadow: '0 30px 90px rgba(0, 0, 0, 0.35)',
+          border: '1px solid #e2ded5',
           animation: 'slideUpModal 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
         onClick={(e) => e.stopPropagation()}
@@ -50,17 +50,18 @@ export const VideoModal = ({ isOpen, onClose, onEnquire }: VideoModalProps) => {
             top: '0.85rem',
             right: '0.85rem',
             zIndex: 10,
-            background: 'rgba(0, 0, 0, 0.75)',
-            border: '1px solid rgba(255, 255, 255, 0.25)',
+            background: 'rgba(255, 255, 255, 0.88)',
+            border: '1px solid rgba(0, 0, 0, 0.12)',
             borderRadius: '50%',
             width: '40px',
             height: '40px',
-            color: '#ffffff',
+            color: '#111215',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             cursor: 'pointer',
             touchAction: 'manipulation',
+            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
           }}
           aria-label="Close video"
         >
@@ -106,14 +107,14 @@ export const VideoModal = ({ isOpen, onClose, onEnquire }: VideoModalProps) => {
                 fontSize: '0.95rem',
                 fontWeight: 700,
                 letterSpacing: '0.08em',
-                color: '#ffffff',
+                color: '#111215',
                 margin: '0 0 0.25rem 0',
                 textTransform: 'uppercase',
               }}
             >
               ENDLESSCAPE: THE ART OF TAILOR-MADE TRAVEL
             </h4>
-            <p style={{ fontSize: '0.78rem', color: 'rgba(255, 255, 255, 0.65)', margin: 0 }}>
+            <p style={{ fontSize: '0.78rem', color: '#555762', margin: 0 }}>
               An intimate look into how our private journey architects curate feelings into unforgettable realities.
             </p>
           </div>

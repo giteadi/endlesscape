@@ -38,28 +38,27 @@ export const CuratedItineraries = ({
     <section
       id="itineraries"
       style={{
-        backgroundColor: '#0c0e12',
-        color: '#ffffff',
+        backgroundColor: '#ffffff',
+        color: '#111215',
         position: 'relative',
         overflow: 'hidden',
       }}
       className="curated-itineraries-section"
     >
-      {/* Background Subtle Gradient */}
+      {/* Background Subtle Warm Ambient Gradient */}
       <div
         style={{
           position: 'absolute',
           top: 0,
           left: 0,
           right: 0,
-          height: '250px',
-          background: 'linear-gradient(to bottom, #ffffff 0%, rgba(12, 14, 18, 0) 100%)',
-          opacity: 0.03,
+          height: '240px',
+          background: 'linear-gradient(to bottom, #fffaf6 0%, rgba(255, 255, 255, 0) 100%)',
           pointerEvents: 'none',
         }}
       />
 
-      <div className="container" style={{ maxWidth: '1440px' }}>
+      <div className="container" style={{ maxWidth: '1440px', position: 'relative', zIndex: 2 }}>
         {/* Header Row with Title, Region Filter, and Carousel Arrows */}
         <div
           style={{
@@ -93,7 +92,7 @@ export const CuratedItineraries = ({
                 fontWeight: 700,
                 letterSpacing: '0.05em',
                 textTransform: 'uppercase',
-                color: '#ffffff',
+                color: '#111215',
                 lineHeight: 1.15,
               }}
             >
@@ -115,34 +114,36 @@ export const CuratedItineraries = ({
             }}
             className="region-filter-bar no-scrollbar"
           >
-            {DESTINATION_REGIONS.map((region) => (
-              <button
-                key={region.id}
-                onClick={() => setSelectedRegion(region.id)}
-                style={{
-                  background:
-                    selectedRegion === region.id ? 'var(--color-pink-accent)' : 'rgba(255, 255, 255, 0.08)',
-                  border:
-                    selectedRegion === region.id
+            {DESTINATION_REGIONS.map((region) => {
+              const isSelected = selectedRegion === region.id;
+              return (
+                <button
+                  key={region.id}
+                  onClick={() => setSelectedRegion(region.id)}
+                  style={{
+                    background: isSelected ? 'var(--color-pink-accent)' : '#f7f6f3',
+                    border: isSelected
                       ? '1px solid var(--color-pink-accent)'
-                      : '1px solid rgba(255, 255, 255, 0.12)',
-                  color: '#ffffff',
-                  padding: '0.45rem 0.95rem',
-                  borderRadius: '999px',
-                  fontFamily: 'var(--font-sans)',
-                  fontSize: '0.74rem',
-                  fontWeight: 600,
-                  letterSpacing: '0.08em',
-                  cursor: 'pointer',
-                  transition: 'var(--transition-fast)',
-                  whiteSpace: 'nowrap',
-                  flexShrink: 0,
-                  touchAction: 'manipulation',
-                }}
-              >
-                {region.name}
-              </button>
-            ))}
+                      : '1px solid #e5e2da',
+                    color: isSelected ? '#ffffff' : '#2d2f35',
+                    padding: '0.45rem 1rem',
+                    borderRadius: '999px',
+                    fontFamily: 'var(--font-sans)',
+                    fontSize: '0.74rem',
+                    fontWeight: 600,
+                    letterSpacing: '0.08em',
+                    cursor: 'pointer',
+                    transition: 'var(--transition-fast)',
+                    whiteSpace: 'nowrap',
+                    flexShrink: 0,
+                    touchAction: 'manipulation',
+                    boxShadow: isSelected ? '0 4px 14px rgba(240, 139, 88, 0.35)' : 'none',
+                  }}
+                >
+                  {region.name}
+                </button>
+              );
+            })}
           </div>
 
           {/* Desktop Navigation Controls */}
@@ -153,14 +154,15 @@ export const CuratedItineraries = ({
                 width: '42px',
                 height: '42px',
                 borderRadius: '50%',
-                backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                border: '1px solid rgba(255, 255, 255, 0.18)',
-                color: '#ffffff',
+                backgroundColor: '#ffffff',
+                border: '1px solid #ded9ce',
+                color: '#111215',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
                 transition: 'var(--transition-fast)',
+                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
               }}
               aria-label="Previous trip"
             >
@@ -172,14 +174,15 @@ export const CuratedItineraries = ({
                 width: '42px',
                 height: '42px',
                 borderRadius: '50%',
-                backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                border: '1px solid rgba(255, 255, 255, 0.18)',
-                color: '#ffffff',
+                backgroundColor: '#ffffff',
+                border: '1px solid #ded9ce',
+                color: '#111215',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
                 transition: 'var(--transition-fast)',
+                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
               }}
               aria-label="Next trip"
             >
@@ -215,7 +218,8 @@ export const CuratedItineraries = ({
                 overflow: 'hidden',
                 cursor: 'pointer',
                 transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-                boxShadow: '0 12px 32px rgba(0, 0, 0, 0.5)',
+                boxShadow: '0 12px 32px rgba(0, 0, 0, 0.12)',
+                border: '1px solid rgba(0, 0, 0, 0.06)',
                 touchAction: 'manipulation',
               }}
               className="itinerary-card"
@@ -260,13 +264,14 @@ export const CuratedItineraries = ({
                   fontWeight: 700,
                   letterSpacing: '0.14em',
                   textTransform: 'uppercase',
-                  color: 'rgba(255, 255, 255, 0.95)',
-                  backgroundColor: 'rgba(0, 0, 0, 0.6)',
-                  backdropFilter: 'blur(8px)',
-                  WebkitBackdropFilter: 'blur(8px)',
+                  color: '#111215',
+                  backgroundColor: 'rgba(255, 255, 255, 0.92)',
+                  backdropFilter: 'blur(10px)',
+                  WebkitBackdropFilter: 'blur(10px)',
                   padding: '0.35rem 0.8rem',
-                  borderRadius: '2px',
-                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  borderRadius: '3px',
+                  border: '1px solid var(--color-pink-accent)',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
                 }}
               >
                 {trip.nights} NIGHTS
@@ -324,8 +329,8 @@ export const CuratedItineraries = ({
                       onSelectItinerary(trip);
                     }}
                     style={{
-                      background: 'transparent',
-                      border: '1px solid rgba(255, 255, 255, 0.75)',
+                      background: 'rgba(255, 255, 255, 0.12)',
+                      border: '1px solid rgba(255, 255, 255, 0.85)',
                       color: '#ffffff',
                       padding: '0.6rem 1.3rem',
                       fontFamily: 'var(--font-sans)',
@@ -348,13 +353,14 @@ export const CuratedItineraries = ({
           ))}
         </div>
 
-        {/* Custom Bespoke Itinerary Request Strip (Responsive stack on mobile) */}
+        {/* Custom Bespoke Itinerary Request Strip (Clean Light Card with Soft Peach Outline) */}
         <div
           style={{
             margin: '2rem 0 1rem 0',
-            padding: 'clamp(1.25rem, 3vw, 2rem)',
-            backgroundColor: 'rgba(255, 255, 255, 0.03)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
+            padding: 'clamp(1.25rem, 3vw, 2.2rem)',
+            backgroundColor: '#fffaf5',
+            border: '1px solid rgba(240, 139, 88, 0.35)',
+            boxShadow: '0 8px 24px rgba(240, 139, 88, 0.08)',
             borderRadius: '4px',
             display: 'flex',
             alignItems: 'center',
@@ -368,17 +374,17 @@ export const CuratedItineraries = ({
             <h4
               style={{
                 fontFamily: 'var(--font-condensed)',
-                fontSize: 'clamp(1rem, 2.5vw, 1.2rem)',
+                fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
                 fontWeight: 700,
                 letterSpacing: '0.04em',
-                color: '#ffffff',
+                color: '#111215',
                 marginBottom: '0.35rem',
                 textTransform: 'uppercase',
               }}
             >
               LOOKING FOR A COMPLETELY BESPOKE ROUTE?
             </h4>
-            <p style={{ fontSize: '0.82rem', color: 'rgba(255, 255, 255, 0.65)', margin: 0, lineHeight: 1.6 }}>
+            <p style={{ fontSize: '0.84rem', color: '#555762', margin: 0, lineHeight: 1.6 }}>
               Every itinerary above is simply an inspirational starting point. We design 100% custom expeditions anywhere on Earth.
             </p>
           </div>
@@ -455,9 +461,10 @@ export const CuratedItineraries = ({
           transform: scale(1.06);
         }
         .explore-trip-btn:hover {
-          background-color: #ffffff !important;
-          color: #0b0c0e !important;
-          border-color: #ffffff !important;
+          background-color: var(--color-pink-accent) !important;
+          color: #ffffff !important;
+          border-color: var(--color-pink-accent) !important;
+          box-shadow: 0 4px 14px rgba(240, 139, 88, 0.4) !important;
         }
 
         @media (max-width: 768px) {

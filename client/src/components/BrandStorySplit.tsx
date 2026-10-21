@@ -124,7 +124,7 @@ export const BrandStorySplit = ({
                 gap: '0.75rem',
               }}
             >
-              <Play size={14} fill="#ffffff" />
+              <Play size={14} fill="currentColor" />
               WATCH THE FILM
             </button>
           </div>
@@ -348,13 +348,13 @@ export const BrandStorySplit = ({
                     letterSpacing: '0.06em',
                     cursor: 'pointer',
                     transition: 'all 0.25s ease',
-                    backgroundColor: isSelected ? '#111215' : '#ffffff',
-                    color: isSelected ? '#ffffff' : '#4a4d55',
-                    border: isSelected ? '1px solid #111215' : '1px solid rgba(0, 0, 0, 0.12)',
+                    backgroundColor: isSelected ? '#fff4ec' : '#ffffff',
+                    color: isSelected ? 'var(--color-pink-accent)' : '#4a4d55',
+                    border: isSelected ? '1.5px solid var(--color-pink-accent)' : '1px solid #ded9ce',
                     touchAction: 'manipulation',
                   }}
                 >
-                  <Icon size={14} style={{ color: isSelected ? 'var(--color-pink-accent)' : '#777' }} />
+                  <Icon size={14} style={{ color: isSelected ? 'var(--color-pink-accent)' : '#8b8e9b' }} />
                   {f.name}
                 </button>
               );

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Search, Phone, User, X, Sparkles, ChevronRight, Compass, Heart, LogOut, Lock } from 'lucide-react';
+import { Search, Phone, User, X, Sparkles, ChevronRight, Compass, Heart, LogOut, Lock, MessageCircle, Mail } from 'lucide-react';
 import { useAppSelector, useAppDispatch } from '../store/store';
 import { logout, openLoginModal } from '../store/slices/authSlice';
 
@@ -69,10 +69,11 @@ export const Navbar = ({
           width: '100%',
           zIndex: 110,
           transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
-          backgroundColor: isScrolled ? 'rgba(7, 8, 10, 0.92)' : 'rgba(7, 8, 10, 0.68)',
+          backgroundColor: 'rgba(255, 255, 255, 0.96)',
           backdropFilter: 'blur(24px) saturate(180%)',
           WebkitBackdropFilter: 'blur(24px) saturate(180%)',
-          borderBottom: isScrolled ? '1px solid rgba(255, 255, 255, 0.08)' : '1px solid rgba(255, 255, 255, 0.05)',
+          borderBottom: '1px solid rgba(0, 0, 0, 0.08)',
+          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
           paddingTop: 'max(0.25rem, var(--safe-top))',
         }}
       >
@@ -98,16 +99,16 @@ export const Navbar = ({
               aria-label="Endlesscape Home"
               style={{
                 textDecoration: 'none',
-                color: '#ffffff',
+                color: '#111215',
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '0.4rem',
               }}
             >
               <picture>
-                <source srcSet="/assets/images/logo-nav.webp" type="image/webp" />
+                <source srcSet="/assets/images/logo-light.webp" type="image/webp" />
                 <img
-                  src="/assets/images/logo-nav.png"
+                  src="/assets/images/logo-light.png"
                   alt="Endlesscape"
                   style={{
                     height: 'clamp(30px, 3.8vw, 38px)',
@@ -135,7 +136,7 @@ export const Navbar = ({
                 style={{
                   background: 'transparent',
                   border: 'none',
-                  color: 'rgba(255, 255, 255, 0.85)',
+                  color: '#111215',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
@@ -153,7 +154,7 @@ export const Navbar = ({
                 style={{
                   background: 'transparent',
                   border: 'none',
-                  color: 'rgba(255, 255, 255, 0.9)',
+                  color: '#111215',
                   fontFamily: 'var(--font-sans)',
                   fontSize: '0.76rem',
                   fontWeight: 600,
@@ -164,7 +165,7 @@ export const Navbar = ({
                   position: 'relative',
                   transition: 'var(--transition-fast)',
                 }}
-                className="nav-link"
+                className="nav-link nav-link-scrolled"
               >
                 DESTINATIONS
               </button>
@@ -174,7 +175,7 @@ export const Navbar = ({
                 style={{
                   background: 'transparent',
                   border: 'none',
-                  color: 'rgba(255, 255, 255, 0.9)',
+                  color: '#111215',
                   fontFamily: 'var(--font-sans)',
                   fontSize: '0.76rem',
                   fontWeight: 600,
@@ -184,7 +185,7 @@ export const Navbar = ({
                   padding: '0.5rem 0',
                   transition: 'var(--transition-fast)',
                 }}
-                className="nav-link"
+                className="nav-link nav-link-scrolled"
               >
                 EXPERIENCES
               </button>
@@ -193,7 +194,7 @@ export const Navbar = ({
                 href="#philosophy"
                 style={{
                   textDecoration: 'none',
-                  color: 'rgba(255, 255, 255, 0.9)',
+                  color: '#111215',
                   fontFamily: 'var(--font-sans)',
                   fontSize: '0.76rem',
                   fontWeight: 600,
@@ -202,7 +203,7 @@ export const Navbar = ({
                   padding: '0.5rem 0',
                   transition: 'var(--transition-fast)',
                 }}
-                className="nav-link"
+                className="nav-link nav-link-scrolled"
               >
                 OUR PHILOSOPHY
               </a>
@@ -211,7 +212,7 @@ export const Navbar = ({
                 href="#itineraries"
                 style={{
                   textDecoration: 'none',
-                  color: 'rgba(255, 255, 255, 0.9)',
+                  color: '#111215',
                   fontFamily: 'var(--font-sans)',
                   fontSize: '0.76rem',
                   fontWeight: 600,
@@ -220,7 +221,7 @@ export const Navbar = ({
                   padding: '0.5rem 0',
                   transition: 'var(--transition-fast)',
                 }}
-                className="nav-link"
+                className="nav-link nav-link-scrolled"
               >
                 ITINERARIES
               </a>
@@ -229,12 +230,14 @@ export const Navbar = ({
 
           {/* Right: Phone Concierge, Admin Switcher & "ENQUIRE" Button */}
           <div className="nav-actions-cluster" style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexShrink: 0 }}>
-            {/* Desktop Phone */}
+            {/* Desktop WhatsApp & Phone Concierge */}
             <a
-              href="tel:+442074269888"
+              href="https://wa.me/918130216668?text=Hello%20Endlesscape,%20I%20would%20like%20to%20enquire%20about%20a%20luxury%20bespoke%20journey."
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
                 textDecoration: 'none',
-                color: 'rgba(255, 255, 255, 0.9)',
+                color: '#111215',
                 fontFamily: 'var(--font-sans)',
                 fontSize: '0.78rem',
                 fontWeight: 600,
@@ -246,9 +249,10 @@ export const Navbar = ({
                 marginRight: '0.5rem',
               }}
               className="desktop-phone"
+              title="Chat with Endlesscape Concierge on WhatsApp"
             >
-              <Phone size={13} style={{ color: 'var(--color-pink-accent)' }} />
-              +44 207 426 9888
+              <MessageCircle size={14} style={{ color: '#25D366' }} />
+              +91 8130216668
             </a>
 
             {/* Admin Concierge Portal Switcher (Desktop - Only visible when logged in as admin) */}
@@ -257,9 +261,9 @@ export const Navbar = ({
                 <button
                   onClick={onOpenAdmin}
                   style={{
-                    background: 'rgba(255, 0, 127, 0.12)',
-                    border: '1px solid rgba(255, 0, 127, 0.35)',
-                    color: '#ffffff',
+                    background: 'var(--color-pink-soft)',
+                    border: '1px solid var(--color-pink-accent)',
+                    color: 'var(--color-pink-accent)',
                     fontFamily: 'var(--font-sans)',
                     fontSize: '0.72rem',
                     fontWeight: 600,
@@ -289,9 +293,9 @@ export const Navbar = ({
                 <button
                   onClick={() => dispatch(logout())}
                   style={{
-                    background: 'rgba(255, 255, 255, 0.06)',
-                    border: '1px solid rgba(255, 255, 255, 0.15)',
-                    color: 'rgba(255, 255, 255, 0.7)',
+                    background: '#f4f2ee',
+                    border: '1px solid #e2ded5',
+                    color: '#555555',
                     fontFamily: 'var(--font-sans)',
                     fontSize: '0.7rem',
                     padding: '0.45rem 0.65rem',
@@ -313,14 +317,14 @@ export const Navbar = ({
             {/* Mobile Quick Search Glass Button */}
             <button
               onClick={onOpenSearch}
-              className="mobile-search-btn"
+              className={`mobile-search-btn ${isScrolled ? 'scrolled' : ''}`}
               aria-label="Search destinations"
               title="Search destinations & experiences"
             >
               <Search size={16} strokeWidth={2.2} />
             </button>
 
-            {/* Signature Luxury Hot Pink ENQUIRE Pill Button */}
+            {/* Signature Luxury Warm Peach ENQUIRE Pill Button */}
             <button
               onClick={onOpenEnquire}
               className="nav-enquire-btn"
@@ -334,7 +338,7 @@ export const Navbar = ({
             {/* Bespoke Luxury 2-Line Editorial Hamburger Toggle */}
             <button
               onClick={() => setMobileMenuOpen(true)}
-              className="mobile-toggle-btn"
+              className={`mobile-toggle-btn ${isScrolled ? 'scrolled' : ''}`}
               aria-label="Open mobile menu"
               title="Menu"
             >
@@ -356,7 +360,7 @@ export const Navbar = ({
             height: '100vh',
             minHeight: '100dvh',
             zIndex: 999,
-            backgroundColor: 'rgba(8, 9, 11, 0.97)',
+            backgroundColor: 'rgba(255, 255, 255, 0.98)',
             backdropFilter: 'blur(30px)',
             WebkitBackdropFilter: 'blur(30px)',
             display: 'flex',
@@ -365,6 +369,7 @@ export const Navbar = ({
             WebkitOverflowScrolling: 'touch',
             paddingTop: 'max(1.2rem, var(--safe-top))',
             paddingBottom: 'max(1.5rem, var(--safe-bottom))',
+            color: '#111215',
             animation: 'fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
           }}
         >
@@ -375,7 +380,7 @@ export const Navbar = ({
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+              borderBottom: '1px solid #eae6de',
             }}
           >
             <a
@@ -390,9 +395,9 @@ export const Navbar = ({
               aria-label="Endlesscape Home"
             >
               <picture>
-                <source srcSet="/assets/images/logo-nav.webp" type="image/webp" />
+                <source srcSet="/assets/images/logo-light.webp" type="image/webp" />
                 <img
-                  src="/assets/images/logo-nav.png"
+                  src="/assets/images/logo-light.png"
                   alt="Endlesscape"
                   style={{
                     height: '32px',
@@ -411,9 +416,9 @@ export const Navbar = ({
                 width: '42px',
                 height: '42px',
                 borderRadius: '50%',
-                backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
-                color: '#ffffff',
+                backgroundColor: '#f3f1ec',
+                border: '1px solid #ded9ce',
+                color: '#111215',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -434,11 +439,11 @@ export const Navbar = ({
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.75rem',
-                backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(255, 255, 255, 0.12)',
+                backgroundColor: '#f7f6f2',
+                border: '1px solid #ded9ce',
                 borderRadius: '6px',
                 padding: '0.9rem 1rem',
-                color: 'rgba(255, 255, 255, 0.7)',
+                color: '#555762',
                 fontSize: '0.86rem',
                 textAlign: 'left',
                 cursor: 'pointer',
@@ -525,7 +530,7 @@ export const Navbar = ({
                   style={{
                     background: 'transparent',
                     border: 'none',
-                    borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
+                    borderBottom: '1px solid #f0eee8',
                     padding: '1.1rem 0',
                     textAlign: 'left',
                     cursor: 'pointer',
@@ -540,7 +545,7 @@ export const Navbar = ({
                         width: '36px',
                         height: '36px',
                         borderRadius: '6px',
-                        backgroundColor: 'rgba(255, 255, 255, 0.04)',
+                        backgroundColor: '#fff4ec',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -556,40 +561,43 @@ export const Navbar = ({
                           fontSize: '1.05rem',
                           fontWeight: 700,
                           letterSpacing: '0.08em',
-                          color: '#ffffff',
+                          color: '#111215',
                           textTransform: 'uppercase',
                         }}
                       >
                         {item.title}
                       </div>
-                      <div style={{ fontSize: '0.74rem', color: 'rgba(255, 255, 255, 0.55)', marginTop: '2px' }}>
+                      <div style={{ fontSize: '0.74rem', color: '#666874', marginTop: '2px' }}>
                         {item.subtitle}
                       </div>
                     </div>
                   </div>
-                  <ChevronRight size={18} style={{ color: 'rgba(255, 255, 255, 0.35)' }} />
+                  <ChevronRight size={18} style={{ color: '#999ba4' }} />
                 </button>
               );
             })}
           </div>
 
-          {/* Bottom Concierge Quick Access & Hot Pink CTA */}
+          {/* Bottom Concierge Quick Access & Peach CTA */}
           <div
             style={{
               padding: '1.5rem 1.25rem 1rem',
               display: 'flex',
               flexDirection: 'column',
               gap: '0.85rem',
-              borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+              borderTop: '1px solid #eae6de',
             }}
           >
+            {/* Direct WhatsApp Inquiry */}
             <a
-              href="tel:+442074269888"
+              href="https://wa.me/918130216668?text=Hello%20Endlesscape,%20I%20would%20like%20to%20enquire%20about%20a%20luxury%20bespoke%20journey."
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
                 textDecoration: 'none',
-                color: '#ffffff',
-                backgroundColor: 'rgba(255, 255, 255, 0.04)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
+                color: '#0b5327',
+                backgroundColor: '#eefaf1',
+                border: '1px solid #c2e8cd',
                 borderRadius: '4px',
                 padding: '0.8rem 1rem',
                 display: 'flex',
@@ -600,9 +608,53 @@ export const Navbar = ({
                 fontWeight: 600,
               }}
             >
-              <Phone size={14} style={{ color: 'var(--color-pink-accent)' }} />
-              +44 207 426 9888 (24/7 Mayfair Concierge)
+              <MessageCircle size={16} style={{ color: '#25D366' }} />
+              WhatsApp Inquiry (+91 8130216668)
             </a>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
+              <a
+                href="tel:+918130216668"
+                style={{
+                  textDecoration: 'none',
+                  color: '#111215',
+                  backgroundColor: '#f8f7f4',
+                  border: '1px solid #ded9ce',
+                  borderRadius: '4px',
+                  padding: '0.7rem 0.5rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.4rem',
+                  fontSize: '0.76rem',
+                  fontWeight: 600,
+                }}
+              >
+                <Phone size={13} style={{ color: 'var(--color-pink-accent)' }} />
+                Call Direct
+              </a>
+
+              <a
+                href="mailto:endlesscape949@gmail.com"
+                style={{
+                  textDecoration: 'none',
+                  color: '#111215',
+                  backgroundColor: '#f8f7f4',
+                  border: '1px solid #ded9ce',
+                  borderRadius: '4px',
+                  padding: '0.7rem 0.5rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.4rem',
+                  fontSize: '0.76rem',
+                  fontWeight: 600,
+                }}
+              >
+                <Mail size={13} style={{ color: 'var(--color-pink-accent)' }} />
+                Email Us
+              </a>
+            </div>
 
             <button
               onClick={() => closeMenuAnd(onOpenEnquire)}
@@ -612,7 +664,7 @@ export const Navbar = ({
                 padding: '0.95rem 1.5rem',
                 fontSize: '0.82rem',
                 letterSpacing: '0.14em',
-                boxShadow: '0 8px 24px rgba(230, 27, 101, 0.4)',
+                boxShadow: '0 8px 24px rgba(240, 139, 88, 0.4)',
               }}
             >
               <Sparkles size={16} />
@@ -638,9 +690,9 @@ export const Navbar = ({
           width: 36px;
           height: 36px;
           border-radius: 50%;
-          background: rgba(255, 255, 255, 0.06);
-          border: 1px solid rgba(255, 255, 255, 0.14);
-          color: #ffffff;
+          background: #f4f2ee;
+          border: 1px solid #ded9ce;
+          color: #111215;
           cursor: pointer;
           touch-action: manipulation;
           transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -648,10 +700,10 @@ export const Navbar = ({
         }
         .mobile-search-btn:active {
           transform: scale(0.92);
-          background: rgba(255, 255, 255, 0.16);
+          background: #eae6de;
         }
 
-        /* Luxury Hot Pink Enquire Pill Button */
+        /* Luxury Warm Peach Enquire Pill Button */
         .nav-enquire-btn {
           display: inline-flex;
           align-items: center;
@@ -660,7 +712,7 @@ export const Navbar = ({
           height: 36px;
           padding: 0 0.95rem;
           border-radius: 999px;
-          background: linear-gradient(135deg, #e61b65 0%, #ce1254 100%);
+          background: linear-gradient(135deg, #f08b58 0%, #e27a44 100%);
           color: #ffffff;
           border: none;
           font-family: var(--font-sans);
@@ -670,17 +722,17 @@ export const Navbar = ({
           text-transform: uppercase;
           cursor: pointer;
           touch-action: manipulation;
-          box-shadow: 0 3px 14px rgba(230, 27, 101, 0.38);
+          box-shadow: 0 3px 14px rgba(240, 139, 88, 0.38);
           transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
           white-space: nowrap;
           flex-shrink: 0;
         }
         .nav-enquire-btn:active {
           transform: scale(0.94);
-          box-shadow: 0 1px 6px rgba(230, 27, 101, 0.4);
+          box-shadow: 0 1px 6px rgba(240, 139, 88, 0.4);
         }
         .nav-enquire-btn:hover {
-          background: linear-gradient(135deg, #ff2375 0%, #e61b65 100%);
+          background: linear-gradient(135deg, #f59a68 0%, #eb834d 100%);
         }
 
         /* Luxury 2-Line Editorial Hamburger */
@@ -693,8 +745,8 @@ export const Navbar = ({
           width: 36px;
           height: 36px;
           border-radius: 50%;
-          background: rgba(255, 255, 255, 0.06);
-          border: 1px solid rgba(255, 255, 255, 0.14);
+          background: #f4f2ee;
+          border: 1px solid #ded9ce;
           cursor: pointer;
           touch-action: manipulation;
           padding: 0;
@@ -703,7 +755,7 @@ export const Navbar = ({
         }
         .mobile-toggle-btn:active {
           transform: scale(0.92);
-          background: rgba(255, 255, 255, 0.16);
+          background: #eae6de;
         }
         .mobile-toggle-btn .menu-line {
           display: block;
@@ -713,7 +765,7 @@ export const Navbar = ({
         }
         .mobile-toggle-btn .menu-line-top {
           width: 17px;
-          background-color: #ffffff;
+          background-color: #111215;
         }
         .mobile-toggle-btn .menu-line-bottom {
           width: 11px;
@@ -752,8 +804,8 @@ export const Navbar = ({
           }
         }
 
-        .nav-link:hover {
-          color: #ffffff !important;
+        .nav-link:hover, .nav-link-scrolled:hover {
+          color: var(--color-pink-accent) !important;
         }
         .nav-link::after {
           content: '';
@@ -761,7 +813,7 @@ export const Navbar = ({
           bottom: 0;
           left: 0;
           width: 0%;
-          height: 1px;
+          height: 2px;
           background-color: var(--color-pink-accent);
           transition: width 0.3s ease;
         }

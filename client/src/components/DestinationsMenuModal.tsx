@@ -181,7 +181,7 @@ export const DestinationsMenuModal: React.FC<DestinationsMenuModalProps> = ({
         width: '100vw',
         height: '100vh',
         zIndex: 220,
-        backgroundColor: 'rgba(7, 8, 10, 0.94)',
+        backgroundColor: 'rgba(10, 12, 16, 0.72)',
         backdropFilter: 'blur(22px)',
         WebkitBackdropFilter: 'blur(22px)',
         display: 'flex',
@@ -193,8 +193,8 @@ export const DestinationsMenuModal: React.FC<DestinationsMenuModalProps> = ({
     >
       <div
         style={{
-          backgroundColor: '#0d0f14',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
+          backgroundColor: '#ffffff',
+          border: '1px solid #e2ded5',
           borderRadius: '4px',
           width: '100%',
           maxWidth: '960px',
@@ -203,8 +203,8 @@ export const DestinationsMenuModal: React.FC<DestinationsMenuModalProps> = ({
           WebkitOverflowScrolling: 'touch',
           position: 'relative',
           padding: 'clamp(1.25rem, 4vw, 2.5rem)',
-          color: '#ffffff',
-          boxShadow: '0 28px 80px rgba(0, 0, 0, 0.85)',
+          color: '#111215',
+          boxShadow: '0 28px 80px rgba(0, 0, 0, 0.22)',
           animation: 'slideUpModal 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
         onClick={(e) => e.stopPropagation()}
@@ -216,12 +216,12 @@ export const DestinationsMenuModal: React.FC<DestinationsMenuModalProps> = ({
             position: 'absolute',
             top: '1.25rem',
             right: '1.25rem',
-            background: 'rgba(255, 255, 255, 0.08)',
-            border: '1px solid rgba(255, 255, 255, 0.15)',
+            background: '#f4f3ef',
+            border: '1px solid #ded9ce',
             borderRadius: '50%',
             width: '40px',
             height: '40px',
-            color: 'rgba(255, 255, 255, 0.85)',
+            color: '#111215',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
@@ -259,6 +259,7 @@ export const DestinationsMenuModal: React.FC<DestinationsMenuModalProps> = ({
               fontWeight: 700,
               letterSpacing: '0.04em',
               textTransform: 'uppercase',
+              color: '#111215',
               marginBottom: '1.25rem',
             }}
           >
@@ -278,7 +279,7 @@ export const DestinationsMenuModal: React.FC<DestinationsMenuModalProps> = ({
               style={{
                 position: 'absolute',
                 left: '1rem',
-                color: 'rgba(255, 255, 255, 0.5)',
+                color: '#777984',
               }}
             />
             <input
@@ -290,12 +291,12 @@ export const DestinationsMenuModal: React.FC<DestinationsMenuModalProps> = ({
               style={{
                 width: '100%',
                 padding: '1.1rem 1rem 1.1rem 3rem',
-                backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                backgroundColor: '#f7f6f2',
                 border: searchQuery
                   ? '1px solid var(--color-pink-accent)'
-                  : '1px solid rgba(255, 255, 255, 0.2)',
+                  : '1px solid #ded9ce',
                 borderRadius: '3px',
-                color: '#ffffff',
+                color: '#111215',
                 fontSize: '1rem',
                 outline: 'none',
                 transition: 'border-color 0.25s ease',
@@ -309,7 +310,7 @@ export const DestinationsMenuModal: React.FC<DestinationsMenuModalProps> = ({
                   right: '1rem',
                   background: 'transparent',
                   border: 'none',
-                  color: 'rgba(255, 255, 255, 0.6)',
+                  color: '#666874',
                   cursor: 'pointer',
                   fontSize: '0.8rem',
                   fontWeight: 600,
@@ -326,11 +327,11 @@ export const DestinationsMenuModal: React.FC<DestinationsMenuModalProps> = ({
             <div
               style={{
                 marginTop: '0.75rem',
-                backgroundColor: 'rgba(20, 24, 32, 0.98)',
-                border: '1px solid rgba(255, 255, 255, 0.15)',
+                backgroundColor: '#ffffff',
+                border: '1px solid #ded9ce',
                 borderRadius: '3px',
                 overflow: 'hidden',
-                boxShadow: '0 12px 32px rgba(0, 0, 0, 0.65)',
+                boxShadow: '0 12px 32px rgba(0, 0, 0, 0.12)',
               }}
             >
               <div
@@ -341,8 +342,8 @@ export const DestinationsMenuModal: React.FC<DestinationsMenuModalProps> = ({
                   letterSpacing: '0.18em',
                   textTransform: 'uppercase',
                   color: 'var(--color-pink-accent)',
-                  backgroundColor: 'rgba(255, 255, 255, 0.03)',
-                  borderBottom: '1px solid rgba(255, 255, 255, 0.06)',
+                  backgroundColor: '#fffaf5',
+                  borderBottom: '1px solid #f0eee8',
                 }}
               >
                 SUGGESTIONS & DIRECT MATCHES
@@ -358,7 +359,7 @@ export const DestinationsMenuModal: React.FC<DestinationsMenuModalProps> = ({
                     justifyContent: 'space-between',
                     padding: '0.75rem 1rem',
                     cursor: 'pointer',
-                    borderBottom: '1px solid rgba(255, 255, 255, 0.04)',
+                    borderBottom: '1px solid #f3f1ec',
                     transition: 'background-color 0.2s ease',
                   }}
                   className="search-suggestion-item"
@@ -369,7 +370,7 @@ export const DestinationsMenuModal: React.FC<DestinationsMenuModalProps> = ({
                         width: '28px',
                         height: '28px',
                         borderRadius: '50%',
-                        backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                        backgroundColor: '#fff4ec',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -386,7 +387,7 @@ export const DestinationsMenuModal: React.FC<DestinationsMenuModalProps> = ({
                         style={{
                           fontSize: '0.88rem',
                           fontWeight: 600,
-                          color: '#ffffff',
+                          color: '#111215',
                           letterSpacing: '0.02em',
                         }}
                       >
@@ -395,7 +396,7 @@ export const DestinationsMenuModal: React.FC<DestinationsMenuModalProps> = ({
                       <div
                         style={{
                           fontSize: '0.74rem',
-                          color: 'rgba(255, 255, 255, 0.55)',
+                          color: '#666874',
                         }}
                       >
                         {s.subtitle}
@@ -431,35 +432,39 @@ export const DestinationsMenuModal: React.FC<DestinationsMenuModalProps> = ({
             gap: '0.5rem',
             flexWrap: 'wrap',
             marginBottom: '1.5rem',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+            borderBottom: '1px solid #eae6de',
             paddingBottom: '1rem',
           }}
         >
-          {DESTINATION_REGIONS.map((r) => (
-            <button
-              key={r.id}
-              onClick={() => setSelectedRegion(r.id)}
-              style={{
-                background: selectedRegion === r.id ? 'var(--color-pink-accent)' : 'rgba(255, 255, 255, 0.06)',
-                border: 'none',
-                color: '#ffffff',
-                padding: '0.4rem 0.95rem',
-                borderRadius: '2px',
-                fontSize: '0.74rem',
-                fontWeight: 600,
-                letterSpacing: '0.06em',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-              }}
-            >
-              {r.name}
-            </button>
-          ))}
+          {DESTINATION_REGIONS.map((r) => {
+            const isSelected = selectedRegion === r.id;
+            return (
+              <button
+                key={r.id}
+                onClick={() => setSelectedRegion(r.id)}
+                style={{
+                  background: isSelected ? 'var(--color-pink-accent)' : '#f7f6f2',
+                  border: isSelected ? '1px solid var(--color-pink-accent)' : '1px solid #e2ded5',
+                  color: isSelected ? '#ffffff' : '#33353c',
+                  padding: '0.4rem 0.95rem',
+                  borderRadius: '2px',
+                  fontSize: '0.74rem',
+                  fontWeight: 600,
+                  letterSpacing: '0.06em',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  boxShadow: isSelected ? '0 3px 10px rgba(240, 139, 88, 0.3)' : 'none',
+                }}
+              >
+                {r.name}
+              </button>
+            );
+          })}
         </div>
 
         {/* Quick Travel Style Shortcuts */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
-          <span style={{ fontSize: '0.72rem', color: 'rgba(255, 255, 255, 0.5)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+          <span style={{ fontSize: '0.72rem', color: '#666874', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
             Travel By Persona:
           </span>
           {TRAVEL_STYLES.map((style) => (
@@ -470,9 +475,9 @@ export const DestinationsMenuModal: React.FC<DestinationsMenuModalProps> = ({
                 onSelectStyle(style);
               }}
               style={{
-                background: 'rgba(255, 255, 255, 0.04)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                color: 'rgba(255, 255, 255, 0.85)',
+                background: '#f8f7f4',
+                border: '1px solid #ded9ce',
+                color: '#33353c',
                 padding: '0.3rem 0.75rem',
                 borderRadius: '999px',
                 fontSize: '0.7rem',
@@ -501,7 +506,7 @@ export const DestinationsMenuModal: React.FC<DestinationsMenuModalProps> = ({
                 fontSize: '0.75rem',
                 letterSpacing: '0.12em',
                 textTransform: 'uppercase',
-                color: 'rgba(255, 255, 255, 0.6)',
+                color: '#666874',
               }}
             >
               Showing {filteredTrips.length} Curated Expeditions
@@ -523,12 +528,13 @@ export const DestinationsMenuModal: React.FC<DestinationsMenuModalProps> = ({
                   onSelectItinerary(trip);
                 }}
                 style={{
-                  backgroundColor: 'rgba(255, 255, 255, 0.03)',
-                  border: '1px solid rgba(255, 255, 255, 0.08)',
-                  borderRadius: '2px',
+                  backgroundColor: '#ffffff',
+                  border: '1px solid #eae6de',
+                  borderRadius: '3px',
                   overflow: 'hidden',
                   cursor: 'pointer',
                   transition: 'all 0.3s ease',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.04)',
                 }}
                 className="search-trip-card"
               >
@@ -546,7 +552,9 @@ export const DestinationsMenuModal: React.FC<DestinationsMenuModalProps> = ({
                       position: 'absolute',
                       top: '0.65rem',
                       right: '0.65rem',
-                      backgroundColor: 'rgba(0, 0, 0, 0.65)',
+                      backgroundColor: 'rgba(12, 14, 18, 0.72)',
+                      border: '1px solid rgba(240, 139, 88, 0.4)',
+                      color: '#ffffff',
                       padding: '0.2rem 0.5rem',
                       fontSize: '0.68rem',
                       fontWeight: 700,
@@ -576,7 +584,7 @@ export const DestinationsMenuModal: React.FC<DestinationsMenuModalProps> = ({
                       fontFamily: 'var(--font-condensed)',
                       fontSize: '0.96rem',
                       fontWeight: 700,
-                      color: '#ffffff',
+                      color: '#111215',
                       marginBottom: '0.4rem',
                       lineHeight: 1.3,
                       textTransform: 'uppercase',
@@ -587,7 +595,7 @@ export const DestinationsMenuModal: React.FC<DestinationsMenuModalProps> = ({
                   <span
                     style={{
                       fontSize: '0.74rem',
-                      color: 'rgba(255, 255, 255, 0.6)',
+                      color: '#666874',
                       display: 'flex',
                       alignItems: 'center',
                       gap: '0.3rem',
@@ -604,7 +612,7 @@ export const DestinationsMenuModal: React.FC<DestinationsMenuModalProps> = ({
         {/* Bottom Custom Route Request */}
         <div
           style={{
-            borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+            borderTop: '1px solid #eae6de',
             paddingTop: '1.5rem',
             display: 'flex',
             alignItems: 'center',
@@ -614,7 +622,7 @@ export const DestinationsMenuModal: React.FC<DestinationsMenuModalProps> = ({
           }}
           className="search-bottom-strip"
         >
-          <p style={{ fontSize: '0.82rem', color: 'rgba(255, 255, 255, 0.6)', margin: 0 }}>
+          <p style={{ fontSize: '0.82rem', color: '#555762', margin: 0 }}>
             Don’t see what you have in mind? We craft 100% custom expeditions anywhere on Earth.
           </p>
           <button
@@ -631,16 +639,17 @@ export const DestinationsMenuModal: React.FC<DestinationsMenuModalProps> = ({
 
       <style>{`
         .search-suggestion-item:hover {
-          background-color: rgba(230, 27, 101, 0.12) !important;
+          background-color: #fff4ec !important;
         }
         .quick-persona-pill:hover {
-          background-color: rgba(255, 255, 255, 0.12) !important;
-          border-color: rgba(255, 255, 255, 0.3) !important;
+          background-color: #fff4ec !important;
+          border-color: var(--color-pink-accent) !important;
+          color: var(--color-pink-accent) !important;
         }
         .search-trip-card:hover {
           transform: translateY(-3px);
-          border-color: rgba(255, 255, 255, 0.25);
-          background-color: rgba(255, 255, 255, 0.06);
+          border-color: var(--color-pink-accent) !important;
+          box-shadow: 0 10px 24px rgba(240, 139, 88, 0.15);
         }
         @media (max-width: 600px) {
           .search-bottom-strip {

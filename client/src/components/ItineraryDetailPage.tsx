@@ -72,12 +72,37 @@ export const ItineraryDetailPage: React.FC<ItineraryDetailPageProps> = ({
     }
   }, []);
 
-  // Related trips memoized
+  // Related trips memoized: Strictly prioritize same region and matching travel styles
   const relatedTrips = useMemo(() => {
-    return allItineraries
-      .filter((item) => item.id !== itinerary.id)
-      .slice(0, 3);
-  }, [allItineraries, itinerary.id]);
+    // 1. Same-region candidates (excluding the current itinerary)
+    const sameRegion = allItineraries.filter(
+      (item) => item.id !== itinerary.id && item.region === itinerary.region
+    );
+
+    // Score same-region candidates by matching experience types
+    const currentTypes = new Set(itinerary.experienceTypes || []);
+    sameRegion.sort((a, b) => {
+      const aMatches = (a.experienceTypes || []).filter((t) => currentTypes.has(t)).length;
+      const bMatches = (b.experienceTypes || []).filter((t) => currentTypes.has(t)).length;
+      return bMatches - aMatches;
+    });
+
+    if (sameRegion.length >= 3) {
+      return sameRegion.slice(0, 3);
+    }
+
+    // Fallback if fewer than 3 in same region: add other matching experience type packages
+    const others = allItineraries.filter(
+      (item) => item.id !== itinerary.id && item.region !== itinerary.region
+    );
+    others.sort((a, b) => {
+      const aMatches = (a.experienceTypes || []).filter((t) => currentTypes.has(t)).length;
+      const bMatches = (b.experienceTypes || []).filter((t) => currentTypes.has(t)).length;
+      return bMatches - aMatches;
+    });
+
+    return [...sameRegion, ...others].slice(0, 3);
+  }, [allItineraries, itinerary.id, itinerary.region, itinerary.experienceTypes]);
 
   return (
     <div className="itinerary-detail-page" style={{ backgroundColor: '#ffffff', color: '#111215', minHeight: '100vh' }}>
@@ -191,7 +216,7 @@ export const ItineraryDetailPage: React.FC<ItineraryDetailPageProps> = ({
           position: 'relative',
           width: '100%',
           height: 'clamp(380px, 62vh, 680px)',
-          backgroundColor: '#0c0e12',
+          backgroundColor: '#f5f3ee',
           overflow: 'hidden',
         }}
       >
@@ -459,23 +484,13 @@ export const ItineraryDetailPage: React.FC<ItineraryDetailPageProps> = ({
 
           <button
             onClick={() => onEnquire(itinerary.title)}
+            className="btn-primary-pink"
             style={{
-              backgroundColor: '#000000',
-              color: '#ffffff',
-              border: 'none',
               padding: '0.95rem 2.2rem',
-              fontFamily: 'var(--font-sans)',
               fontSize: '0.78rem',
-              fontWeight: 700,
               letterSpacing: '0.18em',
-              textTransform: 'uppercase',
-              cursor: 'pointer',
-              borderRadius: '2px',
-              transition: 'all 0.3s ease',
-              boxShadow: '0 6px 18px rgba(0, 0, 0, 0.25)',
               whiteSpace: 'nowrap',
             }}
-            className="enquire-teal-btn"
           >
             ENQUIRE NOW
           </button>
@@ -591,10 +606,11 @@ export const ItineraryDetailPage: React.FC<ItineraryDetailPageProps> = ({
         {/* 6. Expedition Highlights Grid */}
         <div
           style={{
-            backgroundColor: '#0c0e12',
-            color: '#ffffff',
+            backgroundColor: '#faf8f5',
+            color: '#111215',
+            border: '1px solid #e8e4dc',
             padding: '3rem',
-            borderRadius: '3px',
+            borderRadius: '4px',
             marginBottom: '4.5rem',
           }}
         >
@@ -619,7 +635,7 @@ export const ItineraryDetailPage: React.FC<ItineraryDetailPageProps> = ({
                 fontWeight: 700,
                 letterSpacing: '0.04em',
                 textTransform: 'uppercase',
-                color: '#ffffff',
+                color: '#111215',
                 margin: 0,
               }}
             >
@@ -643,7 +659,7 @@ export const ItineraryDetailPage: React.FC<ItineraryDetailPageProps> = ({
                   gap: '0.75rem',
                   fontSize: '0.88rem',
                   lineHeight: 1.55,
-                  color: 'rgba(255, 255, 255, 0.85)',
+                  color: '#2b2d33',
                 }}
               >
                 <div
@@ -858,21 +874,12 @@ export const ItineraryDetailPage: React.FC<ItineraryDetailPageProps> = ({
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <button
               onClick={() => onEnquire(itinerary.title)}
+              className="btn-primary-pink"
               style={{
-                backgroundColor: '#000000',
-                color: '#ffffff',
-                border: 'none',
                 padding: '0.65rem 1.6rem',
-                fontFamily: 'var(--font-sans)',
                 fontSize: '0.74rem',
-                fontWeight: 700,
                 letterSpacing: '0.16em',
-                textTransform: 'uppercase',
-                cursor: 'pointer',
-                borderRadius: '2px',
-                transition: 'all 0.3s ease',
               }}
-              className="sticky-enquire-btn"
             >
               ENQUIRE NOW
             </button>

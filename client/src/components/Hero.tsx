@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { Volume2, VolumeX, Play, Pause } from 'lucide-react';
+import { Volume2, VolumeX } from 'lucide-react';
 
 
 interface HeroProps {
@@ -10,7 +10,6 @@ interface HeroProps {
 export const Hero = ({ onExploreTrips, onPlanTrip }: HeroProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMuted, setIsMuted] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(true);
 
   // Responsive video source: 1920x1080 widescreen for desktop, 720x1280 portrait for mobile
   const [isMobileScreen, setIsMobileScreen] = useState(() => {
@@ -43,18 +42,6 @@ export const Hero = ({ onExploreTrips, onPlanTrip }: HeroProps) => {
     if (videoRef.current) {
       videoRef.current.muted = !videoRef.current.muted;
       setIsMuted(videoRef.current.muted);
-    }
-  }, []);
-
-  const togglePlay = useCallback(() => {
-    if (videoRef.current) {
-      if (videoRef.current.paused) {
-        videoRef.current.play();
-        setIsPlaying(true);
-      } else {
-        videoRef.current.pause();
-        setIsPlaying(false);
-      }
     }
   }, []);
 
@@ -192,10 +179,11 @@ export const Hero = ({ onExploreTrips, onPlanTrip }: HeroProps) => {
             marginTop: '2.5rem',
             padding: '0.35rem 0.85rem',
             borderRadius: '999px',
-            background: 'rgba(0, 0, 0, 0.55)',
-            backdropFilter: 'blur(12px)',
-            WebkitBackdropFilter: 'blur(12px)',
-            border: '1px solid rgba(255, 255, 255, 0.14)',
+            background: 'rgba(255, 255, 255, 0.22)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)',
+            border: '1px solid rgba(240, 139, 88, 0.45)',
+            boxShadow: '0 4px 16px rgba(0, 0, 0, 0.15)',
           }}
         >
           {/* Audio toggle button */}
@@ -208,34 +196,13 @@ export const Hero = ({ onExploreTrips, onPlanTrip }: HeroProps) => {
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              padding: '3px 4px',
+              padding: '4px 6px',
               touchAction: 'manipulation',
             }}
             title={isMuted ? 'Turn on sound' : 'Mute sound'}
             aria-label={isMuted ? 'Turn on sound' : 'Mute sound'}
           >
             {isMuted ? <VolumeX size={15} /> : <Volume2 size={15} color="var(--color-pink-accent)" />}
-          </button>
-
-          <span style={{ width: '1px', height: '12px', backgroundColor: 'rgba(255, 255, 255, 0.2)' }} />
-
-          {/* Play/Pause toggle */}
-          <button
-            onClick={togglePlay}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              color: 'rgba(255, 255, 255, 0.85)',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              padding: '3px 4px',
-              touchAction: 'manipulation',
-            }}
-            title={isPlaying ? 'Pause film' : 'Play film'}
-            aria-label={isPlaying ? 'Pause film' : 'Play film'}
-          >
-            {isPlaying ? <Pause size={13} /> : <Play size={13} />}
           </button>
         </div>
       </div>

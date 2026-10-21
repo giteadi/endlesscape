@@ -146,15 +146,16 @@ export const ExperienceCategoryPage: React.FC<ExperienceCategoryPageProps> = ({
         </div>
       </div>
 
-      {/* 2. Hero Section: Left Dark Title Block + Right Horizontal Cards (Screenshots 1 & 3 Match!) */}
+      {/* 2. Hero Section: Left Title Block + Right Horizontal Cards */}
       <section
         id="category-hero"
         style={{
-          backgroundColor: '#0c0e12',
-          color: '#ffffff',
+          backgroundColor: '#ffffff',
+          color: '#111215',
           padding: '4.5rem 0 5rem 0',
           position: 'relative',
           overflow: 'hidden',
+          borderBottom: '1px solid #e8e4dc',
         }}
       >
         <div className="container" style={{ maxWidth: '1440px' }}>
@@ -225,7 +226,7 @@ export const ExperienceCategoryPage: React.FC<ExperienceCategoryPageProps> = ({
                     letterSpacing: '0.04em',
                     textTransform: 'uppercase',
                     lineHeight: 1.12,
-                    color: '#ffffff',
+                    color: '#111215',
                     margin: 0,
                   }}
                 >
@@ -240,7 +241,7 @@ export const ExperienceCategoryPage: React.FC<ExperienceCategoryPageProps> = ({
                   fontFamily: 'var(--font-sans)',
                   fontSize: '0.98rem',
                   lineHeight: 1.7,
-                  color: 'rgba(255, 255, 255, 0.8)',
+                  color: '#555762',
                   margin: 0,
                 }}
               >
@@ -250,21 +251,12 @@ export const ExperienceCategoryPage: React.FC<ExperienceCategoryPageProps> = ({
               <div>
                 <button
                   onClick={() => onEnquire(`Quote for ${selectedMonth || ''} ${categoryTitle}`)}
+                  className="btn-primary-pink"
                   style={{
-                    backgroundColor: '#000000',
-                    color: '#ffffff',
-                    border: '1px solid rgba(255, 255, 255, 0.4)',
                     padding: '0.85rem 2rem',
-                    fontFamily: 'var(--font-sans)',
                     fontSize: '0.76rem',
-                    fontWeight: 700,
                     letterSpacing: '0.18em',
-                    textTransform: 'uppercase',
-                    cursor: 'pointer',
-                    borderRadius: '2px',
-                    transition: 'all 0.3s ease',
                   }}
-                  className="get-a-quote-btn"
                 >
                   GET A QUOTE
                 </button>

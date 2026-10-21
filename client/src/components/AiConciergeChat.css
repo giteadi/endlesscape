@@ -10,21 +10,21 @@
   align-items: center;
   gap: 12px;
   padding: 12px 20px;
-  background: rgba(13, 15, 18, 0.88);
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(201, 163, 94, 0.35);
+  border: 1px solid rgba(240, 139, 88, 0.45);
   border-radius: 9999px;
-  color: #ffffff;
+  color: #111215;
   cursor: pointer;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 18px rgba(201, 163, 94, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), 0 0 20px rgba(240, 139, 88, 0.2);
 }
 
 .aura-trigger-btn:hover {
-  background: rgba(21, 24, 30, 0.95);
-  border-color: rgba(201, 163, 94, 0.7);
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.65), 0 0 28px rgba(201, 163, 94, 0.4);
+  background: #ffffff;
+  border-color: var(--color-pink-accent);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.18), 0 0 28px rgba(240, 139, 88, 0.35);
   transform: translateY(-2px);
 }
 
@@ -39,17 +39,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, rgba(201, 163, 94, 0.25), rgba(230, 27, 101, 0.15));
-  border: 1px solid rgba(201, 163, 94, 0.4);
+  background: #fff4ec;
+  border: 1px solid rgba(240, 139, 88, 0.4);
   border-radius: 50%;
-  color: var(--color-gold-accent);
+  color: var(--color-pink-accent);
 }
 
 .aura-icon-pulse {
   position: absolute;
   inset: -2px;
   border-radius: 50%;
-  border: 1px solid rgba(201, 163, 94, 0.6);
+  border: 1px solid rgba(240, 139, 88, 0.6);
   animation: auraPulse 2.4s cubic-bezier(0.25, 1, 0.5, 1) infinite;
 }
 
@@ -80,14 +80,14 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #ffffff;
+  color: #111215;
 }
 
 .aura-trigger-subtitle {
   font-family: var(--font-sans);
   font-size: 11px;
   letter-spacing: 0.04em;
-  color: var(--color-gold-accent);
+  color: var(--color-pink-accent);
 }
 
 .aura-unread-dot {
@@ -114,13 +114,13 @@
   max-height: calc(100dvh - 80px);
   display: flex;
   flex-direction: column;
-  background: rgba(11, 13, 17, 0.96);
+  background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-top: 1px solid rgba(201, 163, 94, 0.4);
+  border: 1px solid #e2ded5;
+  border-top: 3px solid var(--color-pink-accent);
   border-radius: 20px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 35px rgba(201, 163, 94, 0.15);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22), 0 0 35px rgba(240, 139, 88, 0.15);
   overflow: hidden;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   animation: auraSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -148,8 +148,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 20px;
-  background: rgba(18, 21, 27, 0.85);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: #faf8f5;
+  border-bottom: 1px solid #e8e4dc;
 }
 
 .aura-header-left {
@@ -165,13 +165,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, rgba(201, 163, 94, 0.3), rgba(230, 27, 101, 0.2));
-  border: 1px solid rgba(201, 163, 94, 0.5);
-  color: var(--color-gold-accent);
+  background: #fff4ec;
+  border: 1px solid rgba(240, 139, 88, 0.5);
+  color: var(--color-pink-accent);
   font-family: var(--font-serif);
   font-size: 18px;
   font-weight: 700;
-  box-shadow: 0 0 12px rgba(201, 163, 94, 0.25);
+  box-shadow: 0 0 12px rgba(240, 139, 88, 0.2);
 }
 
 .aura-header-info {
@@ -185,7 +185,7 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #ffffff;
+  color: #111215;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -196,7 +196,7 @@
   align-items: center;
   gap: 4px;
   font-size: 10px;
-  color: #10b981;
+  color: #059669;
   letter-spacing: 0.02em;
   font-family: var(--font-sans);
   text-transform: none;
@@ -206,14 +206,14 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #10b981;
-  box-shadow: 0 0 6px #10b981;
+  background: #059669;
+  box-shadow: 0 0 6px #059669;
 }
 
 .aura-header-sub {
   font-family: var(--font-sans);
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.5);
+  color: #656774;
   letter-spacing: 0.02em;
 }
 
@@ -232,15 +232,15 @@
   background: transparent;
   border: 1px solid transparent;
   border-radius: 8px;
-  color: rgba(255, 255, 255, 0.6);
+  color: #656774;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .aura-header-btn:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.12);
-  color: #ffffff;
+  background: #f0ece3;
+  border-color: #ded9ce;
+  color: #111215;
 }
 
 /* Chat Messages Scrollable Area */
@@ -248,6 +248,7 @@
   flex: 1;
   overflow-y: auto;
   padding: 20px 18px;
+  background: #ffffff;
   display: flex;
   flex-direction: column;
   gap: 18px;
@@ -257,7 +258,7 @@
   width: 4px;
 }
 .aura-messages-view::-webkit-scrollbar-thumb {
-  background: rgba(201, 163, 94, 0.25);
+  background: rgba(240, 139, 88, 0.3);
   border-radius: 4px;
 }
 
@@ -281,12 +282,12 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: rgba(201, 163, 94, 0.2);
-  border: 1px solid rgba(201, 163, 94, 0.4);
+  background: #fff4ec;
+  border: 1px solid rgba(240, 139, 88, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-gold-accent);
+  color: var(--color-pink-accent);
   font-size: 13px;
   font-family: var(--font-serif);
   font-weight: 700;
@@ -310,17 +311,17 @@
 }
 
 .aura-msg-row.user .aura-msg-bubble {
-  background: linear-gradient(135deg, rgba(201, 163, 94, 0.22), rgba(201, 163, 94, 0.12));
-  border: 1px solid rgba(201, 163, 94, 0.4);
-  color: #ffffff;
+  background: #fff4ec;
+  border: 1px solid rgba(240, 139, 88, 0.4);
+  color: #111215;
   border-bottom-right-radius: 2px;
 }
 
 .aura-msg-row.assistant .aura-msg-bubble {
-  background: rgba(22, 26, 33, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-left: 2px solid var(--color-gold-accent);
-  color: rgba(255, 255, 255, 0.92);
+  background: #faf8f5;
+  border: 1px solid #e8e4dc;
+  border-left: 3px solid var(--color-pink-accent);
+  color: #111215;
   border-top-left-radius: 2px;
 }
 
@@ -341,13 +342,13 @@
 }
 
 .aura-msg-bubble strong {
-  color: #ffffff;
+  color: #111215;
   font-weight: 600;
 }
 
 .aura-msg-time {
   font-size: 10px;
-  color: rgba(255, 255, 255, 0.4);
+  color: #8b8e9b;
   align-self: flex-start;
   padding: 0 4px;
 }
@@ -366,17 +367,18 @@
 
 .aura-pkg-card {
   display: flex;
-  background: rgba(15, 18, 24, 0.85);
-  border: 1px solid rgba(201, 163, 94, 0.25);
+  background: #ffffff;
+  border: 1px solid #e2ded5;
   border-radius: 10px;
   overflow: hidden;
   transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
 }
 
 .aura-pkg-card:hover {
-  border-color: rgba(201, 163, 94, 0.6);
+  border-color: var(--color-pink-accent);
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 6px 18px rgba(240, 139, 88, 0.15);
 }
 
 .aura-pkg-thumb {
@@ -405,8 +407,9 @@
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-gold-accent);
+  color: var(--color-pink-accent);
   margin-bottom: 2px;
+  font-weight: 600;
 }
 
 .aura-pkg-title {
@@ -414,7 +417,7 @@
   font-size: 12.5px;
   font-weight: 600;
   line-height: 1.3;
-  color: #ffffff;
+  color: #111215;
   margin-bottom: 6px;
 }
 
@@ -426,7 +429,7 @@
 }
 
 .aura-pkg-price {
-  color: rgba(255, 255, 255, 0.85);
+  color: #555762;
   font-weight: 500;
 }
 
@@ -440,9 +443,9 @@
   padding: 4px 10px;
   font-size: 10.5px;
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.05);
-  color: #ffffff;
+  border: 1px solid #ded9ce;
+  background: #f7f6f3;
+  color: #111215;
   cursor: pointer;
   transition: all 0.2s ease;
   font-family: var(--font-heading);
@@ -450,20 +453,20 @@
 }
 
 .aura-pkg-action-btn:hover {
-  background: rgba(201, 163, 94, 0.2);
-  border-color: rgba(201, 163, 94, 0.5);
-  color: var(--color-gold-accent);
+  background: #fff4ec;
+  border-color: var(--color-pink-accent);
+  color: var(--color-pink-accent);
 }
 
 .aura-pkg-action-btn.primary {
-  background: linear-gradient(135deg, rgba(201, 163, 94, 0.35), rgba(201, 163, 94, 0.15));
-  border-color: rgba(201, 163, 94, 0.5);
+  background: var(--color-pink-accent);
+  border-color: var(--color-pink-accent);
   color: #ffffff;
 }
 
 .aura-pkg-action-btn.primary:hover {
-  background: var(--color-gold-accent);
-  color: var(--color-black);
+  background: var(--color-pink-hover);
+  color: #ffffff;
 }
 
 /* Suggestion Chips Tray */
@@ -477,10 +480,10 @@
 .aura-suggestion-chip {
   padding: 6px 12px;
   font-size: 11.5px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #ffffff;
+  border: 1px solid #ded9ce;
   border-radius: 9999px;
-  color: rgba(255, 255, 255, 0.85);
+  color: #111215;
   cursor: pointer;
   transition: all 0.2s ease;
   text-align: left;
@@ -488,9 +491,9 @@
 }
 
 .aura-suggestion-chip:hover {
-  background: rgba(201, 163, 94, 0.15);
-  border-color: rgba(201, 163, 94, 0.4);
-  color: #ffffff;
+  background: #fff4ec;
+  border-color: var(--color-pink-accent);
+  color: var(--color-pink-accent);
   transform: translateY(-1px);
 }
 
@@ -500,9 +503,9 @@
   align-items: center;
   gap: 8px;
   padding: 12px 16px;
-  background: rgba(22, 26, 33, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-left: 2px solid var(--color-gold-accent);
+  background: #faf8f5;
+  border: 1px solid #e8e4dc;
+  border-left: 3px solid var(--color-pink-accent);
   border-radius: 14px;
   border-top-left-radius: 2px;
   width: fit-content;
@@ -518,7 +521,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--color-gold-accent);
+  background: var(--color-pink-accent);
   animation: auraDotPulse 1.4s infinite ease-in-out both;
 }
 
@@ -538,15 +541,15 @@
 
 .aura-typing-text {
   font-size: 11.5px;
-  color: rgba(255, 255, 255, 0.6);
+  color: #656774;
   font-style: italic;
 }
 
 /* Chat Input Bar */
 .aura-chat-footer {
   padding: 12px 18px 16px 18px;
-  background: rgba(18, 21, 27, 0.85);
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: #faf8f5;
+  border-top: 1px solid #e8e4dc;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -556,16 +559,16 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(11, 13, 17, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #ffffff;
+  border: 1px solid #ded9ce;
   border-radius: 9999px;
   padding: 6px 8px 6px 16px;
   transition: all 0.25s ease;
 }
 
 .aura-input-form:focus-within {
-  border-color: rgba(201, 163, 94, 0.6);
-  box-shadow: 0 0 12px rgba(201, 163, 94, 0.2);
+  border-color: var(--color-pink-accent);
+  box-shadow: 0 0 12px rgba(240, 139, 88, 0.25);
 }
 
 .aura-input-field {
@@ -573,7 +576,7 @@
   background: transparent;
   border: none;
   outline: none;
-  color: #ffffff;
+  color: #111215;
   font-family: var(--font-sans);
   font-size: 13px;
 }

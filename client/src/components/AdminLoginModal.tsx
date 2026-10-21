@@ -83,11 +83,11 @@ export const AdminLoginModal: React.FC = () => {
         style={{
           width: '100%',
           maxWidth: '460px',
-          backgroundColor: '#0c0e12',
-          border: '1px solid rgba(255, 255, 255, 0.14)',
+          backgroundColor: '#ffffff',
+          border: '1px solid #e2ded5',
           borderRadius: '4px',
           padding: '2.5rem 2.2rem',
-          boxShadow: '0 24px 60px rgba(0, 0, 0, 0.85), 0 0 40px rgba(255, 0, 127, 0.08)',
+          boxShadow: '0 24px 60px rgba(0, 0, 0, 0.25), 0 0 40px rgba(240, 139, 88, 0.08)',
           position: 'relative',
           animation: 'fadeInModal 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
@@ -100,9 +100,9 @@ export const AdminLoginModal: React.FC = () => {
             position: 'absolute',
             top: '1.25rem',
             right: '1.25rem',
-            background: 'rgba(255, 255, 255, 0.06)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            color: 'rgba(255, 255, 255, 0.7)',
+            background: '#f5f3ef',
+            border: '1px solid #ded9ce',
+            color: '#111215',
             width: '32px',
             height: '32px',
             borderRadius: '50%',
@@ -124,8 +124,8 @@ export const AdminLoginModal: React.FC = () => {
               height: '46px',
               margin: '0 auto 1rem',
               borderRadius: '50%',
-              backgroundColor: 'rgba(255, 0, 127, 0.12)',
-              border: '1px solid rgba(255, 0, 127, 0.3)',
+              backgroundColor: '#fff4ec',
+              border: '1px solid rgba(240, 139, 88, 0.4)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -155,7 +155,7 @@ export const AdminLoginModal: React.FC = () => {
               fontSize: '1.4rem',
               fontWeight: 700,
               letterSpacing: '0.08em',
-              color: '#ffffff',
+              color: '#111215',
               textTransform: 'uppercase',
               margin: '0 0 0.5rem 0',
             }}
@@ -168,7 +168,7 @@ export const AdminLoginModal: React.FC = () => {
               fontFamily: 'var(--font-serif)',
               fontStyle: 'italic',
               fontSize: '0.92rem',
-              color: 'rgba(255, 255, 255, 0.65)',
+              color: '#555762',
               margin: 0,
               lineHeight: 1.4,
             }}
@@ -210,7 +210,7 @@ export const AdminLoginModal: React.FC = () => {
                 fontWeight: 600,
                 letterSpacing: '0.12em',
                 textTransform: 'uppercase',
-                color: 'rgba(255, 255, 255, 0.75)',
+                color: '#555762',
                 marginBottom: '0.45rem',
               }}
             >
@@ -225,10 +225,10 @@ export const AdminLoginModal: React.FC = () => {
                 required
                 style={{
                   width: '100%',
-                  backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  backgroundColor: '#f9f8f5',
+                  border: '1px solid #ded9ce',
                   borderRadius: '3px',
-                  color: '#ffffff',
+                  color: '#111215',
                   padding: '0.75rem 1rem 0.75rem 2.4rem',
                   fontSize: '0.85rem',
                   outline: 'none',
@@ -237,7 +237,7 @@ export const AdminLoginModal: React.FC = () => {
                   transition: 'border-color 0.2s ease',
                 }}
                 onFocus={(e) => (e.target.style.borderColor = 'var(--color-pink-accent)')}
-                onBlur={(e) => (e.target.style.borderColor = 'rgba(255, 255, 255, 0.15)')}
+                onBlur={(e) => (e.target.style.borderColor = '#ded9ce')}
               />
               <User
                 size={15}
@@ -246,7 +246,7 @@ export const AdminLoginModal: React.FC = () => {
                   left: '0.85rem',
                   top: '50%',
                   transform: 'translateY(-50%)',
-                  color: 'rgba(255, 255, 255, 0.4)',
+                  color: '#8b8e9b',
                 }}
               />
             </div>
@@ -262,7 +262,7 @@ export const AdminLoginModal: React.FC = () => {
                 fontWeight: 600,
                 letterSpacing: '0.12em',
                 textTransform: 'uppercase',
-                color: 'rgba(255, 255, 255, 0.75)',
+                color: '#555762',
                 marginBottom: '0.45rem',
               }}
             >
@@ -279,10 +279,10 @@ export const AdminLoginModal: React.FC = () => {
                 required
                 style={{
                   width: '100%',
-                  backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  backgroundColor: '#f9f8f5',
+                  border: '1px solid #ded9ce',
                   borderRadius: '3px',
-                  color: '#ffffff',
+                  color: '#111215',
                   padding: '0.75rem 2.6rem 0.75rem 2.4rem',
                   fontSize: '0.85rem',
                   outline: 'none',
@@ -291,7 +291,7 @@ export const AdminLoginModal: React.FC = () => {
                   transition: 'border-color 0.2s ease',
                 }}
                 onFocus={(e) => (e.target.style.borderColor = 'var(--color-pink-accent)')}
-                onBlur={(e) => (e.target.style.borderColor = 'rgba(255, 255, 255, 0.15)')}
+                onBlur={(e) => (e.target.style.borderColor = '#ded9ce')}
               />
               <Lock
                 size={15}
@@ -300,7 +300,7 @@ export const AdminLoginModal: React.FC = () => {
                   left: '0.85rem',
                   top: '50%',
                   transform: 'translateY(-50%)',
-                  color: 'rgba(255, 255, 255, 0.4)',
+                  color: '#8b8e9b',
                 }}
               />
               <button
@@ -313,7 +313,7 @@ export const AdminLoginModal: React.FC = () => {
                   transform: 'translateY(-50%)',
                   background: 'transparent',
                   border: 'none',
-                  color: 'rgba(255, 255, 255, 0.5)',
+                  color: '#8b8e9b',
                   cursor: 'pointer',
                   padding: '4px',
                   display: 'flex',
@@ -330,7 +330,7 @@ export const AdminLoginModal: React.FC = () => {
                 justifyContent: 'space-between',
                 marginTop: '0.45rem',
                 fontSize: '0.68rem',
-                color: 'rgba(255, 255, 255, 0.4)',
+                color: '#8b8e9b',
               }}
             >
               <span>Default key: <code style={{ color: 'var(--color-pink-accent)' }}>endlesscape2026</code></span>

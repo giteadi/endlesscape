@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
-import { X, Sparkles, Check, ChevronRight } from 'lucide-react';
+import { X, Sparkles, Check, ChevronRight, MessageCircle } from 'lucide-react';
 import { DESTINATION_REGIONS } from '../data/travelData';
 import { API_BASE } from '../config/api';
 
@@ -82,8 +82,8 @@ export const TripPlannerModal = ({
     >
       <div
         style={{
-          backgroundColor: '#111318',
-          border: '1px solid rgba(255, 255, 255, 0.12)',
+          backgroundColor: '#ffffff',
+          border: '1px solid #e2ded5',
           borderRadius: '4px',
           width: '100%',
           maxWidth: '780px',
@@ -92,8 +92,8 @@ export const TripPlannerModal = ({
           WebkitOverflowScrolling: 'touch',
           position: 'relative',
           padding: 'clamp(1.25rem, 4vw, 2.5rem)',
-          color: '#ffffff',
-          boxShadow: '0 24px 60px rgba(0, 0, 0, 0.85)',
+          color: '#111215',
+          boxShadow: '0 24px 60px rgba(0, 0, 0, 0.25), 0 0 35px rgba(240, 139, 88, 0.08)',
           animation: 'slideUpModal 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
         onClick={(e) => e.stopPropagation()}
@@ -105,10 +105,10 @@ export const TripPlannerModal = ({
             position: 'absolute',
             top: '1rem',
             right: '1rem',
-            background: 'rgba(255, 255, 255, 0.08)',
-            border: '1px solid rgba(255, 255, 255, 0.15)',
+            background: '#f5f3ef',
+            border: '1px solid #ded9ce',
             borderRadius: '50%',
-            color: '#ffffff',
+            color: '#111215',
             cursor: 'pointer',
             width: '40px',
             height: '40px',
@@ -173,7 +173,7 @@ export const TripPlannerModal = ({
                       flex: 1,
                       height: '3px',
                       backgroundColor:
-                        s <= step ? 'var(--color-pink-accent)' : 'rgba(255, 255, 255, 0.15)',
+                        s <= step ? 'var(--color-pink-accent)' : '#e5e2da',
                       transition: 'all 0.3s ease',
                     }}
                   />
@@ -190,7 +190,7 @@ export const TripPlannerModal = ({
                     fontSize: 'clamp(0.95rem, 2vw, 1.1rem)',
                     fontWeight: 600,
                     marginBottom: '1rem',
-                    color: '#ffffff',
+                    color: '#111215',
                   }}
                 >
                   Step 1: Which corner of the globe is calling you?
@@ -213,16 +213,16 @@ export const TripPlannerModal = ({
                         onClick={() => setSelectedRegion(region.name)}
                         style={{
                           backgroundColor: isSelected
-                            ? 'rgba(230, 27, 101, 0.15)'
-                            : 'rgba(255, 255, 255, 0.04)',
+                            ? '#fff4ec'
+                            : '#f9f8f5',
                           border: isSelected
                             ? '1px solid var(--color-pink-accent)'
-                            : '1px solid rgba(255, 255, 255, 0.1)',
+                            : '1px solid #e2ded5',
                           borderRadius: '3px',
                           padding: '1rem 0.85rem',
                           textAlign: 'left',
                           cursor: 'pointer',
-                          color: '#ffffff',
+                          color: '#111215',
                           transition: 'all 0.2s ease',
                           touchAction: 'manipulation',
                         }}
@@ -240,6 +240,7 @@ export const TripPlannerModal = ({
                               fontFamily: 'var(--font-heading)',
                               fontSize: '0.88rem',
                               fontWeight: 700,
+                              color: isSelected ? 'var(--color-pink-accent)' : '#111215',
                             }}
                           >
                             {region.name}
@@ -251,7 +252,7 @@ export const TripPlannerModal = ({
                         <span
                           style={{
                             fontSize: '0.7rem',
-                            color: 'rgba(255, 255, 255, 0.6)',
+                            color: '#656774',
                             display: 'block',
                             lineHeight: 1.35,
                           }}
@@ -288,7 +289,7 @@ export const TripPlannerModal = ({
                     fontSize: 'clamp(0.95rem, 2vw, 1.1rem)',
                     fontWeight: 600,
                     marginBottom: '1rem',
-                    color: '#ffffff',
+                    color: '#111215',
                   }}
                 >
                   Step 2: Who are you travelling with?
@@ -312,16 +313,16 @@ export const TripPlannerModal = ({
                           onClick={() => setSelectedParty(party)}
                           style={{
                             backgroundColor: isSelected
-                              ? 'rgba(230, 27, 101, 0.15)'
-                              : 'rgba(255, 255, 255, 0.04)',
+                              ? '#fff4ec'
+                              : '#f9f8f5',
                             border: isSelected
                               ? '1px solid var(--color-pink-accent)'
-                              : '1px solid rgba(255, 255, 255, 0.1)',
+                              : '1px solid #e2ded5',
                             borderRadius: '3px',
                             padding: '1.1rem 0.85rem',
                             textAlign: 'center',
                             cursor: 'pointer',
-                            color: '#ffffff',
+                            color: isSelected ? 'var(--color-pink-accent)' : '#111215',
                             fontFamily: 'var(--font-heading)',
                             fontSize: '0.88rem',
                             fontWeight: 700,
@@ -337,7 +338,7 @@ export const TripPlannerModal = ({
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', gap: '0.75rem' }} className="modal-actions-row">
-                  <button onClick={() => setStep(1)} className="btn-outline-white modal-action-btn">
+                  <button onClick={() => setStep(1)} className="btn-outline-white modal-action-btn" style={{ borderColor: '#ded9ce', color: '#111215', backgroundColor: '#f8f7f4' }}>
                     BACK
                   </button>
                   <button
@@ -364,7 +365,7 @@ export const TripPlannerModal = ({
                     fontSize: 'clamp(0.95rem, 2vw, 1.1rem)',
                     fontWeight: 600,
                     marginBottom: '1rem',
-                    color: '#ffffff',
+                    color: '#111215',
                   }}
                 >
                   Step 3: What feeling do you want to awaken?
@@ -392,16 +393,16 @@ export const TripPlannerModal = ({
                         onClick={() => setSelectedFeeling(feel.title)}
                         style={{
                           backgroundColor: isSelected
-                            ? 'rgba(230, 27, 101, 0.15)'
-                            : 'rgba(255, 255, 255, 0.04)',
+                            ? '#fff4ec'
+                            : '#f9f8f5',
                           border: isSelected
                             ? '1px solid var(--color-pink-accent)'
-                            : '1px solid rgba(255, 255, 255, 0.1)',
+                            : '1px solid #e2ded5',
                           borderRadius: '3px',
                           padding: '1.1rem 0.9rem',
                           textAlign: 'left',
                           cursor: 'pointer',
-                          color: '#ffffff',
+                          color: '#111215',
                           touchAction: 'manipulation',
                         }}
                       >
@@ -412,6 +413,7 @@ export const TripPlannerModal = ({
                             fontWeight: 700,
                             display: 'block',
                             marginBottom: '0.3rem',
+                            color: isSelected ? 'var(--color-pink-accent)' : '#111215',
                           }}
                         >
                           {feel.title}
@@ -419,7 +421,7 @@ export const TripPlannerModal = ({
                         <span
                           style={{
                             fontSize: '0.72rem',
-                            color: 'rgba(255, 255, 255, 0.65)',
+                            color: '#656774',
                             display: 'block',
                             lineHeight: 1.4,
                           }}
@@ -432,7 +434,7 @@ export const TripPlannerModal = ({
                 </div>
 
                 <div style={{ display: 'flex', justifyContent: 'space-between', gap: '0.75rem' }} className="modal-actions-row">
-                  <button onClick={() => setStep(2)} className="btn-outline-white modal-action-btn">
+                  <button onClick={() => setStep(2)} className="btn-outline-white modal-action-btn" style={{ borderColor: '#ded9ce', color: '#111215', backgroundColor: '#f8f7f4' }}>
                     BACK
                   </button>
                   <button onClick={() => setStep(4)} className="btn-primary-pink modal-action-btn">
@@ -451,7 +453,7 @@ export const TripPlannerModal = ({
                     fontSize: 'clamp(0.95rem, 2vw, 1.1rem)',
                     fontWeight: 600,
                     marginBottom: '1rem',
-                    color: '#ffffff',
+                    color: '#111215',
                   }}
                 >
                   Step 4: Where should our Travel Specialist send your proposal?
@@ -472,7 +474,7 @@ export const TripPlannerModal = ({
                         fontSize: '0.72rem',
                         letterSpacing: '0.1em',
                         textTransform: 'uppercase',
-                        color: 'rgba(255, 255, 255, 0.7)',
+                        color: '#555762',
                         marginBottom: '0.4rem',
                       }}
                     >
@@ -488,10 +490,10 @@ export const TripPlannerModal = ({
                         width: '100%',
                         padding: '0.8rem',
                         minHeight: '44px',
-                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                        border: '1px solid rgba(255, 255, 255, 0.15)',
+                        backgroundColor: '#f9f8f5',
+                        border: '1px solid #ded9ce',
                         borderRadius: '3px',
-                        color: '#ffffff',
+                        color: '#111215',
                         fontSize: '16px', // iOS zoom fix
                       }}
                     />
@@ -504,7 +506,7 @@ export const TripPlannerModal = ({
                         fontSize: '0.72rem',
                         letterSpacing: '0.1em',
                         textTransform: 'uppercase',
-                        color: 'rgba(255, 255, 255, 0.7)',
+                        color: '#555762',
                         marginBottom: '0.4rem',
                       }}
                     >
@@ -520,10 +522,10 @@ export const TripPlannerModal = ({
                         width: '100%',
                         padding: '0.8rem',
                         minHeight: '44px',
-                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                        border: '1px solid rgba(255, 255, 255, 0.15)',
+                        backgroundColor: '#f9f8f5',
+                        border: '1px solid #ded9ce',
                         borderRadius: '3px',
-                        color: '#ffffff',
+                        color: '#111215',
                         fontSize: '16px', // iOS zoom fix
                       }}
                     />
@@ -536,7 +538,7 @@ export const TripPlannerModal = ({
                         fontSize: '0.72rem',
                         letterSpacing: '0.1em',
                         textTransform: 'uppercase',
-                        color: 'rgba(255, 255, 255, 0.7)',
+                        color: '#555762',
                         marginBottom: '0.4rem',
                       }}
                     >
@@ -545,17 +547,17 @@ export const TripPlannerModal = ({
                     <input
                       required
                       type="tel"
-                      placeholder="+44 7000 000000"
+                      placeholder="+91 81302 16668"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       style={{
                         width: '100%',
                         padding: '0.8rem',
                         minHeight: '44px',
-                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                        border: '1px solid rgba(255, 255, 255, 0.15)',
+                        backgroundColor: '#f9f8f5',
+                        border: '1px solid #ded9ce',
                         borderRadius: '3px',
-                        color: '#ffffff',
+                        color: '#111215',
                         fontSize: '16px', // iOS zoom fix
                       }}
                     />
@@ -569,7 +571,7 @@ export const TripPlannerModal = ({
                       fontSize: '0.72rem',
                       letterSpacing: '0.1em',
                       textTransform: 'uppercase',
-                      color: 'rgba(255, 255, 255, 0.7)',
+                      color: '#555762',
                       marginBottom: '0.4rem',
                     }}
                   >
@@ -583,10 +585,10 @@ export const TripPlannerModal = ({
                     style={{
                       width: '100%',
                       padding: '0.8rem',
-                      backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                      border: '1px solid rgba(255, 255, 255, 0.15)',
+                      backgroundColor: '#f9f8f5',
+                      border: '1px solid #ded9ce',
                       borderRadius: '3px',
-                      color: '#ffffff',
+                      color: '#111215',
                       fontSize: '16px', // iOS zoom fix
                       resize: 'none',
                     }}
@@ -598,13 +600,13 @@ export const TripPlannerModal = ({
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+                    borderTop: '1px solid #e5e2da',
                     paddingTop: '1.25rem',
                     gap: '0.75rem',
                   }}
                   className="modal-actions-row"
                 >
-                  <button type="button" onClick={() => setStep(3)} className="btn-outline-white modal-action-btn">
+                  <button type="button" onClick={() => setStep(3)} className="btn-outline-white modal-action-btn" style={{ borderColor: '#ded9ce', color: '#111215', backgroundColor: '#f8f7f4' }}>
                     BACK
                   </button>
                   <button type="submit" className="btn-primary-pink modal-action-btn">
@@ -622,9 +624,9 @@ export const TripPlannerModal = ({
                 width: '64px',
                 height: '64px',
                 borderRadius: '50%',
-                backgroundColor: 'rgba(5, 150, 105, 0.15)',
-                border: '1px solid var(--color-teal-accent)',
-                color: 'var(--color-teal-accent)',
+                backgroundColor: '#fff4ec',
+                border: '1px solid var(--color-pink-accent)',
+                color: 'var(--color-pink-accent)',
                 display: 'inline-flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -642,6 +644,7 @@ export const TripPlannerModal = ({
                 letterSpacing: '0.08em',
                 marginBottom: '1rem',
                 textTransform: 'uppercase',
+                color: '#111215',
               }}
             >
               YOUR EXPEDITION INQUIRY IS IN MOTION
@@ -652,12 +655,12 @@ export const TripPlannerModal = ({
                 fontFamily: 'var(--font-sans)',
                 fontSize: 'clamp(0.88rem, 1.5vw, 0.98rem)',
                 lineHeight: 1.7,
-                color: 'rgba(255, 255, 255, 0.8)',
+                color: '#555762',
                 maxWidth: '520px',
                 margin: '0 auto 2rem',
               }}
             >
-              Thank you, <strong style={{ color: '#ffffff' }}>{formData.fullName || 'esteemed guest'}</strong>.
+              Thank you, <strong style={{ color: '#111215' }}>{formData.fullName || 'esteemed guest'}</strong>.
               A Senior Endlesscape Travel Specialist dedicated to{' '}
               <strong style={{ color: 'var(--color-pink-accent)' }}>
                 {selectedRegion || 'your requested destination'}
@@ -665,7 +668,31 @@ export const TripPlannerModal = ({
               will review your personal desires and reach out within 24 hours to begin tailoring your journey.
             </p>
 
-            <button onClick={handleReset} className="btn-solid-dark" style={{ width: '100%', maxWidth: '280px' }}>
+            <div style={{ marginBottom: '1.75rem', display: 'flex', justifyContent: 'center' }}>
+              <a
+                href="https://wa.me/918130216668?text=Hello%20Endlesscape,%20I%20have%20just%20submitted%20my%20journey%20enquiry%20online."
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  textDecoration: 'none',
+                  color: '#0b5327',
+                  backgroundColor: '#eefaf1',
+                  border: '1px solid #c2e8cd',
+                  borderRadius: '3px',
+                  padding: '0.65rem 1.25rem',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  fontSize: '0.82rem',
+                  fontWeight: 600,
+                }}
+              >
+                <MessageCircle size={15} style={{ color: '#25D366' }} />
+                Instant WhatsApp Inquiry (+91 8130216668)
+              </a>
+            </div>
+
+            <button onClick={handleReset} className="btn-primary-pink" style={{ width: '100%', maxWidth: '280px', margin: '0 auto' }}>
               RETURN TO JOURNEYS
             </button>
           </div>
