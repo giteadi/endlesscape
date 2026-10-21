@@ -8,8 +8,9 @@ This document details the live production deployment, hosting architecture, serv
 
 | Property | Value | Notes |
 | :--- | :--- | :--- |
-| **Primary Domain** | `https://getashokaazzwels.shop` | Managed in Hostinger Portfolio |
-| **Secondary Domain** | `https://www.getashokaazzwels.shop` | 301 redirects to primary domain |
+| **Official Live Domain** | `https://endlesscape.com` | Live Production Domain with SSL |
+| **Secondary Domain** | `https://www.endlesscape.com` | HTTPS auto-redirect |
+| **Alternate Domain** | `https://getashokaazzwels.shop` | Managed in Hostinger Portfolio |
 | **Public IPv4** | `195.35.45.17` | Static VPS IP |
 | **Public IPv6** | `2a02:4780:12:1e1e::1` | Configured on Hostinger Cloud |
 | **Profile 1 (Standard User)** | User: `aditya` \| Login Password: `1234` | SSH Key: `~/.ssh/id_ed25519` |
@@ -23,12 +24,14 @@ This document details the live production deployment, hosting architecture, serv
 
 ---
 
-## ✦ DNS Records (Hostinger DNS)
+## ✦ DNS Records (Hostinger DNS for endlesscape.com)
 
 | Type | Name | Content | TTL | Purpose |
 | :---: | :---: | :---: | :---: | :--- |
-| **A** | `@` | `195.35.45.17` | 14400 | Apex domain routing |
-| **CNAME** | `www` | `getashokaazzwels.shop.` | 300 | Subdomain redirect |
+| **A** | `@` | `195.35.45.17` | 300 | Routes apex domain directly to Aditya VPS |
+| **CNAME** | `www` | `endlesscape.com.` | 300 | Subdomain CNAME routing |
+| **A** | `growso` | `217.21.91.86` | 1800 | Preserved subdomain |
+| **A** | `servishield` | `217.21.91.86` | 1800 | Preserved subdomain |
 
 ---
 
