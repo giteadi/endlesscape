@@ -8,19 +8,24 @@ export const AdminLoginModal: React.FC = () => {
   const dispatch = useAppDispatch();
   const { isLoginModalOpen, isLoading, error } = useAppSelector((state) => state.auth);
 
-  const [username, setUsername] = useState('admin');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const usernameInputRef = useRef<HTMLInputElement>(null);
   const passwordInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (isLoginModalOpen) {
       const timer = setTimeout(() => {
-        passwordInputRef.current?.focus();
+        if (!username) {
+          usernameInputRef.current?.focus();
+        } else {
+          passwordInputRef.current?.focus();
+        }
       }, 150);
       return () => clearTimeout(timer);
     }
-  }, [isLoginModalOpen]);
+  }, [isLoginModalOpen, username]);
 
 
   const handleClose = useCallback(() => {
@@ -181,8 +186,8 @@ export const AdminLoginModal: React.FC = () => {
         {error && (
           <div
             style={{
-              backgroundColor: 'rgba(239, 68, 68, 0.12)',
-              border: '1px solid rgba(239, 68, 68, 0.35)',
+              backgroundColor: '#fef2f2',
+              border: '1px solid #fecaca',
               borderRadius: '3px',
               padding: '0.65rem 0.85rem',
               marginBottom: '1.25rem',
@@ -190,10 +195,10 @@ export const AdminLoginModal: React.FC = () => {
               alignItems: 'center',
               gap: '0.6rem',
               fontSize: '0.78rem',
-              color: '#fca5a5',
+              color: '#991b1b',
             }}
           >
-            <AlertCircle size={15} style={{ flexShrink: 0 }} />
+            <AlertCircle size={15} style={{ flexShrink: 0, color: '#dc2626' }} />
             <span>{error}</span>
           </div>
         )}
@@ -218,10 +223,13 @@ export const AdminLoginModal: React.FC = () => {
             </label>
             <div style={{ position: 'relative' }}>
               <input
+                ref={usernameInputRef}
                 id="admin-username"
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
+                placeholder="Concierge ID / Username"
+                autoComplete="username"
                 required
                 style={{
                   width: '100%',
@@ -275,7 +283,8 @@ export const AdminLoginModal: React.FC = () => {
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••••••"
+                placeholder="Enter access key"
+                autoComplete="current-password"
                 required
                 style={{
                   width: '100%',
@@ -333,7 +342,7 @@ export const AdminLoginModal: React.FC = () => {
                 color: '#8b8e9b',
               }}
             >
-              <span>Default key: <code style={{ color: 'var(--color-pink-accent)' }}>endlesscape2026</code></span>
+              <span>Authorized personnel only</span>
               <span>256-Bit Encrypted</span>
             </div>
           </div>
