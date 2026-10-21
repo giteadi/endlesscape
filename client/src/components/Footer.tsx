@@ -28,7 +28,7 @@ export const Footer = () => {
         backgroundColor: '#faf9f6',
         color: '#111215',
         borderTop: '1px solid #eae6de',
-        padding: 'clamp(3rem, 6vw, 5rem) 0 max(2rem, var(--safe-bottom)) 0',
+        padding: 'clamp(3rem, 6vw, 5rem) 0 max(4.5rem, calc(3.5rem + var(--safe-bottom))) 0',
         position: 'relative',
       }}
     >

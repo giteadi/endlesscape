@@ -807,7 +807,7 @@ export const ItineraryDetailPage: React.FC<ItineraryDetailPageProps> = ({
         </div>
       </div>
 
-      {/* 8. Sticky Bottom Navy Callout Bar (Screenshots 4 & 5 Exact Match!) */}
+      {/* 8. Sticky Bottom Navy Callout Bar (Desktop Sticky, Mobile Inline to prevent scroll obstruction) */}
       {stickyBannerVisible && (
         <div
           style={{
@@ -831,6 +831,7 @@ export const ItineraryDetailPage: React.FC<ItineraryDetailPageProps> = ({
           className="itinerary-sticky-banner"
         >
           <div
+            className="sticky-text-wrap"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -851,6 +852,7 @@ export const ItineraryDetailPage: React.FC<ItineraryDetailPageProps> = ({
               SO, READY TO START?
             </span>
             <span
+              className="sticky-divider"
               style={{
                 display: 'inline-block',
                 width: '1px',
@@ -871,10 +873,10 @@ export const ItineraryDetailPage: React.FC<ItineraryDetailPageProps> = ({
             </span>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div className="sticky-actions-wrap" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <button
               onClick={() => onEnquire(itinerary.title)}
-              className="btn-primary-pink"
+              className="btn-primary-pink sticky-enquire-action-btn"
               style={{
                 padding: '0.65rem 1.6rem',
                 fontSize: '0.74rem',
@@ -886,6 +888,7 @@ export const ItineraryDetailPage: React.FC<ItineraryDetailPageProps> = ({
 
             <button
               onClick={() => setStickyBannerVisible(false)}
+              className="sticky-dismiss-btn"
               style={{
                 background: 'transparent',
                 border: 'none',
@@ -925,6 +928,44 @@ export const ItineraryDetailPage: React.FC<ItineraryDetailPageProps> = ({
         @media (max-width: 768px) {
           .enquiry-teal-box {
             padding: 1.75rem !important;
+          }
+          .itinerary-sticky-banner {
+            position: static !important;
+            margin: 2.5rem 1rem 1.5rem !important;
+            border-radius: 4px !important;
+            padding: 1.75rem 1.25rem !important;
+            flex-direction: column !important;
+            text-align: center !important;
+            gap: 1.25rem !important;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+            border: 1px solid rgba(255, 255, 255, 0.12) !important;
+          }
+          .itinerary-sticky-banner .sticky-text-wrap {
+            flex-direction: column !important;
+            gap: 0.5rem !important;
+            align-items: center !important;
+            text-align: center !important;
+          }
+          .itinerary-sticky-banner .sticky-divider {
+            display: none !important;
+          }
+          .itinerary-sticky-banner .sticky-actions-wrap {
+            width: 100% !important;
+            justify-content: center !important;
+          }
+          .itinerary-sticky-banner .sticky-enquire-action-btn {
+            width: 100% !important;
+            padding: 0.85rem !important;
+            font-size: 0.82rem !important;
+          }
+          .itinerary-sticky-banner .sticky-dismiss-btn {
+            display: none !important;
+          }
+          .slider-nav-btn {
+            width: 40px !important;
+            height: 40px !important;
+            left: 0.75rem !important;
+            right: 0.75rem !important;
           }
         }
       `}</style>
