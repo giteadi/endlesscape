@@ -1,7 +1,7 @@
 {
   "name": "endlesscape-server",
   "version": "1.0.0",
-  "description": "Backend API for Endlesscape Bespoke Luxury Travel",
+  "description": "Backend API for Endlesscape Ultra-Luxury Travel",
   "main": "server.js",
   "type": "module",
   "scripts": {

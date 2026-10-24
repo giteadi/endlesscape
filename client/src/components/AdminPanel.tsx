@@ -366,7 +366,7 @@ export const AdminPanel = ({ onBackToSite, onRefreshPublicData }: AdminPanelProp
                 </span>
               </div>
               <span style={{ fontSize: '0.72rem', color: 'rgba(255, 255, 255, 0.5)' }}>
-                Private Operations & Bespoke Portfolio Management Engine
+                Private Operations & Portfolio Management Engine
               </span>
             </div>
           </div>
@@ -853,7 +853,7 @@ export const AdminPanel = ({ onBackToSite, onRefreshPublicData }: AdminPanelProp
           >
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
               <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.15rem, 3vw, 1.4rem)', fontWeight: 700, margin: 0 }}>
-                {editingItem ? 'Edit Luxury Expedition' : 'Add New Bespoke Expedition'}
+                {editingItem ? 'Edit Luxury Expedition' : 'Add New Luxury Expedition'}
               </h3>
               <button
                 onClick={() => setIsModalOpen(false)}

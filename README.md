@@ -1,6 +1,6 @@
-# Endlesscape — Ultra-Luxury Bespoke Travel Platform
+# Endlesscape — Ultra-Luxury Tailor-Made Travel Platform
 
-> Inspired by the editorial elegance of Black Tomato, Endlesscape is an award-winning bespoke luxury travel and experiential journey platform. Est. 2026.
+> Inspired by the editorial elegance of Black Tomato, Endlesscape is an award-winning luxury travel and experiential journey platform. Est. 2026.
 
 ---
 
@@ -11,7 +11,7 @@
   - **Full Itinerary Detail Page**: Inspired by Black Tomato luxury features — top metadata strip (nights, price, ideal seasons), high-resolution photo carousel, editorial storytelling ("24 Hours in Marrakech"), teal "Make An Enquiry" banner, day-by-day outline, and sticky bottom bar.
   - **Experience Category Page**: Dark editorial hero, 12-month calendar matrix ("Where To Go on Honeymoon, When"), interactive month filtering, and trending luxury escapes.
 - **Search & Live Autocomplete Suggestions**: Real-time dropdown suggestions for destinations, itineraries, travel styles, and seasonal collections.
-- **Mobile Luxury UI**: Minimalist, aligned glassmorphism navigation with bespoke 2-line hamburger menu, hot-pink pill CTA, and full-screen drawer.
+- **Mobile Luxury UI**: Minimalist, aligned glassmorphism navigation with custom 2-line hamburger menu, hot-pink pill CTA, and full-screen drawer.
 - **Admin Suite & Dynamic Backend**: Express REST API (`server/server.js`) with persistent JSON database for real-time enquiry tracking and custom itinerary management.
 - **Performance Optimized**: Fine-grained memoization (`useMemo`, `useCallback`) across all interactive components to ensure zero redundant re-renders.
 
@@ -80,4 +80,4 @@ npm run build
 ---
 
 ## ✦ License & Credits
-Bespoke travel curation inspired by world-class travel storytelling. Designed with craftsmanship for Endlesscape.
+Luxury travel curation inspired by world-class travel storytelling. Designed with craftsmanship for Endlesscape.

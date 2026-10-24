@@ -5,7 +5,7 @@ import type { ChatMessage, ChatPackage, ChatState } from '../../types/chat';
 const INITIAL_WELCOME_MESSAGE: ChatMessage = {
   id: 'msg-welcome',
   sender: 'assistant',
-  text: 'Welcome to Endlesscape. I am Aura, your Senior Bespoke Travel Concierge.\n\nWhether you desire private palace suites in Rajasthan, starlit desert camps in Morocco, or secluded yacht charters along the Amalfi Coast, I am here to guide you through our rarefied world of travel.\n\nHow may I inspire your next bespoke expedition today?',
+  text: 'Welcome to Endlesscape. I am Aura, your Private Travel Concierge.\n\nWhether you desire private palace suites in Rajasthan, starlit desert camps in Morocco, or secluded yacht charters along the Amalfi Coast, I am here to guide you through our rarefied world of travel.\n\nHow may I inspire your next luxury expedition today?',
   timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
   suggestedQuestions: [
     'What packages do you have in Italy & Amalfi?',
@@ -141,7 +141,7 @@ export const chatSlice = createSlice({
         state.messages.push({
           id: `msg-aura-fallback-${Date.now()}`,
           sender: 'assistant',
-          text: 'I apologize for the brief pause. At Endlesscape, every journey is 100% tailor-made by our private curators. Please let me know your preferred dates and destination, or you may use our bespoke trip planner to submit your desires directly.',
+          text: 'I apologize for the brief pause. At Endlesscape, every journey is 100% tailor-made by our private curators. Please let me know your preferred dates and destination, or you may use our trip planner to submit your desires directly.',
           timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
           error: true,
           suggestedQuestions: [

@@ -353,7 +353,7 @@ export const CuratedItineraries = ({
           ))}
         </div>
 
-        {/* Custom Bespoke Itinerary Request Strip (Clean Light Card with Soft Peach Outline) */}
+        {/* Custom Tailor-Made Itinerary Request Strip (Clean Light Card with Soft Peach Outline) */}
         <div
           style={{
             margin: '2rem 0 1rem 0',
@@ -382,7 +382,7 @@ export const CuratedItineraries = ({
                 textTransform: 'uppercase',
               }}
             >
-              LOOKING FOR A COMPLETELY BESPOKE ROUTE?
+              LOOKING FOR A COMPLETELY TAILOR-MADE ROUTE?
             </h4>
             <p style={{ fontSize: '0.84rem', color: '#555762', margin: 0, lineHeight: 1.6 }}>
               Every itinerary above is simply an inspirational starting point. We design 100% custom expeditions anywhere on Earth.

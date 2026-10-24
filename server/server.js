@@ -78,7 +78,7 @@ function writeDB(data) {
 
 // Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', service: 'Endlesscape Bespoke Travel Engine', timestamp: new Date().toISOString() });
+  res.json({ status: 'ok', service: 'Endlesscape Ultra-Luxury Travel Engine', timestamp: new Date().toISOString() });
 });
 
 // Admin Authentication Login
@@ -194,7 +194,7 @@ app.post('/api/itineraries', (req, res) => {
     country: req.body.country?.toUpperCase() || 'UNKNOWN DESTINATION',
     region: req.body.region || 'mediterranean',
     title: req.body.title?.toUpperCase() || 'UNTITLED EXPEDITION',
-    tagline: req.body.tagline || 'Bespoke luxury journey tailored around feeling.',
+    tagline: req.body.tagline || 'Extraordinary luxury journey tailored around feeling.',
     image: heroImg,
     gallery: galleryImgs,
     tag: req.body.tag || 'EXCLUSIVE DEPARTURE',

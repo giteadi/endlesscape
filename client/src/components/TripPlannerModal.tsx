@@ -154,7 +154,7 @@ export const TripPlannerModal = ({
                   lineHeight: 1.15,
                 }}
               >
-                PLAN YOUR BESPOKE EXPEDITION
+                PLAN YOUR LUXURY EXPEDITION
               </h2>
 
               {/* Steps Progress */}
@@ -610,7 +610,7 @@ export const TripPlannerModal = ({
                     BACK
                   </button>
                   <button type="submit" className="btn-primary-pink modal-action-btn">
-                    <Sparkles size={14} /> REQUEST BESPOKE PROPOSAL
+                    <Sparkles size={14} /> REQUEST CURATED PROPOSAL
                   </button>
                 </div>
               </form>

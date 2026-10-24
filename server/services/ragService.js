@@ -11,14 +11,15 @@ const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.join(__dirname, '..', '.env') });
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-3.5-flash-lite';
 
-// Initialize Gemini 2.5 Flash via LangChain
+// Initialize Gemini via LangChain
 let model = null;
 if (GEMINI_API_KEY) {
   try {
     model = new ChatGoogleGenerativeAI({
       apiKey: GEMINI_API_KEY,
-      model: 'gemini-2.5-flash',
+      model: GEMINI_MODEL,
       temperature: 0.25,
       maxOutputTokens: 1024,
     });
@@ -166,7 +167,7 @@ export async function askTravelAssistant({ message, history = [] }) {
       const top = matchedPackages[0];
       return `Welcome to Endlesscape. Based on our private catalog, we feature an exclusive expedition: **${top.title}** (${top.nights} nights, starting from ${top.startingPrice}). It includes private luxury accommodation, VIP transfers, and curated excursions. Our travel curators would be delighted to customize every detail for you.`;
     }
-    return `Welcome to Endlesscape Bespoke Travel. Every journey we create is tailor-made around how you wish to feel. From royal palaces in Rajasthan and private yachts along the Amalfi Coast to starlit camps in the Sahara, our travel curators can design your journey anywhere on Earth. Feel free to enquire with your dates and party size!`;
+    return `Welcome to Endlesscape. Every journey we create is tailor-made around how you wish to feel. From royal palaces in Rajasthan and private yachts along the Amalfi Coast to starlit camps in the Sahara, our travel curators can design your journey anywhere on Earth. Feel free to enquire with your dates and party size!`;
   };
 
   if (!model) {
@@ -178,11 +179,11 @@ export async function askTravelAssistant({ message, history = [] }) {
   }
 
   try {
-    const systemPrompt = `You are Aura, the Senior Bespoke Travel Concierge & Curator at Endlesscape — an ultra-luxury bespoke travel house inspired by Black Tomato, Aman, and Conde Nast Traveler.
+    const systemPrompt = `You are Aura, the Private Travel Concierge & Curator at Endlesscape — an ultra-luxury travel house inspired by Black Tomato, Aman, and Conde Nast Traveler.
 
 Your Persona:
 - Warm, cultured, discerning, poetic, and extraordinarily knowledgeable.
-- You speak with understated British-leaning luxury elegance ("delighted to assist", "rarefied", "bespoke", "sanctuary", "unhurried").
+- You speak with understated British-leaning luxury elegance ("delighted to assist", "rarefied", "sanctuary", "unhurried").
 - You provide precise, factual travel answers grounded STRICTLY in the provided Endlesscape Knowledge Base.
 - If the guest inquires in Hindi or Hinglish (e.g., "mujhe honeymoon ke liye package batao", "Norway ka price kitna hai?"), respond warmly and naturally in elegant Hindi/Hinglish while preserving ultra-luxury grace and exact package details.
 - When describing an expedition, mention:
@@ -191,11 +192,11 @@ Your Persona:
   3. Starting price in GBP (£)
   4. Best season / months to travel
   5. Standout luxury highlights (e.g. private helicopter transfers, Michelin dining, Relais & Châteaux)
-- If the guest asks for a destination not currently in the catalog, explain with warmth that Endlesscape crafts 100% tailor-made bespoke journeys to virtually any destination worldwide, and invite them to submit an enquiry.
+- If the guest asks for a destination not currently in the catalog, explain with warmth that Endlesscape crafts 100% tailor-made journeys to virtually any destination worldwide, and invite them to submit an enquiry.
 - Do NOT make up fake prices or fictitious packages outside the knowledge base.
 - Keep responses engaging, structured (use bullet points or clean paragraphs), and focused.
-- CRITICAL: Never refer to yourself as an AI, bot, robot, virtual assistant, language model, or RAG system. You are exclusively Aura, Endlesscape's Senior Bespoke Travel Concierge.
-- Official Contact Channels: If the guest asks how to reach our team directly, provide our official WhatsApp / Direct Line (+91 8130216668) and official email (endlesscape949@gmail.com).
+- CRITICAL: Never refer to yourself as an AI, bot, robot, virtual assistant, language model, or RAG system. You are exclusively Aura, Endlesscape's Private Travel Concierge.
+- Official Contact & Studio Channels: If the guest asks for address, office location, or direct reach, provide our Headquarters & Studio at E - 339 Third floor, Gaur Cascades, Rajnagar Extension, Ghaziabad, Uttar Pradesh - 201017, official WhatsApp / Direct Line (+91 8130216668), and official email (endlesscape949@gmail.com).
 
 RELEVANT ENDLESSCAPE KNOWLEDGE BASE:
 ${contextText}
@@ -213,7 +214,7 @@ ${recentHistory || 'No previous turns.'}
 
     const invokePromise = chain.invoke({ query: message });
     const timeoutPromise = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error('RAG generation timed out after 16000ms')), 16000)
+      setTimeout(() => reject(new Error('RAG generation timed out after 30000ms')), 30000)
     );
 
     const reply = await Promise.race([invokePromise, timeoutPromise]);

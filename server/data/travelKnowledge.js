@@ -24,7 +24,7 @@ export const TRAVEL_STYLES_KNOWLEDGE = [
   },
   {
     style: 'Milestone Groups & Celebrations',
-    description: 'Whole-estate and island buyouts, chartered classic schooners, private castles, and bespoke private chef gatherings.',
+    description: 'Whole-estate and island buyouts, chartered classic schooners, private castles, and private chef gatherings.',
     recommendedDestinations: ['Scottish Highlands Lodge', 'Balearic Private Catamaran', 'Napa Valley Private Vineyard', 'Rajasthan Palaces'],
     typicalBudget: '£9,000 – £20,000 per person'
   },
@@ -57,7 +57,7 @@ export const SEASONAL_CALENDAR_KNOWLEDGE = [
   { month: 'December', bestFor: 'Lapland winter wonderland, Caribbean private catamarans, Patagonia summer hiking' }
 ];
 
-export const BESPOKE_SERVICE_PILLARS = [
+export const SERVICE_PILLARS = [
   '100% Tailor-Made: Every expedition is customized from zero around the guest’s personal pacing, desires, and travel party.',
   'Curator Direct Access: A dedicated Senior Travel Curator plans and oversees the expedition with 24/7 on-trip concierge assistance.',
   'Unrivalled VIP Access: Private opening of historical monuments, private helicopter charters, luxury yachts, and private estate buyouts.',
@@ -102,7 +102,7 @@ Duration: ${it.nights} nights
 Starting Price: ${it.startingPrice} ${it.priceNote || ''}
 Best Season: ${it.bestSeason || 'Year-round'}
 Ideal Months: ${monthsText || it.bestSeason || 'All year'}
-Tag: ${it.tag || 'Bespoke Expedition'}
+Tag: ${it.tag || 'Luxury Expedition'}
 Overview: ${it.tagline || ''}. ${it.description ? it.description.slice(0, 220) : ''}
 Key Luxury Highlights: ${highlightsText}
 `.trim();
@@ -155,26 +155,27 @@ Key Luxury Highlights: ${highlightsText}
     });
   }
 
-  // 4. Bespoke Service & Booking Pillar document
+  // 4. Service & Booking Pillar document
   docs.push({
     id: 'endlesscape-service-pillars',
     type: 'company_pillars',
-    title: 'Endlesscape Bespoke Travel Philosophy & Service Standard',
-    content: `ENDLESSCAPE PILLARS & HOW WE OPERATE:\n${BESPOKE_SERVICE_PILLARS.join('\n')}\nBooking Process: Guests submit an enquiry online or contact their curator. We design a bespoke digital narrative itinerary in 24 hours. Once refined, guests confirm with deposit and all logistics, private flights, guides, and hotels are secured.`,
-    keywords: ['booking', 'process', 'curator', 'service', 'bespoke', 'deposit', 'vip', 'customise', 'tailor']
+    title: 'Endlesscape Travel Philosophy & Service Standard',
+    content: `ENDLESSCAPE PILLARS & HOW WE OPERATE:\n${SERVICE_PILLARS.join('\n')}\nBooking Process: Guests submit an enquiry online or contact their curator. We design a tailor-made digital narrative itinerary in 24 hours. Once refined, guests confirm with deposit and all logistics, private flights, guides, and hotels are secured.`,
+    keywords: ['booking', 'process', 'curator', 'service', 'deposit', 'vip', 'customise', 'tailor']
   });
 
-  // 5. Official Contact Channels & Direct WhatsApp Inquiries
+  // 5. Official Contact Channels, Office & Direct WhatsApp Inquiries
   docs.push({
     id: 'endlesscape-contact-channels',
     type: 'contact_channels',
-    title: 'Endlesscape Direct Concierge Contact & WhatsApp Inquiries',
-    content: `OFFICIAL CONTACT DETAILS:
+    title: 'Endlesscape Direct Concierge Contact, Office & WhatsApp Inquiries',
+    content: `OFFICIAL CONTACT & STUDIO DETAILS:
+Headquarters & Private Studio Address: E - 339 Third floor, Gaur Cascades, Rajnagar Extension, Ghaziabad, Uttar Pradesh - 201017, India
 Direct Phone & WhatsApp Inquiry: +91 8130216668
 Official Concierge Email: endlesscape949@gmail.com
 WhatsApp Direct Link: https://wa.me/918130216668
-Our private travel specialists are available 24/7 on WhatsApp (+91 8130216668) and email (endlesscape949@gmail.com) for prompt luxury itinerary design and questions.`,
-    keywords: ['contact', 'whatsapp', 'phone', 'call', 'email', 'mobile', 'reach', 'number', 'address', 'inquiry', 'enquiry']
+Our private travel specialists are available 24/7 on WhatsApp (+91 8130216668) and email (endlesscape949@gmail.com) for prompt luxury itinerary design and questions. Guests are welcome to connect with our studio directly.`,
+    keywords: ['contact', 'whatsapp', 'phone', 'call', 'email', 'mobile', 'reach', 'number', 'address', 'studio', 'office', 'headquarters', 'ghaziabad', 'delhi', 'inquiry', 'enquiry']
   });
 
   return docs;

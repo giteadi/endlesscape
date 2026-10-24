@@ -185,11 +185,11 @@ export const Footer = () => {
                 marginBottom: '1.25rem',
               }}
             >
-              Crafting extraordinary, fully tailor-made bespoke journeys and private luxury expeditions across 100+ global horizons.
+              Crafting extraordinary, fully tailor-made luxury journeys and private expeditions across 100+ global horizons.
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
               <a
-                href="https://wa.me/918130216668?text=Hello%20Endlesscape,%20I%20would%20like%20to%20enquire%20about%20a%20luxury%20bespoke%20journey."
+                href="https://wa.me/918130216668?text=Hello%20Endlesscape,%20I%20would%20like%20to%20enquire%20about%20a%20luxury%20tailor-made%20journey."
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -332,20 +332,14 @@ export const Footer = () => {
                 color: '#111215',
               }}
             >
-              OUR PRIVATE STUDIOS
+              OUR PRIVATE STUDIO
             </h4>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', fontSize: '0.82rem', color: '#555762' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', fontSize: '0.82rem', color: '#555762', lineHeight: 1.6 }}>
               <div>
-                <strong style={{ color: '#111215', display: 'block', marginBottom: '2px' }}>London Mayfair</strong>
-                <span>14 Berkeley Square, Mayfair, London W1J 6BT</span>
-              </div>
-              <div>
-                <strong style={{ color: '#111215', display: 'block', marginBottom: '2px' }}>New York Madison</strong>
-                <span>650 Madison Avenue, New York, NY 10022</span>
-              </div>
-              <div>
-                <strong style={{ color: '#111215', display: 'block', marginBottom: '2px' }}>Tokyo Ginza</strong>
-                <span>Ginza Six Tower 11F, Chuo-ku, Tokyo</span>
+                <strong style={{ color: '#111215', display: 'block', marginBottom: '4px' }}>Headquarters & Studio</strong>
+                <span>E - 339 Third floor, Gaur Cascades</span>
+                <span style={{ display: 'block' }}>Rajnagar Extension, Ghaziabad</span>
+                <span style={{ display: 'block' }}>Uttar Pradesh - 201017</span>
               </div>
             </div>
           </div>

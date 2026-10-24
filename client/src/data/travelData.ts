@@ -21,7 +21,7 @@ export const TRAVEL_STYLES: TravelStyle[] = [
     id: 'groups',
     title: 'GROUPS',
     subtitle: 'Milestone Expeditions & Private Estates',
-    focus: 'Whole-island buyouts, chartered classic schooners, private castles and bespoke chef celebrations.',
+    focus: 'Whole-island buyouts, chartered classic schooners, private castles and private chef celebrations.',
     image: '/assets/images/style-yacht.jpg',
     destinations: ['Rajasthan Heritage Havelis', 'Scottish Highlands Lodge', 'Spanish Country Estate']
   },
@@ -699,7 +699,7 @@ export const ITINERARIES: Itinerary[] = [
     "itineraryOutline": [
       {
         "day": "Day 1",
-        "title": "Bespoke Seaplane Arrival",
+        "title": "Private Seaplane Arrival",
         "detail": "Scenic aerial flight to Baa Atoll, champagne check-in, and sunset dolphin cruise."
       },
       {
@@ -894,7 +894,7 @@ export const ITINERARIES: Itinerary[] = [
       "Private salon shopping appointment with champagne on Rue du Faubourg Saint-Honor\u00e9",
       "Private yacht charter cruising from Cannes to Monaco and Saint-Tropez",
       "Exclusive access to the King's Private Apartments at the Palace of Versailles",
-      "Bespoke perfume creation workshop at a historic maison in Grasse"
+      "Private perfume creation workshop at a historic maison in Grasse"
     ],
     "description": "Seven days immersed in the epitome of French refinement. From grand Parisian boulevards and Michelin three-star culinary dining to the sun-drenched coastal glamour of Nice, Cannes, and Monaco.",
     "narrativeSections": [
@@ -2301,7 +2301,7 @@ export const ITINERARIES: Itinerary[] = [
 export const TESTIMONIALS: Testimonial[] = [
   {
     id: '1',
-    quote: 'ENDLESSCAPE WILL CHANGE THE WAY YOU TRAVEL. FROM PRIVATE SPHINX ACCESS TO BESPOKE NILE DAHABIYA SAILING, IT WAS ABSOLUTELY FLAWLESS.',
+    quote: 'ENDLESSCAPE WILL CHANGE THE WAY YOU TRAVEL. FROM PRIVATE SPHINX ACCESS TO PRIVATE NILE DAHABIYA SAILING, IT WAS ABSOLUTELY FLAWLESS.',
     author: 'Micah',
     destination: 'Egypt'
   },
@@ -2328,17 +2328,17 @@ export const TESTIMONIALS: Testimonial[] = [
 export const PRESS_AWARDS: PressAward[] = [
   {
     id: '1',
-    quote: '“Luxury bespoke travel company, Endlesscape specialises in the trip you didn’t even realize you had been dreaming of.”',
+    quote: '“Luxury experiential travel company, Endlesscape specialises in the trip you didn’t even realize you had been dreaming of.”',
     publication: 'Condé Nast Traveller'
   },
   {
     id: '2',
-    quote: '“One of our travel experts voted as a Robb Report Travel Master for bespoke international expeditions.”',
+    quote: '“One of our travel experts voted as a Robb Report Travel Master for extraordinary international expeditions.”',
     publication: 'Robb Report'
   },
   {
     id: '3',
-    quote: '“Voted among the World’s Most Influential Bespoke Travel Specialists of the Year.”',
+    quote: '“Voted among the World’s Most Influential Luxury Travel Specialists of the Year.”',
     publication: 'Travel + Leisure'
   },
   {

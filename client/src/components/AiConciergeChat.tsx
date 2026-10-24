@@ -178,7 +178,7 @@ export const AiConciergeChat: React.FC<AiConciergeChatProps> = ({
                     <span className="aura-status-dot" /> Online
                   </span>
                 </div>
-                <span className="aura-header-sub">Bespoke Travel Specialist</span>
+                <span className="aura-header-sub">Private Travel Specialist</span>
               </div>
             </div>
 
@@ -340,7 +340,7 @@ export const AiConciergeChat: React.FC<AiConciergeChatProps> = ({
                         <span className="aura-typing-dot" />
                         <span className="aura-typing-dot" />
                       </div>
-                      <span className="aura-typing-text">Aura is curating bespoke insights...</span>
+                      <span className="aura-typing-text">Aura is curating insights...</span>
                     </div>
                   </div>
                 )}

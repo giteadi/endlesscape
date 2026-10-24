@@ -232,7 +232,7 @@ export const Navbar = ({
           <div className="nav-actions-cluster" style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', flexShrink: 0 }}>
             {/* Desktop WhatsApp & Phone Concierge */}
             <a
-              href="https://wa.me/918130216668?text=Hello%20Endlesscape,%20I%20would%20like%20to%20enquire%20about%20a%20luxury%20bespoke%20journey."
+              href="https://wa.me/918130216668?text=Hello%20Endlesscape,%20I%20would%20like%20to%20enquire%20about%20a%20luxury%20tailor-made%20journey."
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -335,7 +335,7 @@ export const Navbar = ({
               <span className="enquire-text-mobile">ENQUIRE</span>
             </button>
 
-            {/* Bespoke Luxury 2-Line Editorial Hamburger Toggle */}
+            {/* Luxury 2-Line Editorial Hamburger Toggle */}
             <button
               onClick={() => setMobileMenuOpen(true)}
               className={`mobile-toggle-btn ${isScrolled ? 'scrolled' : ''}`}
@@ -478,7 +478,7 @@ export const Navbar = ({
               },
               {
                 title: 'CURATED ITINERARIES',
-                subtitle: 'Inspirational bespoke routes & private charters',
+                subtitle: 'Inspirational tailored routes & private charters',
                 icon: Sparkles,
                 action: () => {
                   closeMenuAnd(() => {
@@ -590,7 +590,7 @@ export const Navbar = ({
           >
             {/* Direct WhatsApp Inquiry */}
             <a
-              href="https://wa.me/918130216668?text=Hello%20Endlesscape,%20I%20would%20like%20to%20enquire%20about%20a%20luxury%20bespoke%20journey."
+              href="https://wa.me/918130216668?text=Hello%20Endlesscape,%20I%20would%20like%20to%20enquire%20about%20a%20luxury%20tailor-made%20journey."
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -668,7 +668,7 @@ export const Navbar = ({
               }}
             >
               <Sparkles size={16} />
-              START YOUR BESPOKE JOURNEY
+              START YOUR LUXURY JOURNEY
             </button>
           </div>
         </div>
